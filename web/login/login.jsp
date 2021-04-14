@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,18 +27,22 @@
                 <div class="user signinBx">
 
                     <div class="imgBx"><img src="../images/login-imagen.jpg" alt=""/></div>
-                    
+
 
                     <div class="formBx">
 
-                        <form action="">
+                        <form method="post" action="../controlAdmin ">
                             <h2>Sign In</h2>
-                            <input type="text" placeholder="Username">
-                            <input type="password" placeholder="Password">
-                            <input type="submit" value="Login">
+                            
+                            <input type="hidden" name="action" value="login">
+                             
+                            <input type="text" placeholder="Username" name="usuario">
+                            <input type="password" placeholder="Password" name="password">
+                            <input type="submit"  value="Login">
+
                             <p class="signup">
                                 don't have an account?
-                                <a href="#" onclick="toggleForm();">Sign up</a>
+                                <a href="#" onclick="toggleForm();" >Sign up</a>
                             </p>
                         </form>
 
@@ -50,23 +56,28 @@
 
                     <div class="formBx">
 
-                        <form action="">
+                        <form method="post" action="../controlAdmin ">
                             <h2>Create an account</h2>
-                            <input type="text" placeholder="Username">
-                            <input type="email" placeholder="Email Asddress">
-                            <input type="password" placeholder="Create Password">
-                            <input type="password" placeholder="Confirm Password">
+                            
+                            <input type="hidden" name="action" value="register-user">
+
+                            <input type="text" placeholder="Username" name="usuario">
+                            <input type="email" placeholder="Email Asddress" name="email">
+                            <input type="password" placeholder="Create Password" name="password">
+                            <input type="password" placeholder="Confirm Password" name="password-confirm">
                             <input type="submit" value="Sign Up">
+
                             <p class="signup">
                                 Already have an account?
                                 <a href="#" onclick="toggleForm();">Sign in</a>
                             </p>
+
                         </form>
 
                     </div>
 
                     <div class="imgBx"><img src="../images/create-imagen.jpg" alt=""/></div>
-                    
+
                 </div>
 
             </div>

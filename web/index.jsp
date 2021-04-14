@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 13 abr. 2021, 1:19:24
+    Document   : home
+    Created on : 13 abr. 2021, 20:49:28
     Author     : 52777
 --%>
 
@@ -8,7 +8,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+    
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -251,3 +251,4 @@
     </body>
 
 </html>
+
