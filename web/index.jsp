@@ -25,7 +25,6 @@
         <!-- Glidejs -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.css" />
 
-
         <!-- Custom StyleSheet -->
         <link rel="stylesheet" href="css/styles.css">
 
@@ -67,7 +66,7 @@
                             </li>
                         </ul>
                     </div>
-
+                    
                     <div class="hamburger">
                         <i class="fas fa-bars"></i>
                     </div>

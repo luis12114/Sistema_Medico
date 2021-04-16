@@ -47,13 +47,19 @@ public class controlAdmin extends HttpServlet {
         /*-------------------------------INICIA LOGIN------------------------------------------*/
         if (action.equalsIgnoreCase("login")) {
             /*Valores del formulario*/
-            String username = request.getParameter("usuario");
+            String user = request.getParameter("usuario");
             String passwd = request.getParameter("password");
+            if (admin.login(user, passwd)){
+                forward ="index.jsp";
+            }
+            else{
+                forward ="errors/error.jsp";
+            }
         }
         /*--------------------------------TERMINA LOGIN----------------------------------------*/
 
         /*------------------------INICIA REGISTRO DE USUARIOS---------------------------------*/
-        if (action.equalsIgnoreCase("register-user")) {
+        else if (action.equalsIgnoreCase("register-user")) {
             /*Valores del formulario*/
             String username = request.getParameter("usuario");
             String email = request.getParameter("email");
@@ -64,11 +70,16 @@ public class controlAdmin extends HttpServlet {
             User user = new User();
             user.setName(username);
             user.setPassword(passwd);
+            
         }
         /*------------------------TERMINA REGISTRO DE USUARIOS-------------------------------*/
 
-        RequestDispatcher view = request.getRequestDispatcher(forward);
-        view.forward(request, response);
+        else{
+          
+        }
+       RequestDispatcher view = request.getRequestDispatcher(forward);
+       view.forward(request, response);
+
     }
 
     @Override
