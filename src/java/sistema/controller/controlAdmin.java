@@ -67,8 +67,8 @@ public class controlAdmin extends HttpServlet {
         }
         /*------------------------TERMINA REGISTRO DE USUARIOS-------------------------------*/
 
-        //RequestDispatcher view = request.getRequestDispatcher(forward);
-        //view.forward(request, response);
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+        view.forward(request, response);
     }
 
     @Override
