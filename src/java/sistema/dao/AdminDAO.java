@@ -19,28 +19,36 @@ public class AdminDAO {
     }
 
     // Metodo que devuelve false o true si el  usuario existe en la BD
-    public boolean login(String Usuario, String Password)
-    {
-        try
-        {
-           PreparedStatement pstm = null; 
-           ResultSet rs = null;
-           String query = "SELECT ID_User FROM user WHERE name = ? AND password=?";
-           pstm = con.prepareStatement(query);
-           pstm.setString(1, Usuario);//convertir a String el parametro Usuario
-           pstm.setString(2, Password);//convertir a String el parametro Password
-           rs = pstm.executeQuery();//ejecutar el query 
-           if(rs.next())
-           {
-               return true;
-           }else{
-               return false;
-           }
-        }catch(Exception ex)
-        {
+    public boolean login(String Usuario, String Password) {
+        try {
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            String query = "SELECT ID_User FROM user WHERE name = ? AND password=?";
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, Usuario);//convertir a String el parametro Usuario
+            pstm.setString(2, Password);//convertir a String el parametro Password
+            rs = pstm.executeQuery();//ejecutar el query 
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
+    }
+
+    public void addUser(User user) {
+        try{
+            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO user (name,password) VALUES (?, ?);");
+            preparedStatement.setString(1,user.getName());
+            preparedStatement.setString(2,user.getPassword());
+            preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+       
     }
 
 }

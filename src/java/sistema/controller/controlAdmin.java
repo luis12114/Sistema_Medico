@@ -40,7 +40,7 @@ public class controlAdmin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        PrintWriter out = response.getWriter();
         String forward = "";
         String action = request.getParameter("action");
 
@@ -49,37 +49,35 @@ public class controlAdmin extends HttpServlet {
             /*Valores del formulario*/
             String user = request.getParameter("usuario");
             String passwd = request.getParameter("password");
-            if (admin.login(user, passwd)){
-                forward ="index.jsp";
+            if (admin.login(user, passwd)) {
+                forward = "index.jsp";
+            } else {
+                forward = "errors/error.jsp";
             }
-            else{
-                forward ="errors/error.jsp";
-            }
-        }
-        /*--------------------------------TERMINA LOGIN----------------------------------------*/
-
-        /*------------------------INICIA REGISTRO DE USUARIOS---------------------------------*/
+        } /*--------------------------------TERMINA LOGIN----------------------------------------*/ 
+        
+        /*------------------------INICIA REGISTRO DE USUARIOS---------------------------------*/ 
         else if (action.equalsIgnoreCase("register-user")) {
             /*Valores del formulario*/
             String username = request.getParameter("usuario");
             String email = request.getParameter("email");
             String passwd = request.getParameter("password");
             String passwd_confirm = request.getParameter("password-confirm");
-            
+           
             /*Envio a base de datos*/
             User user = new User();
             user.setName(username);
             user.setPassword(passwd);
-            
-        }
-        /*------------------------TERMINA REGISTRO DE USUARIOS-------------------------------*/
 
-        else{
-          
+            admin.addUser(user);
+            forward = "login/login.jsp";
+        } /*------------------------TERMINA REGISTRO DE USUARIOS-------------------------------*/ 
+        
+        else {
+            forward = "errors/error.jsp";
         }
        RequestDispatcher view = request.getRequestDispatcher(forward);
        view.forward(request, response);
-
     }
 
     @Override
