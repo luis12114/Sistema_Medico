@@ -50,10 +50,13 @@ public class controlAdmin extends HttpServlet {
             String user = request.getParameter("usuario");
             String passwd = request.getParameter("password");
             if (admin.login(user, passwd)) {
-                forward = "index.jsp";
+                forward = "pruebas.jsp";
             } else {
                 forward = "errors/error.jsp";
             }
+            User u = new User();
+            u= admin.getUser(user);
+            request.getSession().setAttribute("name", u.getName());
         } /*--------------------------------TERMINA LOGIN----------------------------------------*/ 
         
         /*------------------------INICIA REGISTRO DE USUARIOS---------------------------------*/ 
@@ -70,7 +73,7 @@ public class controlAdmin extends HttpServlet {
             user.setPassword(passwd);
 
             admin.addUser(user);
-            forward = "login/login.jsp";
+            forward = "pruebas.jsp";
         } /*------------------------TERMINA REGISTRO DE USUARIOS-------------------------------*/ 
         
         else {

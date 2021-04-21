@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import sistema.model.User;
 
 public class AdminDAO {
@@ -18,12 +19,12 @@ public class AdminDAO {
         con = Database.getConnection();
     }
 
-    // Metodo que devuelve false o true si el  usuario existe en la BD
+    // Metodo Login
     public boolean login(String Usuario, String Password) {
         try {
             PreparedStatement pstm = null;
             ResultSet rs = null;
-            String query = "SELECT ID_User FROM user WHERE name = ? AND password=?";
+            String query = "SELECT id_user FROM user WHERE name = ? AND password=?";
             pstm = con.prepareStatement(query);
             pstm.setString(1, Usuario);//convertir a String el parametro Usuario
             pstm.setString(2, Password);//convertir a String el parametro Password
@@ -39,16 +40,34 @@ public class AdminDAO {
         }
     }
 
+    public User getUser(String nombre) {
+        User u = new User();
+        try {
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            String query = "SELECT *FROM user WHERE name= ?";
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, nombre);
+            rs = pstm.executeQuery();
+            while(rs.next()){
+                u.setName(rs.getString("name"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return u;
+    }
+
+    // Metodo para añadir usuarios
     public void addUser(User user) {
-        try{
+        try {
             PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO user (name,password) VALUES (?, ?);");
-            preparedStatement.setString(1,user.getName());
-            preparedStatement.setString(2,user.getPassword());
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getPassword());
             preparedStatement.executeUpdate();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-       
     }
 
 }
