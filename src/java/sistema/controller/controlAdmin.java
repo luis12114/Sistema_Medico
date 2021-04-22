@@ -66,7 +66,7 @@ public class controlAdmin extends HttpServlet {
             if (admin.login(user, passwd)) {
                 forward = "pruebas.jsp";
             } else {
-                forward = "errors/error.jsp";
+                forward = "/login/login.jsp";
             }
             User u = new User();
             u= admin.getUser(user);
@@ -107,14 +107,14 @@ public class controlAdmin extends HttpServlet {
             user.setPassword(passwd);
             
             admin.addUser(user);
-            forward = "index.jsp";
+            forward = "/login/login.jsp";
         }
         
         
         /*------------------------TERMINA REGISTRO DE USUARIOS-------------------------------*/ 
         
         else {
-            forward = "errors/error.jsp";
+           forward = "errors/error.jsp";
         }
         
         

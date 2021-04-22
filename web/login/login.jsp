@@ -16,7 +16,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>User</title>
-        <link href="../css/loginStyle.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="/SistemaMedico/css/loginStyle.css"/>
+        
     </head>
 
     <body>
@@ -26,12 +27,12 @@
 
                 <div class="user signinBx">
 
-                    <div class="imgBx"><img src="../images/login.jpg" alt=""/></div>
+                    <div class="imgBx"><img src="/SistemaMedico/images/login.jpg" alt=""/></div>
 
 
                     <div class="formBx">
 
-                        <form method="post" action="../controlAdmin ">
+                        <form method="post" action="/SistemaMedico/controlAdmin">
                             <h2>Sign In</h2>
                             
                             <input type="hidden" name="action" value="login">
@@ -56,7 +57,7 @@
 
                     <div class="formBx">
 
-                        <form method="post" action="../controlAdmin " enctype="multipart/form-data">
+                        <form method="post" action="/SistemaMedico/controlAdmin" enctype="multipart/form-data">
                             <h2>Create an account</h2>
                             
                             <input type="hidden" name="action" value="register-user">
@@ -77,7 +78,7 @@
 
                     </div>
 
-                    <div class="imgBx"><img src="../images/create.jpg" alt=""/></div>
+                    <div class="imgBx"><img src="/SistemaMedico/images/create.jpg" alt=""/></div>
 
                 </div>
 
