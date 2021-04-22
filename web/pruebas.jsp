@@ -18,8 +18,16 @@
            String imagen = (String)session.getAttribute("imagen");
         %>
          <h2>username: <%out.println(nom);%> </h2>
-  
-         <img src="images/<%=imagen%>" alt=""/>
-         
+        <%
+          if(imagen!=null){
+        %>
+         <img src="/SistemaMedico/images/<%=imagen%>" alt=""/> 
+        <%
+          }
+          else{
+        %>
+        
+        <img src="/SistemaMedico/images/defaultProfile.jpg" alt=""/>
+        <%}%>
     </body>
 </html>
