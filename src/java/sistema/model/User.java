@@ -2,7 +2,7 @@ package sistema.model;
 
 public class User {
 
-    String name, password;
+    String name, password,picture;
 
     public User() {
     }
@@ -21,6 +21,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
 }
