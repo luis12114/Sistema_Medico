@@ -26,7 +26,7 @@
 
                 <div class="user signinBx">
 
-                    <div class="imgBx"><img src="../images/login-imagen.jpg" alt=""/></div>
+                    <div class="imgBx"><img src="../images/login.jpg" alt=""/></div>
 
 
                     <div class="formBx">
@@ -56,15 +56,16 @@
 
                     <div class="formBx">
 
-                        <form method="post" action="../controlAdmin ">
+                        <form method="post" action="../controlAdmin " enctype="multipart/form-data">
                             <h2>Create an account</h2>
                             
                             <input type="hidden" name="action" value="register-user">
 
                             <input type="text" placeholder="Username" name="usuario">
-                            <input type="email" placeholder="Email Asddress" name="email">
                             <input type="password" placeholder="Create Password" name="password">
-                            <input type="password" placeholder="Confirm Password" name="password-confirm">
+                            <input type="file" name="file">
+                            <!--<input type="email" placeholder="Email Asddress" name="email">
+                            <input type="password" placeholder="Confirm Password" name="password-confirm">-->
                             <input type="submit" value="Sign Up">
 
                             <p class="signup">
@@ -76,7 +77,7 @@
 
                     </div>
 
-                    <div class="imgBx"><img src="../images/create-imagen.jpg" alt=""/></div>
+                    <div class="imgBx"><img src="../images/create.jpg" alt=""/></div>
 
                 </div>
 

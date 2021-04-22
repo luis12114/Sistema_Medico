@@ -15,7 +15,11 @@
         <h1>Datos de la Persona relacionada al Usuario</h1><br/>
         <%
            String nom = (String)session.getAttribute("name");
+           String imagen = (String)session.getAttribute("imagen");
         %>
          <h2>username: <%out.println(nom);%> </h2>
+  
+         <img src="images/<%=imagen%>" alt=""/>
+         
     </body>
 </html>

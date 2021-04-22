@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 import sistema.model.User;
 
 public class AdminDAO {
@@ -51,6 +52,7 @@ public class AdminDAO {
             rs = pstm.executeQuery();
             while(rs.next()){
                 u.setName(rs.getString("name"));
+                u.setPicture(rs.getString("imagen_user"));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -61,13 +63,15 @@ public class AdminDAO {
     // Metodo para añadir usuarios
     public void addUser(User user) {
         try {
-            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO user (name,password) VALUES (?, ?);");
+            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO user (name,password,imagen_user) VALUES (?,?,?);");
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getPicture());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
+    
+    
 }
