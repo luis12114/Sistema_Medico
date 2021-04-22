@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.css" />
 
         <!-- Custom StyleSheet -->
-        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="/SistemaMedico/css/styles.css">
 
         <title>UAEM | Medical System</title>
     </head>
@@ -62,7 +62,7 @@
                                 <a href="#services" class="nav-link scroll">Servicios</a>
                             </li>
                             <li class="nav-item">
-                                <a href="login/login.jsp" class="nav-link">Login</a>
+                                <a href="/SistemaMedico/login/login.jsp" class="nav-link">Login</a>
                             </li>
                         </ul>
                     </div>
@@ -81,7 +81,7 @@
                 <a href="#">Saber Más</a>
             </div>
 
-            <img class="banner" src="./images/bg.png" alt="" />
+            <img class="banner" src="/SistemaMedico/images/bg.png" alt="" />
 
             <div class="icons">
                 <span><i class="fab fa-facebook-f"></i></span>
@@ -99,7 +99,7 @@
 
             <div class="about-center container">
                 <div class="left" data-aos="fade-right" data-aos-duration="2000">
-                    <img src="./images/6.jpg" alt="" />
+                    <img src="/SistemaMedico/images/6.jpg" alt="" />
                 </div>
                 <div class="right" data-aos="fade-left" data-aos-duration="2000">
                     <h1>Services:<span id="type2"></span></h1>
@@ -162,7 +162,7 @@
                             <li class="glide__slide">
                                 <div class="team">
                                     <div class="img-cover">
-                                        <img src="./images/6.jpg" alt="" />
+                                        <img src="/SistemaMedico/images/6.jpg" alt="" />
                                     </div>
                                     <h3>FCAEI</h3>
                                     <p>
@@ -173,7 +173,7 @@
                             <li class="glide__slide">
                                 <div class="team">
                                     <div class="img-cover">
-                                        <img src="./images/6.jpg" alt="" />
+                                        <img src="/SistemaMedico/images/6.jpg" alt="" />
                                     </div>
                                     <h3>FCAEI</h3>
                                     <p>
@@ -184,7 +184,7 @@
                             <li class="glide__slide">
                                 <div class="team">
                                     <div class="img-cover">
-                                        <img src="./images/6.jpg" alt="" />
+                                        <img src="/SistemaMedico/images/6.jpg" alt="" />
                                     </div>
                                     <h3>FCAEI</h3>
                                     <p>
@@ -195,7 +195,7 @@
                             <li class="glide__slide">
                                 <div class="team">
                                     <div class="img-cover">
-                                        <img src="./images/6.jpg" alt="" />
+                                        <img src="/SistemaMedico/images/6.jpg" alt="" />
                                     </div>
                                     <h3>FCAEI</h3>
                                     <p>
@@ -206,7 +206,7 @@
                             <li class="glide__slide">
                                 <div class="team">
                                     <div class="img-cover">
-                                        <img src="./images/6.jpg" alt="" />
+                                        <img src="/SistemaMedico/images/6.jpg" alt="" />
                                     </div>
                                     <h3>FCAEI</h3>
                                     <p>
@@ -217,7 +217,7 @@
                             <li class="glide__slide">
                                 <div class="team">
                                     <div class="img-cover">
-                                        <img src="./images/6.jpg" alt="" />
+                                        <img src="/SistemaMedico/images/6.jpg" alt="" />
                                     </div>
                                     <h3>FCAEI</h3>
                                     <p>
@@ -246,7 +246,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
 
         <!-- Custom Script -->
-        <script src="js/scripts.js"></script>
+        <script src="/SistemaMedico/js/scripts.js"></script>
     </body>
 
 </html>
