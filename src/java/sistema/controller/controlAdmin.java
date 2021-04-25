@@ -58,13 +58,13 @@ public class controlAdmin extends HttpServlet {
         String forward = "";
         String action = request.getParameter("action");
 
-        /*-------------------------------INICIA LOGIN------------------------------------------*/
+       /*-------------------------------INICIA LOGIN------------------------------------------*/
         if (action.equalsIgnoreCase("login")) {
             /*Valores del formulario*/
             String user = request.getParameter("usuario");
             String passwd = request.getParameter("password");
             if (admin.login(user, passwd)) {
-                forward = "pruebas.jsp";
+                forward = "/administrador/index.jsp";
             } else {
                 forward = "/login/login.jsp";
             }
@@ -73,9 +73,9 @@ public class controlAdmin extends HttpServlet {
             request.getSession().setAttribute("name", u.getName());
             request.getSession().setAttribute("imagen", u.getPicture());
         } 
-        /*--------------------------------TERMINA LOGIN----------------------------------------*/ 
+       /*--------------------------------TERMINA LOGIN----------------------------------------*/ 
         
-        /*------------------------INICIA REGISTRO DE USUARIOS---------------------------------*/ 
+       /*------------------------INICIA REGISTRO DE USUARIOS---------------------------------*/ 
         else if (action.equalsIgnoreCase("register-user")) {
             /*Valores del formulario*/
             String username = request.getParameter("usuario");
@@ -109,9 +109,7 @@ public class controlAdmin extends HttpServlet {
             admin.addUser(user);
             forward = "/login/login.jsp";
         }
-        
-        
-        /*------------------------TERMINA REGISTRO DE USUARIOS-------------------------------*/ 
+       /*------------------------TERMINA REGISTRO DE USUARIOS-------------------------------*/ 
         
         else {
            forward = "errors/error.jsp";
