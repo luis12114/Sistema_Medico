@@ -102,7 +102,7 @@
                     <img src="/SistemaMedico/images/6.jpg" alt="" />
                 </div>
                 <div class="right" data-aos="fade-left" data-aos-duration="2000">
-                    <h1>Services:<span id="type2"></span></h1>
+                    <h1 style="display:none">Services:<span id="type2"></span></h1>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores placeat inventore rerum tempore cupiditate, amet adipisci aut eius facilis quisquam magni ratione maxime officiis earum blanditiis magnam illum obcaecati vero? Odit ipsa facilis officiis
                         fuga voluptate similique sunt exercitationem voluptatibus, illo et fugit eveniet provident quo atque, nesciunt explicabo tenetur!
