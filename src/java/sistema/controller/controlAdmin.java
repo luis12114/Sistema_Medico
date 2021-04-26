@@ -113,7 +113,7 @@ public class controlAdmin extends HttpServlet {
         
       /*-----------------------INCIA VER TODOS LOS USURIOS-------------------------------*/   
         else if (action.equalsIgnoreCase("allUsers")) {
-            String buscar = request.getParameter("test");
+            String buscar = request.getParameter("usuario");
             User x = new User();
             x = admin.getUser(buscar);
             request.getSession().setAttribute("name", x.getName());

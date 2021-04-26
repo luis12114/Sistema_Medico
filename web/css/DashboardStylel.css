@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 :root {
     --main: #0ba396;
-    --bg: #E5E5E5;
-    --bg-body: #eee;
+    --bg: #ffffff;
+    --bg-body: #f7f7f7;
 }
 
 * {
@@ -18,8 +18,6 @@ input,
 button {
     outline: none;
 }
-
-
 
 #menu-toggle {
     display: none;
@@ -38,7 +36,7 @@ button {
     display: none;
 }
 
-#menu-toggle:checked~.sidebar li a span:last-child {
+#menu-toggle:checked~.sidebar li .opc-cont input {
     display: none;
 }
 
@@ -111,23 +109,41 @@ button {
     margin-bottom: .9rem;
 }
 
-.sidemenu a {
-    color: #111;
-    font-size: .85rem;
-    display: flex;
-    align-items: center;
-}
-
-.sidemenu a span:first-child {
-    font-size: 1.3rem;
-    padding: 0rem 1rem;
-}
-
-.sidemenu a.active {
+.sidemenu form.active {
     background: var(--main);
     color: #fff;
     border-radius: 4px;
     height: 45px;
+}
+
+.sidemenu form.active input.opc {
+    color: #fff;
+}
+
+.opc-cont {
+    align-items: center;
+    display: flex;
+    color: #111;
+}
+
+.opc {
+    color: #111;
+    font-size: .85rem;
+    border: none;
+    background: transparent;
+}
+
+input.opc {
+    color: #111;
+}
+
+input.opc:hover {
+    cursor: pointer;
+}
+
+.opc-cont span:first-child {
+    font-size: 1.3rem;
+    padding: 0rem 1rem;
 }
 
 
@@ -220,7 +236,7 @@ header {
     #menu-toggle~.sidebar .user {
         display: none;
     }
-    #menu-toggle~.sidebar li a span:last-child {
+    #menu-toggle:checked~.sidebar li .opc-cont input {
         display: none;
     }
     #menu-toggle~.sidebar {
@@ -243,7 +259,7 @@ header {
     #menu-toggle:checked~.sidebar .user {
         display: block;
     }
-    #menu-toggle:checked~.sidebar li a span:last-child {
+    #menu-toggle:checked~.sidebar li .opc-cont input {
         display: inline-block;
     }
     #menu-toggle:checked~.sidebar {

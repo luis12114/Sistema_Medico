@@ -27,43 +27,43 @@
         <div class="sidebar">
 
             <div class="brand">
-                <span class="lab la-affiliatetheme"></span>
+                <span class="las la-stethoscope"></span>
                 <h2>Medical</h2>
             </div>
             <div class="sidemenu">
                 <div class="side-user">
                     <div class="side-img"
-                      style="
-                       <%if(imagen!=null){%>
+                         style="
+                         <%if (imagen != null) {%>
                          background-image:url(/SistemaMedico/images/<%=imagen%>
-                       <%}else{%>
+                         <%} else {%>
                          background-image:url(/SistemaMedico/images/defaultProfile.jpg
-                       <%}%>
-                      "
-                    >
+                         <%}%>
+                         "
+                         >
                     </div>
                     <div class="user">
                         <small><%out.println(nom);%></small>
-                        <p>Software developer</p>
+                        <p>Panel Administrador</p>
                     </div>
                 </div>
                 <ul>
-
                     <li>
-                        <a href="#"  class="active">
-                            <span class="las la-home"></span>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
+                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont  active">
+                            <span class="las la-home"></span><input type="submit" value="Dashboard" class="opc">
+                            <input type="hidden" name="action" value="#">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        </form>
+                    </li> 
                     
                     <li>
-                      <a href="#">
-                            <span class="las la-user"></span>
-                            <span>Users</span>
-                       </a>
-                    </li>
+                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
+                            <span class="las la-user"></span><input type="submit" value="Login" class="opc">
+                            <input type="hidden" name="action" value="allUsers">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        </form>
+                    </li>  
                 </ul>
-
             </div>
         </div>
         <div class="main-content">
