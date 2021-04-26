@@ -111,6 +111,17 @@ public class controlAdmin extends HttpServlet {
         }
        /*------------------------TERMINA REGISTRO DE USUARIOS-------------------------------*/ 
         
+      /*-----------------------INCIA VER TODOS LOS USURIOS-------------------------------*/   
+        else if (action.equalsIgnoreCase("allUsers")) {
+            String buscar = request.getParameter("test");
+            User x = new User();
+            x = admin.getUser(buscar);
+            request.getSession().setAttribute("name", x.getName());
+            request.getSession().setAttribute("imagen",x.getPicture());
+            forward = "/administrador/users/index.jsp";
+        }
+      /*-----------------------TERMINA VER TODOS LOS USURIOS-------------------------------*/  
+        
         else {
            forward = "errors/error.jsp";
         }

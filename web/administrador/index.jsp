@@ -55,6 +55,13 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+                    
+                    <li>
+                      <a href="#">
+                            <span class="las la-user"></span>
+                            <span>Users</span>
+                       </a>
+                    </li>
                 </ul>
 
             </div>
