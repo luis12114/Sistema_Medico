@@ -36,7 +36,7 @@ button {
     display: none;
 }
 
-#menu-toggle:checked~.sidebar li .opc-cont input {
+#menu-toggle:checked~.sidebar li .opc-cont button .text {
     display: none;
 }
 
@@ -116,7 +116,7 @@ button {
     height: 45px;
 }
 
-.sidemenu form.active input.opc {
+.sidemenu form.active button.opc {
     color: #fff;
 }
 
@@ -133,11 +133,11 @@ button {
     background: transparent;
 }
 
-input.opc {
+button.opc {
     color: #111;
 }
 
-input.opc:hover {
+button.opc:hover {
     cursor: pointer;
 }
 
@@ -343,7 +343,7 @@ header {
     #menu-toggle~.sidebar .user {
         display: none;
     }
-    #menu-toggle~.sidebar li .opc-cont input {
+    #menu-toggle~.sidebar li .opc-cont button .text {
         display: none;
     }
     #menu-toggle~.sidebar {
@@ -366,7 +366,7 @@ header {
     #menu-toggle:checked~.sidebar .user {
         display: block;
     }
-    #menu-toggle:checked~.sidebar li .opc-cont input {
+    #menu-toggle:checked~.sidebar li .opc-cont button .text {
         display: inline-block;
     }
     #menu-toggle:checked~.sidebar {
