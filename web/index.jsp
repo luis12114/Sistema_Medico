@@ -62,7 +62,7 @@
                                 <a href="#services" class="nav-link scroll">Servicios</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/SistemaMedico/login/login.jsp" class="nav-link">Login</a>
+                                <a href="${pageContext.request.contextPath}/login/login.jsp" class="nav-link">Login</a>
                             </li>
                         </ul>
                     </div>

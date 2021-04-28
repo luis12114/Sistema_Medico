@@ -5,7 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%
     String nom = (String) session.getAttribute("name");
@@ -19,9 +20,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dashboard</title>
+        <title>Users</title>
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-        <link href="/SistemaMedico/css/DashboardStylel.css" rel="stylesheet" type="text/css"/>
+        <link href="/SistemaMedico//css/Admin-styles.css" rel="stylesheet" type="text/css"/>
     </head>
 
     <body>
@@ -34,8 +35,8 @@
             </div>
             <div class="sidemenu">
                 <div class="side-user">
-                    <div class="side-img"
-                         style="
+                     <div class="side-img"
+                        style="
                          <%if (imagen != null) {%>
                          background-image:url(/SistemaMedico/images/<%=imagen%>
                          <%} else {%>
@@ -49,23 +50,28 @@
                         <p>Panel Administrador</p>
                     </div>
                 </div>
-                 <ul>
+                <ul>
+
+
                     <li>
                         <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
                             <span class="las la-home"></span><input type="submit" value="Dashboard" class="opc">
-                            <input type="hidden" name="action" value="#">
-                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                            <input type="hidden" name="action" value="allUsers">
+                            <input type="hidden" name="action" value="allUsers">
                         </form>
+
                     </li>
-                    
+
                     <li>
-                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont active">
-                            <span class="las la-user"></span><input type="submit" value="Login" class="opc">
-                            <input type="hidden" name="action" value="">
-                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont  active">
+                            <span class="las la-user"></span><input type="submit" value="Users" class="opc">
+                            <input type="hidden" name="action" value="allUsers">
+                            <input type="hidden" name="action" value="allUsers">
                         </form>
-                    </li> 
+
+                    </li>
                 </ul>
+
             </div>
         </div>
         <div class="main-content">
@@ -82,6 +88,32 @@
                     <span class="las la-bookmark"></span>
                 </div>
             </header>
+            <main class="card__container ">
+               <c:forEach items="${users}" var="user">
+                <div class="card__glass">
+                    <img src="/SistemaMedico/images/${user.picture}" alt="" class="card__img">
+                    <div class="card__data">
+                        <h3 class="card__title">${user.name}</h3>
+                        <span class="card__profession">${user.password}</span><br>
+                        <!--<span class="card__profession">Web Developer</span><br>
+                        <span class="card__profession">Web Developer</span>-->
+                    </div>
+
+                    <form method="post" action="/SistemaMedico/controlAdmin" class="card__button">
+                        <span class="las la-edit"></span><input type="submit" value="Edit" class="opc">
+                        <input type="hidden" name="action" value="allUsers">
+                        <input type="hidden" name="action" value="allUsers">
+                    </form>
+
+
+                    <form method="post" action="/SistemaMedico/controlAdmin" class="card__button">
+                        <span class="las la-trash"></span><input type="submit" value="Delit" class="opc">
+                        <input type="hidden" name="action" value="allUsers">
+                        <input type="hidden" name="action" value="allUsers">
+                    </form>
+                </div>
+               </c:forEach>
+            </main>
         </div>
         <label class="close-mobile-menu" for="menu-toggle"></label>
     </body>
