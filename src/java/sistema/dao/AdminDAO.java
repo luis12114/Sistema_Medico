@@ -47,10 +47,11 @@ public class AdminDAO {
     // Metodo para añadir usuarios
     public void addUser(User user) {
         try {
-            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO user (name,password,imagen_user) VALUES (?,?,?);");
+            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO user (name,password,imagen_user,ID_Rol) VALUES (?,?,?,?);");
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getPicture());
+            preparedStatement.setInt(4, user.getId_role());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,6 +98,25 @@ public class AdminDAO {
             e.printStackTrace();
         }
         return users;
+    }
+
+    //Metodo que devuelve la url del Rol
+    public String getURLMenu(String usuario) {
+        String url = "";
+        try {
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            String query = "SELECT url FROM roles as r INNER JOIN user as u ON u.ID_Rol = r.ID_Rol WHERE u.name = ?";
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, usuario);
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                url = rs.getString("url");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return url;
     }
 
     //Meotodo para eliminar archivos

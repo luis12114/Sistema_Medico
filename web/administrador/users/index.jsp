@@ -58,10 +58,9 @@
                             <button type="submit" class="opc">
                                 <span class="las la-home"></span> <samp class="text">Dashboard</samp>
                             </button>
-                            <input type="hidden" name="action" value="allUsers">
-                            <input type="hidden" name="action" value="">
+                            <input type="hidden" name="action" value="#">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
-
                     </li>
 
                     <li>
@@ -105,15 +104,14 @@
 
                         <form method="post" action="/SistemaMedico/controlAdmin" class="card__button">
                             <span class="las la-edit"></span><input type="submit" value="Edit" class="opc">
-                            <input type="hidden" name="action" value="allUsers">
-                            <input type="hidden" name="action" value="allUsers">
+                            <input type="hidden" name="action" value="#">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
-
 
                         <form method="post" action="/SistemaMedico/controlAdmin" class="card__button">
                             <span class="las la-trash"></span><input type="submit" value="Delit" class="opc">
-                            <input type="hidden" name="action" value="allUsers">
-                            <input type="hidden" name="action" value="allUsers">
+                            <input type="hidden" name="action" value="#">
+                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </div>
                 </c:forEach>

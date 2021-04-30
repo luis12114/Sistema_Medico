@@ -64,7 +64,8 @@ public class controlAdmin extends HttpServlet {
             String user = request.getParameter("usuario");
             String passwd = request.getParameter("password");
             if (admin.login(user, passwd)) {
-                forward = "/administrador/index.jsp";
+              //forward = "/administrador/index.jsp";
+                forward =  admin.getURLMenu(user);
             } else {
                 forward = "/login/login.jsp";
             }
@@ -82,7 +83,8 @@ public class controlAdmin extends HttpServlet {
             String email = request.getParameter("email");
             String passwd = request.getParameter("password");
             String passwd_confirm = request.getParameter("password-confirm");
-           
+            String id_role = request.getParameter("id_role");
+            int role= Integer.parseInt(id_role);
             
             /*Envio a base de datos*/
             
@@ -105,6 +107,7 @@ public class controlAdmin extends HttpServlet {
   
             user.setName(username);
             user.setPassword(passwd);
+            user.setId_role(role);
             
             admin.addUser(user);
             forward = "/login/login.jsp";
@@ -127,7 +130,7 @@ public class controlAdmin extends HttpServlet {
         
         
         else {
-           forward = "errors/error.jsp";
+           forward = "/errors/error.jsp";
         }
         
         

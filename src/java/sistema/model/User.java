@@ -2,7 +2,8 @@ package sistema.model;
 
 public class User {
 
-    String name, password,picture;
+    String name, password, picture;
+    int id_role;
 
     public User() {
     }
@@ -31,4 +32,11 @@ public class User {
         this.picture = picture;
     }
 
+    public int getId_role() {
+        return id_role;
+    }
+
+    public void setId_role(int id_role) {
+        this.id_role = id_role;
+    }
 }

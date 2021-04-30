@@ -67,6 +67,7 @@
                             <input type="file" name="file">
                             <!--<input type="email" placeholder="Email Asddress" name="email">
                             <input type="password" placeholder="Confirm Password" name="password-confirm">-->
+                            <input type="text" placeholder="" name="id_role" value="2" style="display:none;">
                             <input type="submit" value="Sign Up">
 
                             <p class="signup">
