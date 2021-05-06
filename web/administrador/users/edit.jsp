@@ -52,16 +52,26 @@
                          >
                     </div>
                     <div class="user">
-                        <small>Username</small>
-                        <p><%out.println(nom1);%></p>
+                        <small><%out.println(nom1);%></small>
+                         <p>Panel Administrador</p>
                     </div>
                 </div>
                 <ul>
       
-                    <li>
-                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont active">
+                   <li>
+                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
                             <button type="submit" class="opc">
-                                <span class="las la-undo-alt"></span> <samp class="text">Volver</samp>
+                                <span class="las la-home"></span> <samp class="text">Dashboard</samp>
+                            </button>
+                            <input type="hidden" name="action" value="dashboard">
+                            <input type="text" name="nameUser" value="<%out.println(nom1);%>" style="display:none">
+                        </form>
+                    </li>
+
+                    <li>
+                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
+                            <button type="submit" class="opc">
+                                <span class="las la-user"></span> <samp class="text">Users</samp>
                             </button>
                             <input type="hidden" name="action" value="allUsers">
                             <input type="text" name="usuario" value="<%out.println(nom1);%>" style="display:none">
@@ -124,20 +134,24 @@
                             <span>Write you message here...</span>
                         </div>-->
                         
-                        <div class="inputBox w100  buton">
-                            <input type="hidden" name="action" value="updateUser">
-                            <input type="text" name="usuario1" value="<%out.println(nom);%>" style="display:none">
-                            <input type="text" name="loginUser" value="<%out.println(nom1);%>" style="display:none">
-                            <button type="submit" value="Send ">Guardar</button>
-                        </div>
-                            
-                       <!-- <form action="" method="post" action="/SistemaMedico/controlAdmin"> 
+                        
+                        <div class="botones">
                             <div class="inputBox w100  buton">
-                             <button type="submit" value="Send ">Regresar</button>
-                             <input type="hidden" name="action" value="allUsers">
-                             <input type="text" name="usuario" value="<%out.println(nom1);%>" style="display:none">
+                                <input type="hidden" name="action" value="updateUser">
+                                <input type="text" name="usuario1" value="<%out.println(nom);%>" style="display:none">
+                                <input type="text" name="loginUser" value="<%out.println(nom1);%>" style="display:none">
+                                <button type="submit" value="Send ">Guardar</button>
                             </div>
-                        </form>-->
+
+                            <form action="" method="post" action="/SistemaMedico/controlAdmin" class="formBox"> 
+                                 <div class="inputBox w100  buton">
+                                  <button type="submit" value="Send ">Regresar</button>
+                                  <input type="hidden" name="action" value="allUsers">
+                                  <input type="text" name="usuario" value="<%out.println(nom1);%>" style="display:none">
+                                 </div>
+                            </form>
+                        </div>
+                       
                             
                     </form>
 
