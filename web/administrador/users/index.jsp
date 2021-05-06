@@ -22,7 +22,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Users</title>
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-        <link href="/SistemaMedico//css/admin-Style.css" rel="stylesheet" type="text/css"/>
+        <link href="/SistemaMedico//css/panelStyle.css" rel="stylesheet" type="text/css"/>
     </head>
 
     <body>
@@ -58,8 +58,8 @@
                             <button type="submit" class="opc">
                                 <span class="las la-home"></span> <samp class="text">Dashboard</samp>
                             </button>
-                            <input type="hidden" name="action" value="#">
-                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                            <input type="hidden" name="action" value="dashboard">
+                            <input type="text" name="nameUser" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
 
@@ -71,7 +71,6 @@
                             <input type="hidden" name="action" value="allUsers">
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
-
                     </li>
                 </ul>
 
@@ -104,14 +103,15 @@
 
                         <form method="post" action="/SistemaMedico/controlAdmin" class="card__button">
                             <span class="las la-edit"></span><input type="submit" value="Edit" class="opc">
-                            <input type="hidden" name="action" value="#">
-                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                            <input type="hidden" name="action" value="editUser">
+                            <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="usuario" value="${user.name}" style="display:none">
                         </form>
 
                         <form method="post" action="/SistemaMedico/controlAdmin" class="card__button">
                             <span class="las la-trash"></span><input type="submit" value="Delit" class="opc">
                             <input type="hidden" name="action" value="#">
-                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </div>
                 </c:forEach>

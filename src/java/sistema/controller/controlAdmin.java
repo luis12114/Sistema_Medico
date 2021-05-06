@@ -58,7 +58,8 @@ public class controlAdmin extends HttpServlet {
         String forward = "";
         String action = request.getParameter("action");
 
-       /*-------------------------------INICIA LOGIN------------------------------------------*/
+        
+      /*-------------------------------INICIA LOGIN------------------------------------------*/
         if (action.equalsIgnoreCase("login")) {
             /*Valores del formulario*/
             String user = request.getParameter("usuario");
@@ -74,9 +75,10 @@ public class controlAdmin extends HttpServlet {
             request.getSession().setAttribute("name", u.getName());
             request.getSession().setAttribute("imagen", u.getPicture());
         } 
-       /*--------------------------------TERMINA LOGIN----------------------------------------*/ 
+      /*--------------------------------TERMINA LOGIN----------------------------------------*/ 
         
-       /*------------------------INICIA REGISTRO DE USUARIOS---------------------------------*/ 
+        
+      /*------------------------INICIA REGISTRO DE USUARIOS---------------------------------*/ 
         else if (action.equalsIgnoreCase("register-user")) {
             /*Valores del formulario*/
             String username = request.getParameter("usuario");
@@ -112,10 +114,25 @@ public class controlAdmin extends HttpServlet {
             admin.addUser(user);
             forward = "/login/login.jsp";
         }
-       /*------------------------TERMINA REGISTRO DE USUARIOS-------------------------------*/ 
+      /*------------------------TERMINA REGISTRO DE USUARIOS-------------------------------*/ 
         
         
-      /*-----------------------INCIA VER TODOS LOS USURIOS-------------------------------*/   
+      /*-----------------------INCIA VOLVER A HOME DEL PANEL ADMIN-------------------------*/ 
+      else if (action.equalsIgnoreCase("dashboard")) {
+           String buscar = request.getParameter("nameUser");
+           
+           User x = new User();
+           x = admin.getUser(buscar);
+           
+           request.getSession().setAttribute("name", x.getName());
+           request.getSession().setAttribute("imagen",x.getPicture());
+           
+           forward = "/administrador/index.jsp";
+       }
+      /*-----------------------TERMINA VOLVER A HOME DEL PANEL ADMIN-----------------------*/ 
+        
+        
+      /*-----------------------INCIA VER TODOS LOS USURIOS----------------------------------*/   
         else if (action.equalsIgnoreCase("allUsers")) {
             String buscar = request.getParameter("usuario");
             User x = new User();
@@ -125,8 +142,58 @@ public class controlAdmin extends HttpServlet {
             request.setAttribute("users",admin.getAllUsers()); 
             forward = "/administrador/users/index.jsp";
         }
-      /*-----------------------TERMINA VER TODOS LOS USURIOS-------------------------------*/  
         
+      /*-----------------------TERMINA VER TODOS LOS USURIOS-------------------------------*/  
+       
+      
+      /*-----------------------INCIA EDITAR USUARIO-----------------------------------------*/
+        else if (action.equalsIgnoreCase("editUser")) {
+            /**Datos del usuario logeado**/
+            String buscar1 = request.getParameter("usuario-login");
+            User z= new User();
+            z = admin.getUser(buscar1);
+            request.getSession().setAttribute("name1", z.getName());
+            request.getSession().setAttribute("imagen1",z.getPicture());
+            
+            /**Datos del usuario que se desea editar**/
+            String buscar2 = request.getParameter("usuario");
+            User x = new User();
+            x = admin.getUser(buscar2);
+            request.getSession().setAttribute("name", x.getName());
+            request.getSession().setAttribute("imagen",x.getPicture());
+            request.getSession().setAttribute("pass",x.getPassword());
+            forward = "/administrador/users/edit.jsp";
+        }
+        
+      /*-----------------------TERMINA EDITAR USUARIO---------------------------------------*/
+        
+        
+      /*-----------------------INCIA ACTUALIZAR USUARIO-----------------------------------------*/
+        
+       else if (action.equalsIgnoreCase("updateUser")) {
+           String buscar = request.getParameter("loginUser");
+           
+           String username1 = request.getParameter("usuario1");
+           String username = request.getParameter("usuario");
+           String passwd = request.getParameter("password");
+
+           User user = new User();
+           user.setName(username);
+           user.setPassword(passwd);
+           admin.updateUser(username1,user);
+           
+           
+           User x = new User();
+           x = admin.getUser(buscar);
+           request.getSession().setAttribute("name", x.getName());
+           request.getSession().setAttribute("imagen",x.getPicture());
+           
+           request.setAttribute("users",admin.getAllUsers()); 
+       
+           forward = "/administrador/users/index.jsp";
+        } 
+      
+      /*-----------------------TERMINA ACTUALIZAR USUARIO---------------------------------------*/
         
         
         else {

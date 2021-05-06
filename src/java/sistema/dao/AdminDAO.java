@@ -71,6 +71,7 @@ public class AdminDAO {
             while (rs.next()) {
                 u.setName(rs.getString("name"));
                 u.setPicture(rs.getString("imagen_user"));
+                u.setPassword(rs.getString("password"));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -98,6 +99,19 @@ public class AdminDAO {
             e.printStackTrace();
         }
         return users;
+    }
+    
+    // Metodo para añadir usuarios
+    public void updateUser(String nombre,User user) {
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement("UPDATE user SET password=?,name=? WHERE name= ?;");
+            preparedStatement.setString(1, user.getPassword());
+            preparedStatement.setString(2, user.getName());
+            preparedStatement.setString(3,nombre);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     //Metodo que devuelve la url del Rol

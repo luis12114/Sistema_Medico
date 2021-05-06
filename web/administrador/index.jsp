@@ -19,7 +19,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dashboard</title>
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-        <link href="/SistemaMedico//css/admin-Style.css" rel="stylesheet" type="text/css"/>
+        <link href="/SistemaMedico//css/panelStyle.css" rel="stylesheet" type="text/css"/>
     </head>
 
     <body>
@@ -53,8 +53,8 @@
                             <button type="submit" class="opc">
                                 <span class="las la-home"></span> <samp class="text">Dashboard</samp>
                             </button>
-                            <input type="hidden" name="action" value="#">
-                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                            <input type="hidden" name="action" value="dashboard">
+                            <input type="text" name="nameUser" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li> 
 
