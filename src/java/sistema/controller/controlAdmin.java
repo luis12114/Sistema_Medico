@@ -47,8 +47,7 @@ public class controlAdmin extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+            throws ServletException, IOException {     
     }
 
     @Override
@@ -194,6 +193,28 @@ public class controlAdmin extends HttpServlet {
         } 
       
       /*-----------------------TERMINA ACTUALIZAR USUARIO---------------------------------------*/
+       
+       
+      /*-----------------------INCIA ELIMINAR USUARIOS------------------------------------------*/
+      else if (action.equalsIgnoreCase("delitUser")) {
+          String buscar = request.getParameter("usuario-login");
+          String username = request.getParameter("usuario");
+          String imagen = request.getParameter("img");
+         
+          admin.deleteUser(username);
+          admin.deleteItems(imagen);
+                  
+           User x = new User();
+           x = admin.getUser(buscar);
+           request.getSession().setAttribute("name", x.getName());
+           request.getSession().setAttribute("imagen",x.getPicture());
+           
+           request.setAttribute("users",admin.getAllUsers());
+           
+           
+           forward = "/administrador/users/index.jsp";
+        }
+      /*-----------------------TERMINA ELIMINAR USUARIOS---------------------------------------*/
         
         
         else {

@@ -100,14 +100,14 @@ public class AdminDAO {
         }
         return users;
     }
-    
-    // Metodo para añadir usuarios
-    public void updateUser(String nombre,User user) {
+
+    // Metodo para actualizar usuarios
+    public void updateUser(String nombre, User user) {
         try {
             PreparedStatement preparedStatement = con.prepareStatement("UPDATE user SET password=?,name=? WHERE name= ?;");
             preparedStatement.setString(1, user.getPassword());
             preparedStatement.setString(2, user.getName());
-            preparedStatement.setString(3,nombre);
+            preparedStatement.setString(3, nombre);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -133,8 +133,19 @@ public class AdminDAO {
         return url;
     }
 
+    //Metodo para eliminar usuario
+    public void deleteUser(String name) {
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement("DELETE FROM user WHERE name= ?;");
+            preparedStatement.setString(1,name);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     //Meotodo para eliminar archivos
-    public void deleteitems(String name) {
+    public void deleteItems(String name) {
         final String RUTA = "C:\\Users\\52777\\Documents\\NetBeansProjects\\SistemaMedico\\web\\images\\" + name;
         try {
             File archivo = new File(RUTA);

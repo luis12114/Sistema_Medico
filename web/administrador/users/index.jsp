@@ -108,16 +108,17 @@
                             <input type="text" name="usuario" value="${user.name}" style="display:none">
                         </form>
 
-                        <form method="post" action="/SistemaMedico/controlAdmin" class="card__button">
-                            <span class="las la-trash"></span><input type="submit" value="Delit" class="opc">
-                            <input type="hidden" name="action" value="#">
-                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        <form method="post" action="/SistemaMedico/controlAdmin" class="card__button formulario">
+                            <span class="las la-trash"></span><input type="submit"  value="Delit" class="opc">
+                            <input type="hidden" name="action" value="delitUser">
+                            <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="usuario" value="${user.name}" style="display:none">
+                            <input type="text" name="img" value="${user.picture}" style="display:none">
                         </form>
                     </div>
                 </c:forEach>
             </main>
         </div>
-        <label class="close-mobile-menu" for="menu-toggle"></label>
+        <label class="close-mobile-menu" for="menu-toggle"></label
     </body>
-
 </html>
