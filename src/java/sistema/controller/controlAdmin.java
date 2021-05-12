@@ -144,6 +144,20 @@ public class controlAdmin extends HttpServlet {
         
       /*-----------------------TERMINA VER TODOS LOS USURIOS-------------------------------*/  
        
+        
+     /*-----------------------------INCIA CREAR USUARIOS-----------------------------------*/
+        else if (action.equalsIgnoreCase("formAdd")) {
+            /**Datos del usuario logeado**/
+            String buscar = request.getParameter("usuario-login");
+            User z= new User();
+            z = admin.getUser(buscar);
+            request.getSession().setAttribute("name", z.getName());
+            request.getSession().setAttribute("imagen",z.getPicture());
+            forward = "/administrador/users/create.jsp";
+        }   
+     /*-----------------------------TERMINA CREAR USUARIOS---------------------------------*/
+        
+        
       
       /*-----------------------INCIA EDITAR USUARIO-----------------------------------------*/
         else if (action.equalsIgnoreCase("editUser")) {

@@ -301,6 +301,36 @@ header {
     color: #111;
 }
 
+/**Add buttom**/
+
+.add button {
+    border: none;
+    background: none;
+    margin-top: 2rem;
+}
+
+.add button .la-plus-circle {
+    font-size: 120px;
+    color: #fff;
+}
+
+.add button span {
+    border: 4px solid #0ba396;
+    border-radius: 50%;
+    background: #0ba396;
+}
+
+.add button:hover {
+    cursor: pointer;
+}
+
+.add button .la-plus-circle:hover {
+    box-shadow: 3px 6px 5px 0px rgba(0, 0, 0, 0.25);
+}
+
+.card__glass:hover {
+    box-shadow: 3px 6px 5px .5px rgba(0, 0, 0, 0.25);
+}
 
 /**Edit-info**/
 

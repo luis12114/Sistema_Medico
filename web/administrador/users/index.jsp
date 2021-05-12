@@ -68,6 +68,7 @@
                             <button type="submit" class="opc">
                                 <span class="las la-user"></span> <samp class="text">Users</samp>
                             </button>
+                            
                             <input type="hidden" name="action" value="allUsers">
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
@@ -91,6 +92,14 @@
                 </div>
             </header>
             <main class="card__container ">
+                <div class="card__glass">
+                    <form method="post" action="/SistemaMedico/controlAdmin" class="add">
+                        <button class="btn-add"><span class="las la-plus-circle"></span></button>
+                        <input type="hidden" name="action" value="formAdd">
+                        <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
+                    </form>
+                </div>
+               
                 <c:forEach items="${users}" var="user">
                     <div class="card__glass">
                         <img src="/SistemaMedico/images/${user.picture}" alt="" class="card__img">
