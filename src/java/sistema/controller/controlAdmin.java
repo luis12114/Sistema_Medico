@@ -158,6 +158,43 @@ public class controlAdmin extends HttpServlet {
      /*-----------------------------TERMINA CREAR USUARIOS---------------------------------*/
         
         
+     /*------------------------INICIA  ADD USUARIOS---------------------------------------*/ 
+        else if (action.equalsIgnoreCase("addUser")) {
+            /*Valores del formulario*/
+            String username = request.getParameter("User");
+            String passwd = request.getParameter("pass");
+//          String id_role = request.getParameter("id_role");
+//            int role= Integer.parseInt(id_role);
+//            
+            /*Envio a base de datos*/
+            
+            User user = new User();
+
+            try{
+                Part part = request.getPart("file");
+                String namefoto=extractFileName(part);
+                user.setPicture(namefoto);
+                if (part == null){
+                    out.print("no imagen");
+                    return;
+                }
+                if(isExtension(part.getSubmittedFileName(),exents)){
+                    String foto= saveFile(part,uploads);
+                }
+            }catch(Exception e){
+               e.printStackTrace();
+            }
+  
+            user.setName(username);
+            user.setPassword(passwd);
+//            user.setId_role(role);
+            admin.addUser(user);
+            
+            request.setAttribute("users",admin.getAllUsers()); 
+            forward = "/administrador/users/index.jsp";
+        }
+      /*------------------------TERMINA ADD USUARIOS----------------------------------------*/    
+        
       
       /*-----------------------INCIA EDITAR USUARIO-----------------------------------------*/
         else if (action.equalsIgnoreCase("editUser")) {

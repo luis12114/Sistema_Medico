@@ -479,7 +479,7 @@ header {
 }
     
 .container-edit .contactForm .formBox .botones {
-    display: flex;
+    padding-top: 1px;
 }
 
 /**Resposive**/

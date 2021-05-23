@@ -19,7 +19,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dark theme Admin Dashboard</title>
+        <title>Create</title>
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
         <link href="/SistemaMedico//css/panelStyle.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -51,23 +51,25 @@
                 </div>
                 <ul>
 
-
                     <li>
                         <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-home"></span> <samp class="text">Dashboard</samp>
                             </button>
+                            <input type="hidden" name="action" value="dashboard">
+                            <input type="text" name="nameUser" value="<%out.println(nom);%>" style="display:none">
                         </form>
-
                     </li>
 
                     <li>
-                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont  active">
+                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
                             <button type="submit" class="opc">
-                                <span class="las la-user"></span> <samp class="text" >Users</samp>
+                                <span class="las la-user"></span> <samp class="text">Users</samp>
                             </button>
-                        </form>
 
+                            <input type="hidden" name="action" value="allUsers">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        </form>
                     </li>
                 </ul>
 
@@ -96,35 +98,37 @@
                 <div class="contactForm">
                     <h2>Registro</h2>
 
-                    <form action="" method="post" action="/SistemaMedico/controlAdmin" class="formBox">
+                    <form method="post" action="/SistemaMedico/controlAdmin" class="formBox" enctype="multipart/form-data">
                         <div class="inputBox w50 ">
-                            <input type="text " required>
+                            <input type="text" name="User" required>
                             <span>First Name</span>
                         </div>
 
                         <div class="inputBox w50 ">
-                            <input type="text " required>
+                            <input type="password" name="pass" required>
                             <span>Last Name</span>
                         </div>
 
-                        
-                        <div class="botones">
-                            
+                        <div class="inputBox w100 ">
+                            <input type="file" name="file">
+                        </div>
+                        <input type="hidden" name="action" value="addUser">
+
+                        <div class="">
                             <div class="inputBox w100  buton">
                                 <button type="submit " value="Send ">Guardar</button>
-                            </div>
-                            
-                            
-                            <form action="" method="post" action="/SistemaMedico/controlAdmin" class="formBox">
-                                <div class="inputBox w100  buton">
-                                    <button type="submit " value="Send ">Regresar</button>
-                                </div>
-                                <input type="hidden" name="action" value="allUsers">
-                                <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
-                            </form>
-
+                            </div
                         </div>
+                    </form>
 
+                    <form method="post" action="/SistemaMedico/controlAdmin" class="formBox">
+                        <input type="hidden" name="action" value="allUsers">
+                        <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        <div class="botones">
+                            <div class="inputBox w100  buton">
+                                <button type="submit" class="top">Regresar</button>
+                            </div> 
+                        </div>
                     </form>
 
                 </div>
