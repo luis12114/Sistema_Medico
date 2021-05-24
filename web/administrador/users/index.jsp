@@ -73,6 +73,16 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
+                    
+                    <li>
+                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
+                            <button type="submit" class="opc">
+                                <span class="las la-user-tag"></span> <samp class="text">Roles</samp>
+                            </button>
+                            <input type="hidden" name="action" value="allRoles">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        </form>
+                    </li
                 </ul>
 
             </div>
@@ -104,8 +114,8 @@
                     <div class="card__glass">
                         <img src="/SistemaMedico/images/${user.picture}" alt="" class="card__img">
                         <div class="card__data">
-                            <h3 class="card__title">${user.name}</h3>
-                            <span class="card__profession">${user.password}</span><br>
+                            <h3 class="card__title"> ${user.id}. ${user.name}</h3>
+                            <span class="card__profession">Constraseña: ${user.password}</span><br>
                             <!--<span class="card__profession">Web Developer</span><br>
                             <span class="card__profession">Web Developer</span>-->
                         </div>

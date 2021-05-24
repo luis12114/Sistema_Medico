@@ -3,7 +3,7 @@ package sistema.model;
 public class User {
 
     String name, password, picture;
-    int id_role;
+    int id_role,id;
 
     public User() {
     }
@@ -39,4 +39,13 @@ public class User {
     public void setId_role(int id_role) {
         this.id_role = id_role;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
 }

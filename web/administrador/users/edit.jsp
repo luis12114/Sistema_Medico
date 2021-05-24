@@ -77,6 +77,17 @@
                             <input type="text" name="usuario" value="<%out.println(nom1);%>" style="display:none">
                         </form>
                     </li>
+                    
+                    <li>
+                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
+                            <button type="submit" class="opc">
+                                <span class="las la-user-tag"></span> <samp class="text">Roles</samp>
+                            </button>
+                            <input type="hidden" name="action" value="allRoles">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        </form>
+                    </li
+                      
                 </ul>
             </div>
         </div>

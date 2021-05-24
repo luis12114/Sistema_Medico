@@ -1,14 +1,16 @@
 <%-- 
-    Document   : index.js
-    Created on : 25 abr. 2021, 13:19:05
+    Document   : Create
+    Created on : 11 may. 2021, 22:44:53
     Author     : 52777
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%
     String nom = (String) session.getAttribute("name");
     String imagen = (String) session.getAttribute("imagen");
 %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +19,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dashboard</title>
+        <title>Create</title>
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
         <link href="/SistemaMedico//css/panelStyle.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -48,25 +50,27 @@
                     </div>
                 </div>
                 <ul>
+
                     <li>
-                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont  active">
+                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-home"></span> <samp class="text">Dashboard</samp>
                             </button>
                             <input type="hidden" name="action" value="dashboard">
                             <input type="text" name="nameUser" value="<%out.println(nom);%>" style="display:none">
                         </form>
-                    </li> 
+                    </li>
 
                     <li>
                         <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-user"></span> <samp class="text">Users</samp>
                             </button>
+
                             <input type="hidden" name="action" value="allUsers">
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
-                    </li>  
+                    </li>
                     
                     <li>
                         <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
@@ -76,8 +80,9 @@
                             <input type="hidden" name="action" value="allRoles">
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
-                    </li>  
+                    </li
                 </ul>
+
             </div>
         </div>
         <div class="main-content">
@@ -85,17 +90,67 @@
                 <label for="menu-toggle" class="menu-toggler">
                     <span class="las la-bars"></span>
                 </label>
-                <div class="search">
+                <div class="search" style="display: none;">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="Enter keyword">
                 </div>
-                <div class="header-icons">
-                    <span class="las la-bell"></span>
-                    <span class="las la-bookmark"></span>
+                <div class="header-icons ">
+                    <span class="las la-bell "></span>
+                    <span class="las la-bookmark "></span>
                 </div>
             </header>
+            <main class="container-edit ">
+                <div class="contactInfo ">
+                    <div class="img">
+                        
+                    </div>
+                </div>
+                <div class="contactForm">
+                    <h2>Registro</h2>
+
+                    <form method="post" action="/SistemaMedico/controlAdmin" class="formBox" enctype="multipart/form-data">
+                        
+                        <div class="inputBox w50">
+                            <input type="text" name="rol" required value="">
+                            <span>Rol</span>
+                        </div>
+                            
+                        <div class="inputBox w50">
+                            <input type="text" name="desc" required value="">
+                            <span>Descripción</span>
+                        </div>
+                            
+                        <div class="inputBox w100">
+                            <input type="text" name="url" required value="">
+                            <span>Url</span>
+                        </div>
+                        
+                        
+                        <input type="hidden" name="action" value="addRole">
+
+                        <div class="">
+                            <div class="inputBox w100  buton">
+                                <button type="submit " value="Send ">Guardar</button>
+                            </div
+                        </div>
+                    </form>
+
+                    <form method="post" action="/SistemaMedico/controlAdmin" class="formBox">
+                        <input type="hidden" name="action" value="allRoles">
+                        <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        <div class="botones">
+                            <div class="inputBox w100  buton">
+                                <button type="submit" class="top">Regresar</button>
+                            </div> 
+                        </div>
+                    </form>
+
+                </div>
+            </main>
         </div>
-        <label class="close-mobile-menu" for="menu-toggle"></label>
+        <label class="close-mobile-menu " for="menu-toggle "></label>
     </body>
 
 </html>
+
+
