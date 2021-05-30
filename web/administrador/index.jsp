@@ -59,7 +59,7 @@
                     </li> 
 
                     <li>
-                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
+                        <form method="post" action="/SistemaMedico/UserController" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-user"></span> <samp class="text">Users</samp>
                             </button>
@@ -69,7 +69,7 @@
                     </li>  
                     
                     <li>
-                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
+                        <form method="post" action="/SistemaMedico/RolesController" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-user-tag"></span> <samp class="text">Roles</samp>
                             </button>

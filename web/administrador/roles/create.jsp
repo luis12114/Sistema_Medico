@@ -62,7 +62,7 @@
                     </li>
 
                     <li>
-                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
+                        <form method="post" action="/SistemaMedico/UserController" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-user"></span> <samp class="text">Users</samp>
                             </button>
@@ -73,7 +73,7 @@
                     </li>
                     
                     <li>
-                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
+                        <form method="post" action="/SistemaMedico/RolesController" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-user-tag"></span> <samp class="text">Roles</samp>
                             </button>
@@ -108,7 +108,7 @@
                 <div class="contactForm">
                     <h2>Registro</h2>
 
-                    <form method="post" action="/SistemaMedico/controlAdmin" class="formBox" enctype="multipart/form-data">
+                    <form method="post" action="/SistemaMedico/RolesController" class="formBox" enctype="multipart/form-data">
                         
                         <div class="inputBox w50">
                             <input type="text" name="rol" required value="">
@@ -135,7 +135,7 @@
                         </div>
                     </form>
 
-                    <form method="post" action="/SistemaMedico/controlAdmin" class="formBox">
+                    <form method="post" action="/SistemaMedico/RolesController" class="formBox">
                         <input type="hidden" name="action" value="allRoles">
                         <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         <div class="botones">

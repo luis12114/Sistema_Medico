@@ -64,7 +64,7 @@
                     </li>
 
                     <li>
-                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
+                        <form method="post" action="/SistemaMedico/UserController" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-user"></span> <samp class="text">Users</samp>
                             </button>
@@ -75,7 +75,7 @@
                     </li>
                     
                     <li>
-                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont active">
+                        <form method="post" action="/SistemaMedico/RolesController" class="opc-cont active">
                             <button type="submit" class="opc">
                                 <span class="las la-user-tag"></span> <samp class="text">Roles</samp>
                             </button>
@@ -103,7 +103,7 @@
             </header>
             <main class="card__container ">
                 <div class="card__glass">
-                    <form method="post" action="/SistemaMedico/controlAdmin" class="add">
+                    <form method="post" action="/SistemaMedico/RolesController" class="add">
                         <button class="btn-add"><span class="las la-plus-circle"></span></button>
                         <input type="hidden" name="action" value="formAddRole">
                         <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
@@ -120,14 +120,14 @@
                             <span class="card__profession">Web Developer</span>-->
                         </div>
 
-                        <form method="post" action="/SistemaMedico/controlAdmin" class="card__button">
+                        <form method="post" action="/SistemaMedico/RolesController" class="card__button">
                             <span class="las la-edit"></span><input type="submit" value="Edit" class="opc">
                             <input type="hidden" name="action" value="editRole">
                             <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
                             <input type="text" name="id" value="${roles.id_rol}" style="display:none">
                         </form>
 
-                        <form method="post" action="/SistemaMedico/controlAdmin" class="card__button formulario">
+                        <form method="post" action="/SistemaMedico/RolesController" class="card__button formulario">
                             <span class="las la-trash"></span><input type="submit"  value="Delit" class="opc">
                             <input type="hidden" name="action" value="delitRole">
                             <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">

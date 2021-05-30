@@ -60,14 +60,14 @@ public class controlAdmin extends HttpServlet {
         String action = request.getParameter("action");
 
         
-      /*-------------------------------INICIA LOGIN------------------------------------------*/
+      /*-------------------------------INICIA LOGIN-----------------------------------------*/
         if (action.equalsIgnoreCase("login")) {
             /*Valores del formulario*/
             String user = request.getParameter("usuario");
             String passwd = request.getParameter("password");
             if (admin.login(user, passwd)) {
               //forward = "/administrador/index.jsp";
-                forward =  admin.getURLMenu(user);
+               forward =  admin.getURLMenu(user);
             } else {
                 forward = "/login/login.jsp";
             }
@@ -76,7 +76,7 @@ public class controlAdmin extends HttpServlet {
             request.getSession().setAttribute("name", u.getName());
             request.getSession().setAttribute("imagen", u.getPicture());
         } 
-      /*--------------------------------TERMINA LOGIN----------------------------------------*/ 
+      /*--------------------------------TERMINA LOGIN---------------------------------------*/ 
         
         
         
@@ -133,275 +133,7 @@ public class controlAdmin extends HttpServlet {
            forward = "/administrador/index.jsp";
        }
       /*-----------------------TERMINA VOLVER A HOME DEL PANEL ADMIN-----------------------*/ 
-        
-      
-        
-      /*-----------------------INCIA VER TODOS LOS USURIOS----------------------------------*/   
-        else if (action.equalsIgnoreCase("allUsers")) {
-            String buscar = request.getParameter("usuario");
-            User x = new User();
-            x = admin.getUser(buscar);
-            request.getSession().setAttribute("name", x.getName());
-            request.getSession().setAttribute("imagen",x.getPicture());
-            request.setAttribute("users",admin.getAllUsers()); 
-            forward = "/administrador/users/index.jsp";
-        }
-        
-      /*-----------------------TERMINA VER TODOS LOS USURIOS-------------------------------*/  
-       
-        
-     /*-----------------------------INCIA CREAR USUARIOS-----------------------------------*/
-        else if (action.equalsIgnoreCase("formAdd")) {
-            /**Datos del usuario logeado**/
-            String buscar = request.getParameter("usuario-login");
-            User z= new User();
-            z = admin.getUser(buscar);
-            request.getSession().setAttribute("name", z.getName());
-            request.getSession().setAttribute("imagen",z.getPicture());
-            forward = "/administrador/users/create.jsp";
-        }   
-     /*-----------------------------TERMINA CREAR USUARIOS---------------------------------*/
-        
-        
-     /*------------------------INICIA  ADD USUARIOS---------------------------------------*/ 
-        else if (action.equalsIgnoreCase("addUser")) {
-            /*Valores del formulario*/
-            String username = request.getParameter("User");
-            String passwd = request.getParameter("pass");
-            //String id_role = request.getParameter("id_role");
-            //int role= Integer.parseInt(id_role);
             
-            /*Envio a base de datos*/
-            
-            User user = new User();
-
-            try{
-                Part part = request.getPart("file");
-                String namefoto=extractFileName(part);
-                user.setPicture(namefoto);
-                if (part == null){
-                    out.print("no imagen");
-                    return;
-                }
-                if(isExtension(part.getSubmittedFileName(),exents)){
-                    String foto= saveFile(part,uploads);
-                }
-            }catch(Exception e){
-               e.printStackTrace();
-            }
-  
-            user.setName(username);
-            user.setPassword(passwd);
-//            user.setId_role(role);
-            admin.addUser(user);
-            
-            request.setAttribute("users",admin.getAllUsers()); 
-            forward = "/administrador/users/index.jsp";
-        }
-      /*------------------------TERMINA ADD USUARIOS----------------------------------------*/    
-        
-      
-      /*-----------------------INCIA EDITAR USUARIO-----------------------------------------*/
-        else if (action.equalsIgnoreCase("editUser")) {
-            /**Datos del usuario logeado**/
-            String buscar1 = request.getParameter("usuario-login");
-            User z= new User();
-            z = admin.getUser(buscar1);
-            request.getSession().setAttribute("name1", z.getName());
-            request.getSession().setAttribute("imagen1",z.getPicture());
-            
-            /**Datos del usuario que se desea editar**/
-            String buscar2 = request.getParameter("usuario");
-            User x = new User();
-            x = admin.getUser(buscar2);
-            request.getSession().setAttribute("name", x.getName());
-            request.getSession().setAttribute("imagen",x.getPicture());
-            request.getSession().setAttribute("pass",x.getPassword());
-            forward = "/administrador/users/edit.jsp";
-        }
-        
-      /*-----------------------TERMINA EDITAR USUARIO---------------------------------------*/
-        
-        
-      /*-----------------------INCIA ACTUALIZAR USUARIO-----------------------------------------*/
-        
-       else if (action.equalsIgnoreCase("updateUser")) {
-           String buscar = request.getParameter("loginUser");
-           
-           String username1 = request.getParameter("usuario1");
-           String username = request.getParameter("usuario");
-           String passwd = request.getParameter("password");
-
-           User user = new User();
-           user.setName(username);
-           user.setPassword(passwd);
-           admin.updateUser(username1,user);
-           
-           
-           User x = new User();
-           x = admin.getUser(buscar);
-           request.getSession().setAttribute("name", x.getName());
-           request.getSession().setAttribute("imagen",x.getPicture());
-           
-           request.setAttribute("users",admin.getAllUsers()); 
-       
-           forward = "/administrador/users/index.jsp";
-        } 
-      
-      /*-----------------------TERMINA ACTUALIZAR USUARIO---------------------------------------*/
-       
-       
-      /*-----------------------INCIA ELIMINAR USUARIOS------------------------------------------*/
-      else if (action.equalsIgnoreCase("delitUser")) {
-          String buscar = request.getParameter("usuario-login");
-          String username = request.getParameter("usuario");
-          String imagen = request.getParameter("img");
-         
-          admin.deleteUser(username);
-          admin.deleteItems(imagen);
-                  
-           User x = new User();
-           x = admin.getUser(buscar);
-           request.getSession().setAttribute("name", x.getName());
-           request.getSession().setAttribute("imagen",x.getPicture());
-           
-           request.setAttribute("users",admin.getAllUsers());
-           
-           
-           forward = "/administrador/users/index.jsp";
-        }
-      /*-----------------------TERMINA ELIMINAR USUARIOS---------------------------------------*/
-       
-      
-      
-      /*-----------------------INICIA LISTAR ROLES--------------------------------------------*/
-      else if (action.equalsIgnoreCase("allRoles")) {
-            String buscar = request.getParameter("usuario");
-            User x = new User();
-            x = admin.getUser(buscar);
-            request.getSession().setAttribute("name", x.getName());
-            request.getSession().setAttribute("imagen",x.getPicture());
-            
-            request.setAttribute("roles",admin.getAllRoles()); 
-            forward = "/administrador/roles/index.jsp";
-        }
-      
-      /*-----------------------TERMINA LISTAR ROLES-------------------------------------------*/
-      
-      
-      /*-----------------------------INCIA CREAR ROLE----------------------------------------*/
-        else if (action.equalsIgnoreCase("formAddRole")) {
-            /**Datos del usuario logeado**/
-            String buscar = request.getParameter("usuario-login");
-            User z= new User();
-            z = admin.getUser(buscar);
-            request.getSession().setAttribute("name", z.getName());
-            request.getSession().setAttribute("imagen",z.getPicture());
-            forward = "/administrador/roles/create.jsp";
-        }   
-      /*-----------------------------TERMINA CREAR ROLE------------------------------------*/
-      
-      /*------------------------INICIA  ADD ROLES------------------------------------------*/ 
-        else if (action.equalsIgnoreCase("addRole")) {
-            /*Valores del formulario*/
-
-           String rol = request.getParameter("rol");
-           String desc = request.getParameter("desc");
-           String url = request.getParameter("url");
-            
-           Roles role = new Roles();
-           role.setName_role(rol);
-           role.setPermissions(desc);
-           role.setUrl(url);
-           admin.addRole(role);
-
-           request.setAttribute("roles",admin.getAllRoles());
-           forward = "/administrador/roles/index.jsp";
-        }
-      /*------------------------TERMINA ADD ROLES------------------------------------------*/ 
-        
-        
-      /*-----------------------INCIA EDITAR ROLES--------------------------------------------*/
-        else if (action.equalsIgnoreCase("editRole")) {
-            
-            /**Datos del usuario logeado**/
-            String buscar1 = request.getParameter("usuario-login");
-            User z= new User();
-            z = admin.getUser(buscar1);
-            request.getSession().setAttribute("name", z.getName());
-            request.getSession().setAttribute("imagen",z.getPicture());
-            
-            /**Datos del usuario que se desea editar**/
-            String id_buscar = request.getParameter("id");
-            int id= Integer.parseInt(id_buscar);
-            
-            Roles r = new Roles();
-            r= admin.getRoles(id);
-            request.getSession().setAttribute("id",r.getId_rol());
-            request.getSession().setAttribute("rol",r.getName_role());
-            request.getSession().setAttribute("descrip",r.getPermissions());
-            request.getSession().setAttribute("url",r.getUrl());
-            request.getSession().setAttribute("id_permi",r.getId_permisos());
-            forward = "/administrador/roles/edit.jsp";
-        }
-      /*-----------------------TERMINA EDITAR ROLES------------------------------------------*/ 
-      
-        
-      /*-----------------------INCIA ACTUALIZAR ROLES-----------------------------------------*/
-        
-       else if (action.equalsIgnoreCase("updateRole")) {
-           String buscar = request.getParameter("usuario");
-           
-           String idSerch=request.getParameter("id-serch");
-           int id_serach= Integer.parseInt(idSerch);
-           
-           String idUpdate = request.getParameter("id-update");
-           int id_update= Integer.parseInt(idUpdate);
-           String rol = request.getParameter("rol");
-           String desc = request.getParameter("desc");
-           String url = request.getParameter("url");
-           
-           Roles role = new Roles();
-           role.setId_rol(id_update);
-           role.setName_role(rol);
-           role.setPermissions(desc);
-           role.setUrl(url);
-           admin.updateRoles(id_serach, role);
-  
-           User x = new User();
-           x = admin.getUser(buscar);
-           request.getSession().setAttribute("name", x.getName());
-           request.getSession().setAttribute("imagen",x.getPicture());
-           
-           request.setAttribute("users",admin.getAllUsers()); 
-           request.setAttribute("roles",admin.getAllRoles()); 
-           forward = "/administrador/roles/index.jsp";
-        } 
-      
-      /*-----------------------TERMINA ACTUALIZAR ROLES-------------------------------------*/  
-      
-       
-      /*-----------------------INCIA ELIMINAR ROLES------------------------------------------*/
-      else if (action.equalsIgnoreCase("delitRole")) {
-          String buscar = request.getParameter("usuario-login");
-          
-          String id_buscar = request.getParameter("id");
-          int id= Integer.parseInt(id_buscar);
-          admin.deleteRoles(id);
-
-                  
-           User x = new User();
-           x = admin.getUser(buscar);
-           request.getSession().setAttribute("name", x.getName());
-           request.getSession().setAttribute("imagen",x.getPicture());
-           
-           request.setAttribute("roles",admin.getAllRoles()); 
-           
-           
-           forward = "/administrador/roles/index.jsp";
-        }
-      /*-----------------------TERMINA ELIMINAR ROLES---------------------------------------*/
-        
         else {
            forward = "/errors/error.jsp";
         }

@@ -4,9 +4,25 @@
         <servlet-name>controlAdmin</servlet-name>
         <servlet-class>sistema.controller.controlAdmin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserController</servlet-name>
+        <servlet-class>sistema.controller.UserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RolesController</servlet-name>
+        <servlet-class>sistema.controller.RolesController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>controlAdmin</servlet-name>
         <url-pattern>/controlAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserController</servlet-name>
+        <url-pattern>/UserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RolesController</servlet-name>
+        <url-pattern>/RolesController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

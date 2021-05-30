@@ -69,7 +69,7 @@
                     </li>
 
                     <li>
-                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
+                        <form method="post" action="/SistemaMedico/UserController" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-user"></span> <samp class="text">Users</samp>
                             </button>
@@ -79,7 +79,7 @@
                     </li>
                     
                     <li>
-                        <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
+                        <form method="post" action="/SistemaMedico/RolesController" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-user-tag"></span> <samp class="text">Roles</samp>
                             </button>
@@ -118,7 +118,7 @@
                 <div class="contactForm">
                     <h2>Informacion</h2>
 
-                    <form action="" method="post" action="/SistemaMedico/controlAdmin" class="formBox">
+                    <form action="" method="post" action="/SistemaMedico/UserController" class="formBox">
                         
                         <div class="inputBox w50">
                             <input type="text" name="usuario" required value="<%out.println(nom);%>">
@@ -154,7 +154,7 @@
                                 <button type="submit" value="Send ">Guardar</button>
                             </div>
 
-                            <form action="" method="post" action="/SistemaMedico/controlAdmin" class="formBox"> 
+                            <form action="" method="post" action="/SistemaMedico/UserController" class="formBox"> 
                                  <div class="inputBox w100  buton">
                                   <button type="submit" value="Send ">Regresar</button>
                                   <input type="hidden" name="action" value="allUsers">

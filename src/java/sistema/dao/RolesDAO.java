@@ -12,61 +12,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import sistema.model.Roles;
 import sistema.model.User;
 
-import sistema.model.Roles;
-
-public class AdminDAO {
-
+public class RolesDAO {
     private Connection con = null;
-
     
     // Metodo que genera la conexion
-    public AdminDAO() {
+    public RolesDAO() {
         con = Database.getConnection();
     }
     
-  /*-------------------------------INICIA LOGIN-----------------------------------------*/
-    // Metodo Login
-    public boolean login(String Usuario, String Password) {
-        try {
-            PreparedStatement pstm = null;
-            ResultSet rs = null;
-            String query = "SELECT id_user FROM user WHERE name = ? AND password=?";
-            pstm = con.prepareStatement(query);
-            pstm.setString(1, Usuario);//convertir a String el parametro Usuario
-            pstm.setString(2, Password);//convertir a String el parametro Password
-            rs = pstm.executeQuery();//ejecutar el query 
-            if (rs.next()) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
     
-    //Metodo que devuelve la url del Rol
-    public String getURLMenu(String usuario) {
-        String url = "";
-        try {
-            PreparedStatement pstm = null;
-            ResultSet rs = null;
-            String query = "SELECT url FROM roles as r INNER JOIN user as u ON u.ID_Rol = r.ID_Rol WHERE u.name = ?";
-            pstm = con.prepareStatement(query);
-            pstm.setString(1, usuario);
-            rs = pstm.executeQuery();
-            if (rs.next()) {
-                url = rs.getString("url");
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return url;
-    }
- 
     // Metodo para obtener el usuario logeado
     public User getUser(String nombre) {
         User u = new User();
@@ -87,27 +44,7 @@ public class AdminDAO {
         }
         return u;
     }
-  /*-------------------------------TERMINA LOGIN------------------------------------------*/
-       
     
-  /*-------------------------------INICIA REGISTRO DE USURIOS----------------------------*/
-    // Metodo para añadir usuarios
-    public void addUser(User user) {
-        try {
-            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO user (name,password,imagen_user,ID_Rol) VALUES (?,?,?,?);");
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setString(3, user.getPicture());
-            preparedStatement.setInt(4, user.getId_role());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-  /*-------------------------------TERMINA REGISTRO DE USURIOS --------------------------*/
-
-    
-  /*-------------------------------INICIA ROLES---------------------------------------------*/
     // Metodo para listar todos los roles
     public List<Roles> getAllRoles() {
         List<Roles> roles = new ArrayList<Roles>();
@@ -194,5 +131,4 @@ public class AdminDAO {
         }
     }
     
-   /*-------------------------------TERMINA ROLES---------------------------------------------*/
 }
