@@ -9,20 +9,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%
-    /**
-     * Datos del usuario logeado*
-     */
+    /**Datos del usuario logeado**/
+    String nom1 = (String) session.getAttribute("name1");
+    String imagen1 = (String) session.getAttribute("imagen1");
+    
+    /**Datos del usuario que se desea editar**/
     String nom = (String) session.getAttribute("name");
     String imagen = (String) session.getAttribute("imagen");
-
-    /**
-     * Datos del usuario que se desea editar*
-     */
-    int id = (int) session.getAttribute("id");
-    String rol = (String) session.getAttribute("rol");
-    String desc = (String) session.getAttribute("descrip");
-    String url = (String) session.getAttribute("url");
-    int id_permi = (int) session.getAttribute("id_permi");
+    String password = (String) session.getAttribute("pass");
 %>
 
 <!DOCTYPE html>
@@ -50,7 +44,7 @@
                     <div class="side-img"
                          style="
                          <%if (imagen != null) {%>
-                         background-image:url(/SistemaMedico/images/<%=imagen%>
+                         background-image:url(/SistemaMedico/images/<%=imagen1%>
                          <%} else {%>
                          background-image:url(/SistemaMedico/images/defaultProfile.jpg
                          <%}%>
@@ -58,19 +52,19 @@
                          >
                     </div>
                     <div class="user">
-                        <small><%out.println(nom);%></small>
-                        <p>Panel Administrador</p>
+                        <small><%out.println(nom1);%></small>
+                         <p>Panel Administrador</p>
                     </div>
                 </div>
                 <ul>
-
-                    <li>
+      
+                   <li>
                         <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-home"></span> <samp class="text">Dashboard</samp>
                             </button>
                             <input type="hidden" name="action" value="dashboard">
-                            <input type="text" name="nameUser" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="nameUser" value="<%out.println(nom1);%>" style="display:none">
                         </form>
                     </li>
 
@@ -79,11 +73,11 @@
                             <button type="submit" class="opc">
                                 <span class="las la-user"></span> <samp class="text">Users</samp>
                             </button>
-                            <input type="hidden" name="action" value="allRoles">
-                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                            <input type="hidden" name="action" value="allUsers">
+                            <input type="text" name="usuario" value="<%out.println(nom1);%>" style="display:none">
                         </form>
                     </li>
-
+                    
                     <li>
                         <form method="post" action="/SistemaMedico/RolesController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -92,18 +86,8 @@
                             <input type="hidden" name="action" value="allRoles">
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
-                    </li>
-
-                    <li>
-                        <form method="post" action="/SistemaMedico/MedicosController" class="opc-cont">
-                            <button type="submit" class="opc">
-                                <span class="las la-stethoscope"></span> <samp class="text">Medicos</samp>
-                            </button>
-                            <input type="hidden" name="action" value="allMedicos">
-                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
-                        </form>
-                    </li>
-
+                    </li
+                      
                 </ul>
             </div>
         </div>
@@ -124,32 +108,26 @@
             <main class="container-edit ">
                 <div class="contactInfo ">
                     <div class="img">
-
+                        <%if (imagen != null) {%>
+                          <img src="/SistemaMedico/images/<%=imagen%>" alt="">
+                        <%} else {%>
+                         <img src="/SistemaMedico/images/defaultProfile.jpg" alt="">
+                        <%}%>
                     </div>
                 </div>
                 <div class="contactForm">
                     <h2>Informacion</h2>
 
-                    <form action="" method="post" action="/SistemaMedico/RolesController" class="formBox">
-
+                    <form action="" method="post" action="/SistemaMedico/UserController" class="formBox">
+                        
                         <div class="inputBox w50">
-                            <input type="text" name="id-update" required value="<%out.println(id);%>">
-                            <span>id</span>
+                            <input type="text" name="usuario" required value="<%out.println(nom);%>">
+                            <span>First Name</span>
                         </div>
 
                         <div class="inputBox w50">
-                            <input type="text" name="rol" required value="<%out.println(rol);%>">
-                            <span>Rol</span>
-                        </div>
-
-                        <div class="inputBox w50">
-                            <input type="text" name="desc" required value="<%out.println(desc);%>">
-                            <span>Descripción</span>
-                        </div>
-
-                        <div class="inputBox w50">
-                            <input type="text" name="url" required value="<%out.println(url);%>">
-                            <span>Url</span>
+                            <input type="password" name="password" required value="<%out.println(password);%>">
+                            <span>Password</span>
                         </div>
 
                         <!--<div class="inputBox w100">
@@ -166,29 +144,28 @@
                             <textarea required></textarea>
                             <span>Write you message here...</span>
                         </div>-->
-
-
+                        
+                        
                         <div class="botones">
                             <div class="inputBox w100  buton">
-                                <input type="hidden" name="action" value="updateRole">
-                                <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
-                                <input type="text" name="id-serch" value="<%out.println(id);%>" style="display:none">
+                                <input type="hidden" name="action" value="updateUser">
+                                <input type="text" name="usuario1" value="<%out.println(nom);%>" style="display:none">
+                                <input type="text" name="loginUser" value="<%out.println(nom1);%>" style="display:none">
                                 <button type="submit" value="Send ">Guardar</button>
                             </div>
-                        </div>  
+
+                            <form action="" method="post" action="/SistemaMedico/UserController" class="formBox"> 
+                                 <div class="inputBox w100  buton">
+                                  <button type="submit" value="Send ">Regresar</button>
+                                  <input type="hidden" name="action" value="allUsers">
+                                  <input type="text" name="usuario" value="<%out.println(nom1);%>" style="display:none">
+                                 </div>
+                            </form>
+                        </div>
+                       
+                            
                     </form>
-                                
-                    <div class="botom">
-                        <form method="post" action="/SistemaMedico/RolesController" class="formBox">
-                            <input type="hidden" name="action" value="allRoles">
-                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
-                            <div class="botones">
-                                <div class="inputBox w100  buton">
-                                    <button type="submit" class="top">Regresar</button>
-                                </div> 
-                            </div>
-                        </form>
-                    </div>            
+
                 </div>
             </main>
         </div>

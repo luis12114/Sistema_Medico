@@ -9,11 +9,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%
-    /**Datos del usuario logeado**/
+    /**
+     * Datos del usuario logeado*
+     */
     String nom1 = (String) session.getAttribute("name1");
     String imagen1 = (String) session.getAttribute("imagen1");
-    
-    /**Datos del usuario que se desea editar**/
+
+    /**
+     * Datos del usuario que se desea editar*
+     */
     String nom = (String) session.getAttribute("name");
     String imagen = (String) session.getAttribute("imagen");
     String password = (String) session.getAttribute("pass");
@@ -28,7 +32,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Edit</title>
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-        <link rel="stylesheet" href="/SistemaMedico//css/panelStyle.css">
+        <link rel="stylesheet" href="/SistemaMedico//css/dashboardStyle.css">
     </head>
 
     <body>
@@ -53,12 +57,12 @@
                     </div>
                     <div class="user">
                         <small><%out.println(nom1);%></small>
-                         <p>Panel Administrador</p>
+                        <p>Panel Administrador</p>
                     </div>
                 </div>
                 <ul>
-      
-                   <li>
+
+                    <li>
                         <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-home"></span> <samp class="text">Dashboard</samp>
@@ -77,7 +81,7 @@
                             <input type="text" name="usuario" value="<%out.println(nom1);%>" style="display:none">
                         </form>
                     </li>
-                    
+
                     <li>
                         <form method="post" action="/SistemaMedico/RolesController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -86,8 +90,18 @@
                             <input type="hidden" name="action" value="allRoles">
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
-                    </li
-                      
+                    </li>
+
+                    <li>
+                        <form method="post" action="/SistemaMedico/MedicosController" class="opc-cont">
+                            <button type="submit" class="opc">
+                                <span class="las la-stethoscope"></span> <samp class="text">Medicos</samp>
+                            </button>
+                            <input type="hidden" name="action" value="allMedicos">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        </form>
+                    </li>
+
                 </ul>
             </div>
         </div>
@@ -109,9 +123,9 @@
                 <div class="contactInfo ">
                     <div class="img">
                         <%if (imagen != null) {%>
-                          <img src="/SistemaMedico/images/<%=imagen%>" alt="">
+                        <img src="/SistemaMedico/images/<%=imagen%>" alt="">
                         <%} else {%>
-                         <img src="/SistemaMedico/images/defaultProfile.jpg" alt="">
+                        <img src="/SistemaMedico/images/defaultProfile.jpg" alt="">
                         <%}%>
                     </div>
                 </div>
@@ -119,7 +133,7 @@
                     <h2>Informacion</h2>
 
                     <form action="" method="post" action="/SistemaMedico/UserController" class="formBox">
-                        
+
                         <div class="inputBox w50">
                             <input type="text" name="usuario" required value="<%out.println(nom);%>">
                             <span>First Name</span>
@@ -144,8 +158,8 @@
                             <textarea required></textarea>
                             <span>Write you message here...</span>
                         </div>-->
-                        
-                        
+
+
                         <div class="botones">
                             <div class="inputBox w100  buton">
                                 <input type="hidden" name="action" value="updateUser">
@@ -153,19 +167,20 @@
                                 <input type="text" name="loginUser" value="<%out.println(nom1);%>" style="display:none">
                                 <button type="submit" value="Send ">Guardar</button>
                             </div>
-
-                            <form action="" method="post" action="/SistemaMedico/UserController" class="formBox"> 
-                                 <div class="inputBox w100  buton">
-                                  <button type="submit" value="Send ">Regresar</button>
-                                  <input type="hidden" name="action" value="allUsers">
-                                  <input type="text" name="usuario" value="<%out.println(nom1);%>" style="display:none">
-                                 </div>
-                            </form>
                         </div>
-                       
-                            
-                    </form>
 
+                    </form>
+                    <div class="botom">
+                        <form method="post" action="/SistemaMedico/UserController" class="formBox">
+                            <input type="hidden" name="action" value="allUsers">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                            <div class="botones">
+                                <div class="inputBox w100  buton">
+                                    <button type="submit" class="top">Regresar</button>
+                                </div> 
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </main>
         </div>

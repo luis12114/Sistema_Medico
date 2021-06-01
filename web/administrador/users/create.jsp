@@ -21,7 +21,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Create</title>
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-        <link href="/SistemaMedico//css/panelStyle.css" rel="stylesheet" type="text/css"/>
+        <link href="/SistemaMedico//css/dashboardStyle.css" rel="stylesheet" type="text/css"/>
     </head>
 
     <body>
@@ -71,7 +71,7 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                    
+
                     <li>
                         <form method="post" action="/SistemaMedico/RolesControlle" class="opc-cont">
                             <button type="submit" class="opc">
@@ -80,7 +80,17 @@
                             <input type="hidden" name="action" value="allRoles">
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
-                    </li
+                    </li>
+
+                    <li>
+                        <form method="post" action="/SistemaMedico/MedicosController" class="opc-cont">
+                            <button type="submit" class="opc">
+                                <span class="las la-stethoscope"></span> <samp class="text">Medicos</samp>
+                            </button>
+                            <input type="hidden" name="action" value="allMedicos">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        </form>
+                    </li>
                 </ul>
 
             </div>
@@ -130,17 +140,17 @@
                             </div
                         </div>
                     </form>
-
-                    <form method="post" action="/SistemaMedico/UserController" class="formBox">
-                        <input type="hidden" name="action" value="allUsers">
-                        <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
-                        <div class="botones">
-                            <div class="inputBox w100  buton">
-                                <button type="submit" class="top">Regresar</button>
-                            </div> 
-                        </div>
-                    </form>
-
+                    <div class="botom">
+                        <form method="post" action="/SistemaMedico/UserController" class="formBox">
+                            <input type="hidden" name="action" value="allUsers">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                            <div class="botones">
+                                <div class="inputBox w100  buton">
+                                    <button type="submit" class="top">Regresar</button>
+                                </div> 
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </main>
         </div>

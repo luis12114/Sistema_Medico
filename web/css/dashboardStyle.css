@@ -468,8 +468,8 @@ header {
     padding-left: 20px;
     padding-right: 20px;
     text-align: center;
-    margin-right: 2rem;
     font-size: 18px;
+    margin-right: 2rem;
 }
 
 .container-edit .contactForm .formBox .inputBox.w100 button:hover {
@@ -477,9 +477,15 @@ header {
     border: 2px solid #0ba396;
     color: #111;
 }
-    
-.container-edit .contactForm .formBox .botones {
+
+.container-edit .contactForm .formBox div.botones {
     padding-top: 1px;
+    display: flex;
+}
+
+.container-edit .contactForm div.botom{
+    margin-left: 8rem; 
+    margin-top: -7.2rem;
 }
 
 /**Resposive**/
@@ -722,6 +728,10 @@ header {
     .container-edit .contactForm .formBox .inputBox.w50 {
         width: 100%;
     }
+    .container-edit .contactForm div.botom{
+        margin-left: 0rem; 
+        margin-top: -2rem;
+    }
 }
 
 @media screen and (max-width: 360px) {
@@ -749,6 +759,10 @@ header {
     }
     .container-edit .img img {
         width: 150px;
+    }
+    .container-edit .contactForm div.botom{
+        margin-left: 0rem; 
+        margin-top: -2rem;
     }
 }
 

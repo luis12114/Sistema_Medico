@@ -12,6 +12,10 @@
         <servlet-name>RolesController</servlet-name>
         <servlet-class>sistema.controller.RolesController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MedicosController</servlet-name>
+        <servlet-class>sistema.controller.MedicosController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>controlAdmin</servlet-name>
         <url-pattern>/controlAdmin</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>RolesController</servlet-name>
         <url-pattern>/RolesController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MedicosController</servlet-name>
+        <url-pattern>/MedicosController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
