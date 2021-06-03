@@ -134,18 +134,18 @@
                             <span class="card__profession">Web Developer</span>-->
                         </div>
 
-                        <form method="post" action="/SistemaMedico/UserController" class="card__button">
+                        <form method="post" action="/SistemaMedico/MedicosController" class="card__button">
                             <span class="las la-edit"></span><input type="submit" value="Edit" class="opc">
-                            <input type="hidden" name="action" value="editUser">
+                            <input type="hidden" name="action" value="editMedico">
                             <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
-                            <input type="text" name="usuario" value="${medico.nombre}" style="display:none">
+                            <input type="text" name="medico" value="${medico.id}" style="display:none">
                         </form>
 
-                        <form method="post" action="/SistemaMedico/UserController" class="card__button formulario">
+                        <form method="post" action="/SistemaMedico/MedicosController" class="card__button formulario">
                             <span class="las la-trash"></span><input type="submit"  value="Delit" class="opc">
-                            <input type="hidden" name="action" value="delitUser">
+                            <input type="hidden" name="action" value="delitMedico">
                             <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
-                            <input type="text" name="usuario" value="${medico.nombre}" style="display:none">
+                            <input type="text" name="medico" value="${medico.id}" style="display:none">
                         </form>
                     </div>
                 </c:forEach>
