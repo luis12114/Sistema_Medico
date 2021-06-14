@@ -174,17 +174,52 @@ public class UserController extends HttpServlet {
            user.setPassword(passwd);
            user.setEmail(email);
            
-           admin.updateUser(username1,user);
+           if(username1 == null ? username != null : !username1.equals(username)){
+               if (admin.validarregistro(username)) {
+                 request.getSession().setAttribute("mensaje", "El usuario ya está en uso");
+                 forward = "/administrador/users/edit.jsp";
+               }
+               else{
+                  admin.updateUser(username1,user);
+                  User x = new User();
+                  x = admin.getUser(buscar);
+                  request.getSession().setAttribute("name", x.getName());
+                  request.getSession().setAttribute("imagen",x.getPicture());
            
-           
-           User x = new User();
-           x = admin.getUser(buscar);
-           request.getSession().setAttribute("name", x.getName());
-           request.getSession().setAttribute("imagen",x.getPicture());
-           
-           request.setAttribute("users",admin.getAllUsers()); 
+                  request.setAttribute("users",admin.getAllUsers()); 
        
-           forward = "/administrador/users/index.jsp";
+                  forward = "/administrador/users/index.jsp";
+               }
+            }
+           else if(email2== null ? email!= null : !email2.equals(email)){
+              if(admin.validaemail(email)){
+                  request.getSession().setAttribute("mensaje", "El correo ya está en uso");
+                  forward = "/administrador/users/edit.jsp";
+                }
+                else{
+                  admin.updateUser(username1,user);
+                  User x = new User();
+                  x = admin.getUser(buscar);
+                  request.getSession().setAttribute("name", x.getName());
+                  request.getSession().setAttribute("imagen",x.getPicture());
+           
+                  request.setAttribute("users",admin.getAllUsers()); 
+       
+                  forward = "/administrador/users/index.jsp";
+               }
+           }
+           else if(username1.equals(username)||email2.equals(email)){
+               admin.updateUser(username1,user);
+               User x = new User();
+               x = admin.getUser(buscar);
+               request.getSession().setAttribute("name", x.getName());
+               request.getSession().setAttribute("imagen",x.getPicture());
+           
+               request.setAttribute("users",admin.getAllUsers()); 
+       
+               forward = "/administrador/users/index.jsp";
+           }
+           
         }
       /*-----------------------TERMINA ELIMINAR USUARIOS-----------------------------------*/
       
