@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sistema.model.User;
+import sistema.model.Roles;
 
 public class UserDAO {
 
@@ -43,7 +44,7 @@ public class UserDAO {
         try {
             PreparedStatement pstm = null;
             ResultSet rs = null;
-            String query = "SELECT *FROM user WHERE name= ?";
+            String query = "SELECT * FROM user JOIN roles WHERE user.ID_Rol=roles.ID_Rol AND user.name=?";
             pstm = con.prepareStatement(query);
             pstm.setString(1, nombre);
             rs = pstm.executeQuery();
@@ -52,7 +53,8 @@ public class UserDAO {
                 u.setEmail(rs.getString("email"));
                 u.setPassword(rs.getString("password"));
                 u.setPicture(rs.getString("imagen_user"));
-                
+                u.setId_role(rs.getInt("user.ID_Rol"));
+                u.setName_rol(rs.getString("roles.Name_Rol"));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -83,16 +85,41 @@ public class UserDAO {
         }
         return users;
     }
-
+    
+    // Metodo para listar todos los roles
+    public List<Roles> getAllRoles() {
+        List<Roles> roles = new ArrayList<Roles>();
+        try {
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            String query = "SELECT *FROM roles";
+            pstm = con.prepareStatement(query);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Roles role = new Roles();
+                role.setId_rol(rs.getInt("ID_Rol"));
+                role.setName_role(rs.getString("Name_Rol"));
+                role.setPermissions(rs.getString("Permissions"));
+                role.setUrl(rs.getString("url"));
+                role.setId_permisos(rs.getInt("ID_permisos"));
+                roles.add(role);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return roles;
+    }
+    
     // Metodo para actualizar usuarios
     public void updateUser(String nombre, User user) {
         try {
-            PreparedStatement preparedStatement = con.prepareStatement("UPDATE user SET password=?,name=?,email=?,imagen_user=? WHERE name= ?;");
+            PreparedStatement preparedStatement = con.prepareStatement("UPDATE user SET password=?,name=?,email=?,imagen_user=?,ID_Rol=? WHERE name=?;");
             preparedStatement.setString(1, user.getPassword());
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getEmail());
             preparedStatement.setString(4, user.getPicture());
-            preparedStatement.setString(5, nombre);
+            preparedStatement.setInt(5,user.getId_role());
+            preparedStatement.setString(6, nombre);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -166,52 +193,6 @@ public class UserDAO {
             return false;
         }
     }  
-  /*-------------------------------TERMINA VALIDACIONES--------------------------------*/
-   
- 
-  /*-------------------------------INICIA VALIDACIONES-----------------------------------*/
-   public boolean validarregistro1(String Usuario) {
-        try {
-            PreparedStatement pstm = null;
-            ResultSet rs = null;
-            String query = "SELECT id_user FROM user WHERE name=?";
-            pstm = con.prepareStatement(query);
-            pstm.setString(1, Usuario);//convertir a String el parametro Usuario
-            rs = pstm.executeQuery();//ejecutar el query 
-            if (rs.next()) {
-                return false;
-            } else {
-                return true;
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }  
-  
-   public boolean validaemail2(String Usuario) {
-        try {
-            PreparedStatement pstm = null;
-            ResultSet rs = null;
-            String query = "SELECT id_user FROM user WHERE email=?";
-            pstm = con.prepareStatement(query);
-            pstm.setString(1, Usuario);//convertir a String el parametro Usuario
-            rs = pstm.executeQuery();//ejecutar el query 
-            if (rs.next()) {
-                return false;
-            } else {
-                return true;
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }  
-  /*-------------------------------TERMINA VALIDACIONES--------------------------------*/
-
-  
-  
- 
-  
+  /*-------------------------------TERMINA VALIDACIONES--------------------------------*/ 
 
 }

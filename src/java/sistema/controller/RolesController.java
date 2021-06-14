@@ -96,10 +96,19 @@ public class RolesController extends HttpServlet {
            role.setName_role(rol);
            role.setPermissions(desc);
            role.setUrl(url);
-           admin.addRole(role);
+          
+           
+           if (admin.validarregistro(rol)) {
+               request.getSession().setAttribute("mensaje", "El rol ya existe");
+               forward = "/administrador/roles/create.jsp";
+            }
+           else{
+               admin.addRole(role);
+               request.setAttribute("roles",admin.getAllRoles());
+               forward = "/administrador/roles/index.jsp";
+           }
 
-           request.setAttribute("roles",admin.getAllRoles());
-           forward = "/administrador/roles/index.jsp";
+           
         }
       /*------------------------TERMINA ADD ROLES------------------------------------------*/ 
       
@@ -138,6 +147,9 @@ public class RolesController extends HttpServlet {
            String idSerch=request.getParameter("id-serch");
            int id_serach= Integer.parseInt(idSerch);
            
+           String rolSearch = request.getParameter("rolSerch");
+           
+           
            String idUpdate = request.getParameter("id-update");
            int id_update= Integer.parseInt(idUpdate);
            String rol = request.getParameter("rol");
@@ -149,15 +161,35 @@ public class RolesController extends HttpServlet {
            role.setName_role(rol);
            role.setPermissions(desc);
            role.setUrl(url);
-           admin.updateRoles(id_serach, role);
-  
-           User x = new User();
-           x = admin.getUser(buscar);
-           request.getSession().setAttribute("name", x.getName());
-           request.getSession().setAttribute("imagen",x.getPicture());
            
-           request.setAttribute("roles",admin.getAllRoles()); 
-           forward = "/administrador/roles/index.jsp";
+           if(rolSearch == null ? rol != null : !rolSearch.equals(rol)){
+               if (admin.validarregistro(rol)) {
+                 request.getSession().setAttribute("mensaje", "El rol ya existe");
+                 forward = "/administrador/roles/edit.jsp";
+               }
+               else{
+                  admin.updateRoles(id_serach, role);
+                  User x = new User();
+                  x = admin.getUser(buscar);
+                  request.getSession().setAttribute("name", x.getName());
+                  request.getSession().setAttribute("imagen",x.getPicture());
+           
+                  request.setAttribute("roles",admin.getAllRoles()); 
+                  forward = "/administrador/roles/index.jsp";
+               }
+            }
+           else if (rolSearch.equals(rol)){
+              admin.updateRoles(id_serach, role);
+              User x = new User();
+              x = admin.getUser(buscar);
+              request.getSession().setAttribute("name", x.getName());
+              request.getSession().setAttribute("imagen",x.getPicture());
+           
+              request.setAttribute("roles",admin.getAllRoles()); 
+              forward = "/administrador/roles/index.jsp";
+           }
+           
+          
         } 
       /*-----------------------TERMINA ACTUALIZAR ROLES------------------------------------*/  
      

@@ -18,11 +18,13 @@
     /**
      * Datos del usuario que se desea editar*
      */
-    String nom = (String) session.getAttribute("name");
-    String email = (String) session.getAttribute("email");
-    String password = (String) session.getAttribute("pass");
-    String imagen = (String) session.getAttribute("imagen");
-    
+    String nom = (String)session.getAttribute("name");
+    String email = (String)session.getAttribute("email");
+    String password = (String)session.getAttribute("pass");
+    String imagen = (String)session.getAttribute("imagen");
+    int rolId = (int)session.getAttribute("rolId");
+    String rolName = (String) session.getAttribute("rolName");
+
 %>
 
 <!DOCTYPE html>
@@ -160,24 +162,33 @@
                             <input  <input type="email"  name="email" required value="<%out.println(email);%>">
                             <span>Email</span>
                         </div>
-                            
+
                         <div class="inputBox w50">
-                            <input type="file" name="file">
+                            <select name="id_role" required>
+                                <c:forEach items="${rol}" var="rol">
+                                   
+                                    <option value="${rol.id_rol}">${rol.name_role}</option>
+                                </c:forEach>
+                            </select>
                         </div>
                             
+                        <div class="inputBox w100">
+                            <input type="file" name="file">
+                        </div>
+
                         <div class="inputBox w100">
                             <%
                                 String msg = (String) session.getAttribute("mensaje");
                                 if (!(msg == null)) {
                             %>
                             <p style="color:white; padding-top:10px; padding-bottom: 10px;background-color: red; font-size:14px; margin-bottom:0px; text-align: center;"><i class="las la-times" style="color:white;margin-right:3px; font-size:14px;"></i><%out.println(msg);%></p>
-                            <%
+                                <%
 
-                                    session.setAttribute("mensaje", null);
-                                }
-                            %>
+                                        session.setAttribute("mensaje", null);
+                                    }
+                                %>
                         </div>
-                        
+
                         <!--<div class="inputBox w50">
                             <input type="file" name="file">
                         </div>
@@ -204,8 +215,11 @@
                                 <input type="hidden" name="action" value="updateUser">
                                 <input type="text" name="usuario1" value="<%out.println(nom);%>" style="display:none">
                                 <input type="text" name="loginUser" value="<%out.println(nom1);%>" style="display:none">
+                                
                                 <input type="text" name="emailLogin" value="<%out.println(email);%>" style="display:none">
                                 <input  <input type="text"  name="imagen" value="<%out.println(imagen);%>" style="display:none">
+                                
+                                <input  <input type="text"  name="idRol" required value="<%out.println(rolId);%>"style="display:none">
                                 <button type="submit" value="Send ">Guardar</button>
                             </div>
                         </div>
@@ -214,7 +228,7 @@
                     <div class="botom">
                         <form method="post" action="/SistemaMedico/UserController" class="formBox">
                             <input type="hidden" name="action" value="allUsers">
-                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="usuario" value="<%out.println(nom1);%>" style="display:none">
                             <div class="botones">
                                 <div class="inputBox w100  buton">
                                     <button type="submit" class="top">Regresar</button>

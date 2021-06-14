@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 
 <%
     String nom = (String) session.getAttribute("name");
@@ -91,7 +94,7 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                    
+
                     <li>
                         <form method="post" action="/SistemaMedico/CitasController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -139,27 +142,36 @@
                             <input type="password" name="pass" required>
                             <span>Password</span>
                         </div>
-   
+
                         <div class="inputBox w50">
-                            <input  <input type="email"  name="email" required>
+                            <input type="email"  name="email" required>
                             <span>Email</span>
                         </div>
-                        
+
                         <div class="inputBox w50">
+                            <select name="id_role" required>
+                                <option value="" selected>Selecciona un rol</option>
+                                <c:forEach items="${rol}" var="rol">
+                                   <option value="${rol.id_rol}">${rol.name_role}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+
+                        <div class="inputBox w100">
                             <input type="file" name="file">
                         </div>
-                        
+
                         <div class="inputBox w100">
                             <%
                                 String msg = (String) session.getAttribute("mensaje");
                                 if (!(msg == null)) {
                             %>
                             <p style="color:white; padding-top:10px; padding-bottom: 10px;background-color: red; font-size:14px; margin-bottom:0px; text-align: center;"><i class="las la-times" style="color:white;margin-right:3px; font-size:14px;"></i><%out.println(msg);%></p>
-                            <%
+                                <%
 
-                                    session.setAttribute("mensaje", null);
-                                }
-                            %>
+                                        session.setAttribute("mensaje", null);
+                                    }
+                                %>
                         </div>
                         <input type="hidden" name="action" value="addUser">
 

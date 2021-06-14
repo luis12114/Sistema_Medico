@@ -162,6 +162,19 @@
                             <input type="text" name="url" required value="<%out.println(url);%>">
                             <span>Url</span>
                         </div>
+                            
+                        <div class="inputBox w100">
+                            <%
+                                String msg = (String) session.getAttribute("mensaje");
+                                if (!(msg == null)) {
+                            %>
+                            <p style="color:white; padding-top:10px; padding-bottom: 10px;background-color: red; font-size:14px; margin-bottom:0px; text-align: center;"><i class="las la-times" style="color:white;margin-right:3px; font-size:14px;"></i><%out.println(msg);%></p>
+                                <%
+
+                                        session.setAttribute("mensaje", null);
+                                    }
+                                %>
+                        </div>
 
                         <!--<div class="inputBox w100">
                             <input type="file" name="file">
@@ -184,6 +197,7 @@
                                 <input type="hidden" name="action" value="updateRole">
                                 <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                                 <input type="text" name="id-serch" value="<%out.println(id);%>" style="display:none">
+                                <input type="text" name="rolSerch" required value="<%out.println(rol);%>" style="display:none">
                                 <button type="submit" value="Send ">Guardar</button>
                             </div>
                         </div>  

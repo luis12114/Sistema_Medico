@@ -81,6 +81,7 @@ public class UserController extends HttpServlet {
             z = admin.getUser(buscar);
             request.getSession().setAttribute("name", z.getName());
             request.getSession().setAttribute("imagen",z.getPicture());
+            request.setAttribute("rol",admin.getAllRoles());
             forward = "/administrador/users/create.jsp";
         }   
      /*-----------------------------TERMINA CREAR USUARIOS--------------------------------*/
@@ -92,8 +93,8 @@ public class UserController extends HttpServlet {
             String username = request.getParameter("User");
             String email = request.getParameter("email");
             String passwd = request.getParameter("pass");
-            //String id_role = request.getParameter("id_role");
-            //int role= Integer.parseInt(id_role);
+            String id_role = request.getParameter("id_role");
+            int role= Integer.parseInt(id_role);
             
             /*Envio a base de datos*/
             
@@ -121,7 +122,7 @@ public class UserController extends HttpServlet {
             user.setName(username);
             user.setPassword(passwd);
             user.setEmail(email);
-            //user.setId_role(role);
+            user.setId_role(role);
             
             
             if (admin.validarregistro(username)) {
@@ -158,6 +159,11 @@ public class UserController extends HttpServlet {
             request.getSession().setAttribute("email", x.getEmail());
             request.getSession().setAttribute("pass",x.getPassword());
             request.getSession().setAttribute("imagen",x.getPicture());
+            
+            request.getSession().setAttribute("rolId",x.getId_role());
+            request.getSession().setAttribute("rolName",x.getName_rol());
+            
+            request.setAttribute("rol",admin.getAllRoles());
             forward = "/administrador/users/edit.jsp";
         }
       /*-----------------------TERMINA EDITAR USUARIO--------------------------------------*/
@@ -169,10 +175,15 @@ public class UserController extends HttpServlet {
            String username1 = request.getParameter("usuario1");
            String email2 = request.getParameter("emailLogin");
            String imagen = request.getParameter("imagen");
+           String id_role1 = request.getParameter("idRol");
+           int role1= Integer.parseInt(id_role1);
+           
            
            String username = request.getParameter("usuario");
            String email = request.getParameter("email");
            String passwd = request.getParameter("password");
+           String id_role = request.getParameter("id_role");
+           int role= Integer.parseInt(id_role);
 
            User user = new User();
            
@@ -198,6 +209,9 @@ public class UserController extends HttpServlet {
            user.setName(username);
            user.setPassword(passwd);
            user.setEmail(email);
+           user.setId_role(role);
+
+           
            
            if(username1 == null ? username != null : !username1.equals(username)){
                if (admin.validarregistro(username)) {

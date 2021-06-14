@@ -109,7 +109,7 @@ public class AdminDAO {
     
 
   /*-------------------------------INICIA VALIDACIONES-----------------------------------*/
-  public boolean validarregistro(String Usuario) {
+   public boolean validarregistro(String Usuario) {
         try {
             PreparedStatement pstm = null;
             ResultSet rs = null;
@@ -128,7 +128,7 @@ public class AdminDAO {
         }
     }  
   
-  public boolean validaemail(String Usuario) {
+   public boolean validaemail(String Usuario) {
         try {
             PreparedStatement pstm = null;
             ResultSet rs = null;
@@ -146,7 +146,7 @@ public class AdminDAO {
             return false;
         }
     }  
-   /*-------------------------------TERMINA VALIDACIONES--------------------------------*/
+  /*-------------------------------TERMINA VALIDACIONES---------------------------------*/
   
   
 }
