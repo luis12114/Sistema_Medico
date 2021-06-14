@@ -20,7 +20,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Users</title>
+        <title>Medicos</title>
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
         <link href="/SistemaMedico//css/dashboardStyle.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -90,6 +90,17 @@
                                 <span class="las la-stethoscope"></span> <samp class="text">Medicos</samp>
                             </button>
                             <input type="hidden" name="action" value="allMedicos">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        </form>
+                    </li>
+                    
+                    <li>
+                        <form method="post" action="/SistemaMedico/CitasController" class="opc-cont">
+                            <button type="submit" class="opc">
+                                <span class="las la-calendar-day"></span> <samp class="text">Citas
+                                </samp>
+                            </button>
+                            <input type="hidden" name="action" value="allCitas">
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>

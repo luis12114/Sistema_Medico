@@ -9,20 +9,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%
-    /**
-     * Datos del usuario logeado*
-     */
+    /**Datos del usuario logeado**/
     String nom = (String) session.getAttribute("name");
     String imagen = (String) session.getAttribute("imagen");
-
-    /**
-     * Datos del usuario que se desea editar*
-     */
-    int id = (int) session.getAttribute("id");
-    String rol = (String) session.getAttribute("rol");
-    String desc = (String) session.getAttribute("descrip");
-    String url = (String) session.getAttribute("url");
-    int id_permi = (int) session.getAttribute("id_permi");
+    
+    /**Datos de la cita que se desea editar**/
+    int id= (int)session.getAttribute("id");
+    String name= (String) session.getAttribute("name");
+    String doctor= (String) session.getAttribute("doctor");
+    String fecha= (String) session.getAttribute("fecha");
+    String hora= (String) session.getAttribute("hora");
+    String tel= (String) session.getAttribute("tel");
+    String correo= (String) session.getAttribute("correo");
+    String genero= (String) session.getAttribute("genero");
+    String motivo= (String) session.getAttribute("motivo");
+    String sintomas= (String) session.getAttribute("sintomas");
+    
 %>
 
 <!DOCTYPE html>
@@ -59,12 +61,12 @@
                     </div>
                     <div class="user">
                         <small><%out.println(nom);%></small>
-                        <p>Panel Administrador</p>
+                         <p>Panel Administrador</p>
                     </div>
                 </div>
                 <ul>
-
-                    <li>
+      
+                   <li>
                         <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-home"></span> <samp class="text">Dashboard</samp>
@@ -79,12 +81,11 @@
                             <button type="submit" class="opc">
                                 <span class="las la-user"></span> <samp class="text">Users</samp>
                             </button>
-                            
                             <input type="hidden" name="action" value="allUsers">
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-
+                    
                     <li>
                         <form method="post" action="/SistemaMedico/RolesController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -94,7 +95,7 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-
+                    
                     <li>
                         <form method="post" action="/SistemaMedico/MedicosController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -104,7 +105,7 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                   
+                    
                     <li>
                         <form method="post" action="/SistemaMedico/CitasController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -115,6 +116,7 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
+                      
                 </ul>
             </div>
         </div>
@@ -135,75 +137,101 @@
             <main class="container-edit ">
                 <div class="contactInfo ">
                     <div class="img">
-
+                        
                     </div>
                 </div>
                 <div class="contactForm">
-                    <h2>Informacion</h2>
-
-                    <form action="" method="post" action="/SistemaMedico/RolesController" class="formBox">
-
-                        <div class="inputBox w50">
-                            <input type="text" name="id-update" required value="<%out.println(id);%>">
-                            <span>id</span>
+                    <h2>Editar Cita</h2>
+                    <form method="post" action="/SistemaMedico/CitasController" class="formBox">
+                       <div class="inputBox w50 ">
+                            <input type="text" name="name" value="<%out.println(name);%>" readonly required>
+                            <!--<span>Nombre</span>-->
                         </div>
 
-                        <div class="inputBox w50">
-                            <input type="text" name="rol" required value="<%out.println(rol);%>">
-                            <span>Rol</span>
+                        <div class="inputBox w50 ">
+                            <input type="text" name="doctor" value="<%out.println(doctor);%>" required>
+                            <span>Doctor</span>
                         </div>
 
-                        <div class="inputBox w50">
-                            <input type="text" name="desc" required value="<%out.println(desc);%>">
-                            <span>Descripción</span>
+                        <div class="inputBox w50 ">
+                            <input type="text" name="fecha" id="fecha" value="<%out.println(fecha);%>" required>
+                            <span>Fecha</span>
                         </div>
 
-                        <div class="inputBox w50">
-                            <input type="text" name="url" required value="<%out.println(url);%>">
-                            <span>Url</span>
+                        <div class="inputBox w50 ">
+                            <input type="text" name="hora" value="<%out.println(hora);%>" required>
+                            <span>Hora</span>
                         </div>
 
-                        <!--<div class="inputBox w100">
-                            <input type="file" name="file">
-                            <span>Cambiar foto</span>
+                        <div class="inputBox w50 ">
+                            <input type="text" name="tel" value="<%out.println(tel);%>" required>
+                            <span>Tel</span>
+                        </div>
+                            
+                            
+                        <div class="inputBox w50 ">
+                            <input type="email" name="email" value="<%out.println(correo);%>" required>
+                            <span>Correo</span>
                         </div>
 
-                        <div class="inputBox w50">
-                            <input type="text" required>
-                            <span>Mobil Number</span>
+                        <div class="inputBox w50 ">
+                            <input type="text" name="genero" value="<%out.println(genero);%>" required>
+                            <span>Genero</span>
+                        </div>
+
+                        <div class="inputBox w50 ">
+                            <input type="text" name="motivo" value="<%out.println(motivo);%>" required>
+                            <span>Motivo</span>
                         </div>
 
                         <div class="inputBox w100">
-                            <textarea required></textarea>
-                            <span>Write you message here...</span>
-                        </div>-->
+                            <input type="text" name="sintomas" value="<%out.println(sintomas);%>" required>
+                            <span>Sintomas</span>
+                        </div>
 
-
-                        <div class="botones">
+                        <input type="hidden" name="action" value="updaCita">
+                        
+                        <input type="text" name="usuario1" value="<%out.println(nom);%>" style="display:none">
+                        <input type="text" name="id_serch" value="<%out.println(id);%>" style="display:none">
+                        <div class="">
                             <div class="inputBox w100  buton">
-                                <input type="hidden" name="action" value="updateRole">
-                                <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
-                                <input type="text" name="id-serch" value="<%out.println(id);%>" style="display:none">
-                                <button type="submit" value="Send ">Guardar</button>
-                            </div>
-                        </div>  
+                                <button type="submit " value="Send ">Guardar</button>
+                            </div
+                        </div>
                     </form>
-                                
                     <div class="botom">
-                        <form method="post" action="/SistemaMedico/RolesController" class="formBox">
-                            <input type="hidden" name="action" value="allRoles">
+                        <form method="post" action="/SistemaMedico/CitasController" class="formBox">
+                            <input type="hidden" name="action" value="allCitas">
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
-                            <div class="botones">
-                                <div class="inputBox w100  buton">
-                                    <button type="submit" class="top">Regresar</button>
-                                </div> 
-                            </div>
+                            <div class="inputBox w100  buton">
+                                <button type="submit" class="top">Regresar</button>
+                            </div> 
                         </form>
-                    </div>            
+                    </div>
                 </div>
             </main>
         </div>
         <label class="close-mobile-menu" for="menu-toggle"></label>
+        <script>
+            window.addEventListener('load', function () {
+
+                document.getElementById('fecha').type = 'text';
+
+                document.getElementById('fecha').addEventListener('blur', function () {
+
+                    document.getElementById('fecha').type = 'text';
+
+                });
+
+                document.getElementById('fecha').addEventListener('focus', function () {
+
+                    document.getElementById('fecha').type = 'date';
+
+                });
+
+            });
+
+        </script>
     </body>
 
 </html>

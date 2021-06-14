@@ -64,6 +64,9 @@
                             <li class="nav-item">
                                 <a href="${pageContext.request.contextPath}/login/login.jsp" class="nav-link">Login</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="${pageContext.request.contextPath}/login/registro.jsp" class="nav-link">Registro</a>
+                            </li>
                         </ul>
                     </div>
                     

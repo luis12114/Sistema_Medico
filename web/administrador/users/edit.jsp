@@ -19,8 +19,10 @@
      * Datos del usuario que se desea editar*
      */
     String nom = (String) session.getAttribute("name");
-    String imagen = (String) session.getAttribute("imagen");
+    String email = (String) session.getAttribute("email");
     String password = (String) session.getAttribute("pass");
+    String imagen = (String) session.getAttribute("imagen");
+    
 %>
 
 <!DOCTYPE html>
@@ -102,6 +104,16 @@
                         </form>
                     </li>
 
+                    <li>
+                        <form method="post" action="/SistemaMedico/CitasController" class="opc-cont">
+                            <button type="submit" class="opc">
+                                <span class="las la-calendar-day"></span> <samp class="text">Citas
+                                </samp>
+                            </button>
+                            <input type="hidden" name="action" value="allCitas">
+                            <input type="text" name="usuario" value="<%out.println(email);%>" style="display:none">
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -132,11 +144,11 @@
                 <div class="contactForm">
                     <h2>Informacion</h2>
 
-                    <form action="" method="post" action="/SistemaMedico/UserController" class="formBox">
+                    <form action="" method="post" action="/SistemaMedico/UserController" class="formBox" enctype="multipart/form-data">
 
                         <div class="inputBox w50">
                             <input type="text" name="usuario" required value="<%out.println(nom);%>">
-                            <span>First Name</span>
+                            <span>User Name</span>
                         </div>
 
                         <div class="inputBox w50">
@@ -144,7 +156,30 @@
                             <span>Password</span>
                         </div>
 
-                        <!--<div class="inputBox w100">
+                        <div class="inputBox w100">
+                            <input  <input type="email"  name="email" required value="<%out.println(email);%>">
+                            <span>Email</span>
+                        </div>
+                            
+                        <div class="inputBox w100">
+                            <%
+                                String msg = (String) session.getAttribute("mensaje");
+                                if (!(msg == null)) {
+                            %>
+                            <p style="color:white; padding-top:10px; padding-bottom: 10px;background-color: red; font-size:14px; margin-bottom:0px; text-align: center;"><i class="las la-times" style="color:white;margin-right:3px; font-size:14px;"></i><%out.println(msg);%></p>
+                            <%
+
+                                    session.setAttribute("mensaje", null);
+                                }
+                            %>
+                        </div>
+                        
+                        <!--<div class="inputBox w50">
+                            <input type="file" name="file">
+                        </div>
+                        
+                       
+                        <div class="inputBox w100">
                             <input type="file" name="file">
                             <span>Cambiar foto</span>
                         </div>
@@ -165,6 +200,7 @@
                                 <input type="hidden" name="action" value="updateUser">
                                 <input type="text" name="usuario1" value="<%out.println(nom);%>" style="display:none">
                                 <input type="text" name="loginUser" value="<%out.println(nom1);%>" style="display:none">
+                                <input type="text" name="emailLogin" value="<%out.println(email);%>" style="display:none">
                                 <button type="submit" value="Send ">Guardar</button>
                             </div>
                         </div>

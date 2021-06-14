@@ -16,6 +16,10 @@
         <servlet-name>MedicosController</servlet-name>
         <servlet-class>sistema.controller.MedicosController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CitasController</servlet-name>
+        <servlet-class>sistema.controller.CitasController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>controlAdmin</servlet-name>
         <url-pattern>/controlAdmin</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>MedicosController</servlet-name>
         <url-pattern>/MedicosController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CitasController</servlet-name>
+        <url-pattern>/CitasController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

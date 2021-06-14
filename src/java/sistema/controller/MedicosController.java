@@ -82,6 +82,7 @@ public class MedicosController extends HttpServlet {
         }   
       /*-----------------------------TERMINA CREAR MEDICO------------------------------------*/
       
+      
       /*------------------------INICIA  ADD MEDICO-------------------------------------------*/ 
         else if (action.equalsIgnoreCase("addMedico")) {
            /*Valores del formulario*/
@@ -187,6 +188,7 @@ public class MedicosController extends HttpServlet {
         } 
       /*-----------------------TERMINA ACTUALIZAR MEDICO-----------------------------------*/ 
       
+      
       /*-----------------------INCIA ELIMINAR MEDICO---------------------------------------*/
       else if (action.equalsIgnoreCase("delitMedico")) {
           String buscar = request.getParameter("usuario-login");
@@ -207,6 +209,7 @@ public class MedicosController extends HttpServlet {
            forward = "/administrador/medicos/index.jsp";
         }
       /*-----------------------TERMINA ELIMINAR MEDICO----------------------------------*/
+      
       RequestDispatcher view = request.getRequestDispatcher(forward);
        view.forward(request, response);
     }

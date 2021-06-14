@@ -69,6 +69,7 @@ public class controlAdmin extends HttpServlet {
               //forward = "/administrador/index.jsp";
                forward =  admin.getURLMenu(user);
             } else {
+                request.getSession().setAttribute("mensaje", "El usuario o Contraseña son incorrectos");
                 forward = "/login/login.jsp";
             }
             User u = new User();
@@ -86,12 +87,11 @@ public class controlAdmin extends HttpServlet {
             String username = request.getParameter("usuario");
             String email = request.getParameter("email");
             String passwd = request.getParameter("password");
-            String passwd_confirm = request.getParameter("password-confirm");
             String id_role = request.getParameter("id_role");
             int role= Integer.parseInt(id_role);
             
-            /*Envio a base de datos*/
             
+            /*Envio a base de datos*/
             User user = new User();
 
             try{
@@ -111,10 +111,21 @@ public class controlAdmin extends HttpServlet {
   
             user.setName(username);
             user.setPassword(passwd);
+            user.setEmail(email);
             user.setId_role(role);
             
-            admin.addUser(user);
-            forward = "/login/login.jsp";
+            if (admin.validarregistro(username)) {
+               request.getSession().setAttribute("mensaje", "El usuario ya está en uso");
+               forward = "/login/registro.jsp";
+            }
+            else if(admin.validaemail(email)){
+              request.getSession().setAttribute("mensaje", "El correo ya está en uso");
+              forward = "/login/registro.jsp";
+            }
+            else{
+               admin.addUser(user);  
+               forward = "/login/login.jsp";
+            }    
         }
       /*------------------------TERMINA REGISTRO DE USUARIOS-------------------------------*/ 
        

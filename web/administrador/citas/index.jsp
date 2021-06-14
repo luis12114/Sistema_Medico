@@ -1,6 +1,6 @@
 <%-- 
-    Document   : edit
-    Created on : 5 may. 2021, 20:18:52
+    Document   : index
+    Created on : 25 abr. 2021, 17:41:00
     Author     : 52777
 --%>
 
@@ -9,20 +9,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%
-    /**
-     * Datos del usuario logeado*
-     */
     String nom = (String) session.getAttribute("name");
     String imagen = (String) session.getAttribute("imagen");
-
-    /**
-     * Datos del usuario que se desea editar*
-     */
-    int id = (int) session.getAttribute("id");
-    String rol = (String) session.getAttribute("rol");
-    String desc = (String) session.getAttribute("descrip");
-    String url = (String) session.getAttribute("url");
-    int id_permi = (int) session.getAttribute("id_permi");
 %>
 
 <!DOCTYPE html>
@@ -32,9 +20,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Edit</title>
+        <title>Citas</title>
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-        <link rel="stylesheet" href="/SistemaMedico//css/dashboardStyle.css">
+        <link href="/SistemaMedico//css/dashboardStyle.css" rel="stylesheet" type="text/css"/>
     </head>
 
     <body>
@@ -64,6 +52,7 @@
                 </div>
                 <ul>
 
+
                     <li>
                         <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
                             <button type="submit" class="opc">
@@ -84,7 +73,7 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-
+                    
                     <li>
                         <form method="post" action="/SistemaMedico/RolesController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -94,7 +83,7 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-
+                    
                     <li>
                         <form method="post" action="/SistemaMedico/MedicosController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -104,9 +93,9 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                   
+                    
                     <li>
-                        <form method="post" action="/SistemaMedico/CitasController" class="opc-cont">
+                        <form method="post" action="/SistemaMedico/CitasController" class="opc-cont active">
                             <button type="submit" class="opc">
                                 <span class="las la-calendar-day"></span> <samp class="text">Citas
                                 </samp>
@@ -116,6 +105,7 @@
                         </form>
                     </li>
                 </ul>
+
             </div>
         </div>
         <div class="main-content">
@@ -123,87 +113,65 @@
                 <label for="menu-toggle" class="menu-toggler">
                     <span class="las la-bars"></span>
                 </label>
-                <div class="search" style="display: none;">
+                <div class="search">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="Enter keyword">
                 </div>
-                <div class="header-icons ">
-                    <span class="las la-bell "></span>
-                    <span class="las la-bookmark "></span>
+                <div class="header-icons">
+                    <span class="las la-bell"></span>
+                    <span class="las la-bookmark"></span>
                 </div>
             </header>
-            <main class="container-edit ">
-                <div class="contactInfo ">
-                    <div class="img">
-
-                    </div>
-                </div>
-                <div class="contactForm">
-                    <h2>Informacion</h2>
-
-                    <form action="" method="post" action="/SistemaMedico/RolesController" class="formBox">
-
-                        <div class="inputBox w50">
-                            <input type="text" name="id-update" required value="<%out.println(id);%>">
-                            <span>id</span>
-                        </div>
-
-                        <div class="inputBox w50">
-                            <input type="text" name="rol" required value="<%out.println(rol);%>">
-                            <span>Rol</span>
-                        </div>
-
-                        <div class="inputBox w50">
-                            <input type="text" name="desc" required value="<%out.println(desc);%>">
-                            <span>Descripción</span>
-                        </div>
-
-                        <div class="inputBox w50">
-                            <input type="text" name="url" required value="<%out.println(url);%>">
-                            <span>Url</span>
-                        </div>
-
-                        <!--<div class="inputBox w100">
-                            <input type="file" name="file">
-                            <span>Cambiar foto</span>
-                        </div>
-
-                        <div class="inputBox w50">
-                            <input type="text" required>
-                            <span>Mobil Number</span>
-                        </div>
-
-                        <div class="inputBox w100">
-                            <textarea required></textarea>
-                            <span>Write you message here...</span>
-                        </div>-->
-
-
-                        <div class="botones">
-                            <div class="inputBox w100  buton">
-                                <input type="hidden" name="action" value="updateRole">
-                                <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
-                                <input type="text" name="id-serch" value="<%out.println(id);%>" style="display:none">
-                                <button type="submit" value="Send ">Guardar</button>
-                            </div>
-                        </div>  
+            <main class="card__container ">
+                <div class="card__glass">
+                    <form method="post" action="/SistemaMedico/CitasController" class="add">
+                        <button class="btn-add"><span class="las la-plus-circle"></span></button>
+                        <input type="hidden" name="action" value="formAddCita">
+                        <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
                     </form>
-                                
-                    <div class="botom">
-                        <form method="post" action="/SistemaMedico/RolesController" class="formBox">
-                            <input type="hidden" name="action" value="allRoles">
-                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
-                            <div class="botones">
-                                <div class="inputBox w100  buton">
-                                    <button type="submit" class="top">Regresar</button>
-                                </div> 
-                            </div>
-                        </form>
-                    </div>            
                 </div>
+               
+                <c:forEach items="${citas}" var="citas">
+                    <div class="card__glass">
+                        
+                        <div class="card__data">
+                            <h3 class="card__title"> ${citas.id}. ${citas.name} </h3>
+                            <span class="card__profession">Doctor:${citas.doctor}</span><br>
+                            <span class="card__profession">Correo:${citas.correo}</span><br>
+                            <span class="card__profession">Genero:${citas.genero}</span><br>
+                            <span class="card__profession">Motivo:${citas.motivo}</span><br>
+                            <span class="card__profession">Sintomas:${citas.sintomas}</span><br>
+                            <span class="card__profession">Tel: ${citas.tel}</span><br>
+                            <span class="card__profession">Horario:${citas.fecha}, ${citas.hora}</span><br>
+                            <span class="card__profession">Estatus:${citas.estatus}</span><br>
+                            <!--<span class="card__profession">Web Developer</span><br>
+                            <span class="card__profession">Web Developer</span>-->
+                        </div>
+
+                        <form method="post" action="/SistemaMedico/CitasController" class="card__button">
+                            <span class="las la-edit"></span><input type="submit" value="Edit" class="opc">
+                            <input type="hidden" name="action" value="editCita">
+                            <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="cita" value="${citas.id}" style="display:none">
+                        </form>
+                        
+                        <form method="post" action="/SistemaMedico/CitasController" class="card__button formulario">
+                            <span class="las la-trash"></span><input type="submit"  value="Delit" class="opc">
+                            <input type="hidden" name="action" value="delitCita">
+                            <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="cita" value="${citas.id}" style="display:none">
+                        </form>
+                        
+                        <form method="post" action="/SistemaMedico/CitasController" class="card__button formulario">
+                            <span class="las la-ban" > </span><input type="submit"  value="Cancelar" class="opc" style="margin-left:1px;">
+                            <input type="hidden" name="action" value="cancelarCita">
+                            <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="cita" value="${citas.id}" style="display:none">
+                        </form>
+                    </div>
+                </c:forEach>
             </main>
         </div>
-        <label class="close-mobile-menu" for="menu-toggle"></label>
+        <label class="close-mobile-menu" for="menu-toggle"></label
     </body>
-
 </html>

@@ -30,24 +30,27 @@
 
                 <div class="user signinBx">
 
-                    <div class="imgBx"><img src="/SistemaMedico/images/login.jpg" alt=""/></div>
+                    <div class="imgBx"><img src="/SistemaMedico/images/create.jpg" alt=""/></div>
 
 
                     <div class="formBx">
 
-                        <form method="post" action="/SistemaMedico/controlAdmin">
-                            
-                            <h2>Sign In</h2>
+                        <form method="post" action="/SistemaMedico/controlAdmin" enctype="multipart/form-data">
 
-                            <input type="hidden" name="action" value="login">
+                            <h2>Create an account</h2>
+
+                            <input type="hidden" name="action" value="register-user">
 
                             <input type="text" placeholder="Username" name="usuario" required>
-                            <input type="password" placeholder="Password" name="password"required>
-                            <input type="submit"  value="Login">
+                            <input type="email" placeholder="Email Asddress" name="email" required>
+                            <input type="password" placeholder="Create Password" name="password" required>
+                            <input type="file" name="file" required>
+                            <input type="text" placeholder="" name="id_role" value="2" style="display:none;">
+                            <input type="submit" value="Sign Up">
 
                             <p class="signup">
-                                don't have an account?
-                                <a href="${pageContext.request.contextPath}/login/registro.jsp" onclick="" >Sign up</a>
+                                Already have an account?
+                                <a href="${pageContext.request.contextPath}/login/login.jsp" onclick="">Sign in</a>
                             </p>
                             
                             <%
@@ -56,10 +59,9 @@
                             %>
                             <p style="color:white; padding-top:10px; padding-bottom: 10px; padding-left: 50px; padding-right: 50px; background-color: red; font-size:14px; margin-top:10px; "><i class="las la-times" style="color:white;margin-right:3px; font-size:14px;"></i><%out.println(msg);%></p>
                             <%
-
-                                    session.setAttribute("mensaje", null);
-                                }
-                            %>
+                                  session.setAttribute("mensaje", null);
+                               }
+                           %>
                         </form>
 
                     </div>

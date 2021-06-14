@@ -93,6 +93,18 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
+                    
+                    
+                    <li>
+                        <form method="post" action="/SistemaMedico/CitasController" class="opc-cont">
+                            <button type="submit" class="opc">
+                                <span class="las la-calendar-day"></span> <samp class="text">Citas
+                                </samp>
+                            </button>
+                            <input type="hidden" name="action" value="allCitas">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        </form>
+                    </li>
                 </ul>
 
             </div>
@@ -125,6 +137,7 @@
                         <img src="/SistemaMedico/images/${user.picture}" alt="" class="card__img">
                         <div class="card__data">
                             <h3 class="card__title"> ${user.id}. ${user.name}</h3>
+                            <span class="card__profession">Correo: ${user.email}</span><br>
                             <span class="card__profession">Constraseña: ${user.password}</span><br>
                             <!--<span class="card__profession">Web Developer</span><br>
                             <span class="card__profession">Web Developer</span>-->

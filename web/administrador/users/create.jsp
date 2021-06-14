@@ -91,6 +91,17 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
+                    
+                    <li>
+                        <form method="post" action="/SistemaMedico/CitasController" class="opc-cont">
+                            <button type="submit" class="opc">
+                                <span class="las la-calendar-day"></span> <samp class="text">Citas
+                                </samp>
+                            </button>
+                            <input type="hidden" name="action" value="allCitas">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        </form>
+                    </li>
                 </ul>
 
             </div>
@@ -121,16 +132,34 @@
                     <form method="post" action="/SistemaMedico/UserController" class="formBox" enctype="multipart/form-data">
                         <div class="inputBox w50 ">
                             <input type="text" name="User" required>
-                            <span>First Name</span>
+                            <span>User Name</span>
                         </div>
 
                         <div class="inputBox w50 ">
                             <input type="password" name="pass" required>
-                            <span>Last Name</span>
+                            <span>Password</span>
                         </div>
-
-                        <div class="inputBox w100 ">
+   
+                        <div class="inputBox w50">
+                            <input  <input type="email"  name="email" required>
+                            <span>Email</span>
+                        </div>
+                        
+                        <div class="inputBox w50">
                             <input type="file" name="file">
+                        </div>
+                        
+                        <div class="inputBox w100">
+                            <%
+                                String msg = (String) session.getAttribute("mensaje");
+                                if (!(msg == null)) {
+                            %>
+                            <p style="color:white; padding-top:10px; padding-bottom: 10px;background-color: red; font-size:14px; margin-bottom:0px; text-align: center;"><i class="las la-times" style="color:white;margin-right:3px; font-size:14px;"></i><%out.println(msg);%></p>
+                            <%
+
+                                    session.setAttribute("mensaje", null);
+                                }
+                            %>
                         </div>
                         <input type="hidden" name="action" value="addUser">
 

@@ -90,6 +90,7 @@ public class UserController extends HttpServlet {
         else if (action.equalsIgnoreCase("addUser")) {
             /*Valores del formulario*/
             String username = request.getParameter("User");
+            String email = request.getParameter("email");
             String passwd = request.getParameter("pass");
             //String id_role = request.getParameter("id_role");
             //int role= Integer.parseInt(id_role);
@@ -115,11 +116,23 @@ public class UserController extends HttpServlet {
   
             user.setName(username);
             user.setPassword(passwd);
+            user.setEmail(email);
             //user.setId_role(role);
-            admin.addUser(user);
             
-            request.setAttribute("users",admin.getAllUsers()); 
-            forward = "/administrador/users/index.jsp";
+            
+            if (admin.validarregistro(username)) {
+               request.getSession().setAttribute("mensaje", "El usuario ya está en uso");
+               forward = "/administrador/users/create.jsp";
+            }
+            else if(admin.validaemail(email)){
+              request.getSession().setAttribute("mensaje", "El correo ya está en uso");
+              forward = "/administrador/users/create.jsp";
+            }
+            else{
+               admin.addUser(user);
+               request.setAttribute("users",admin.getAllUsers());
+               forward = "/administrador/users/index.jsp";
+            }   
         }
       /*------------------------TERMINA ADD USUARIOS----------------------------------------*/
       
@@ -138,8 +151,9 @@ public class UserController extends HttpServlet {
             User x = new User();
             x = admin.getUser(buscar2);
             request.getSession().setAttribute("name", x.getName());
-            request.getSession().setAttribute("imagen",x.getPicture());
+            request.getSession().setAttribute("email", x.getEmail());
             request.getSession().setAttribute("pass",x.getPassword());
+            request.getSession().setAttribute("imagen",x.getPicture());
             forward = "/administrador/users/edit.jsp";
         }
       /*-----------------------TERMINA EDITAR USUARIO--------------------------------------*/
@@ -147,15 +161,19 @@ public class UserController extends HttpServlet {
         
       /*-----------------------INCIA ACTUALIZAR USUARIO------------------------------------*/
        else if (action.equalsIgnoreCase("updateUser")) {
-           String buscar = request.getParameter("loginUser");
+          String buscar = request.getParameter("loginUser");
            
            String username1 = request.getParameter("usuario1");
            String username = request.getParameter("usuario");
+           String email = request.getParameter("email");
+           String email2 = request.getParameter("emailLogin");
            String passwd = request.getParameter("password");
 
            User user = new User();
            user.setName(username);
            user.setPassword(passwd);
+           user.setEmail(email);
+           
            admin.updateUser(username1,user);
            
            
@@ -166,28 +184,6 @@ public class UserController extends HttpServlet {
            
            request.setAttribute("users",admin.getAllUsers()); 
        
-           forward = "/administrador/users/index.jsp";
-        } 
-      /*-----------------------TERMINA ACTUALIZAR USUARIO-----------------------------------*/
-      
-       
-      /*-----------------------INCIA ELIMINAR USUARIOS--------------------------------------*/
-      else if (action.equalsIgnoreCase("delitUser")) {
-          String buscar = request.getParameter("usuario-login");
-          String username = request.getParameter("usuario");
-          String imagen = request.getParameter("img");
-         
-          admin.deleteUser(username);
-          admin.deleteItems(imagen);
-                  
-           User x = new User();
-           x = admin.getUser(buscar);
-           request.getSession().setAttribute("name", x.getName());
-           request.getSession().setAttribute("imagen",x.getPicture());
-           
-           request.setAttribute("users",admin.getAllUsers());
-           
-           
            forward = "/administrador/users/index.jsp";
         }
       /*-----------------------TERMINA ELIMINAR USUARIOS-----------------------------------*/

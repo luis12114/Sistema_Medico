@@ -2,10 +2,18 @@ package sistema.model;
 
 public class User {
 
-    String name, password, picture;
+    String name, password, picture,email;
     int id_role,id;
 
     public User() {
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -40,12 +48,12 @@ public class User {
         this.id_role = id_role;
     }
 
-    public int getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setEmail(String email) {
+        this.email = email;
     }
     
 }

@@ -68,7 +68,6 @@
                             <button type="submit" class="opc">
                                 <span class="las la-user"></span> <samp class="text">Users</samp>
                             </button>
-                            
                             <input type="hidden" name="action" value="allUsers">
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
@@ -90,6 +89,17 @@
                                 <span class="las la-stethoscope"></span> <samp class="text">Medicos</samp>
                             </button>
                             <input type="hidden" name="action" value="allMedicos">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        </form>
+                    </li>
+                    
+                    <li>
+                        <form method="post" action="/SistemaMedico/CitasController" class="opc-cont">
+                            <button type="submit" class="opc">
+                                <span class="las la-calendar-day"></span> <samp class="text">Citas
+                                </samp>
+                            </button>
+                            <input type="hidden" name="action" value="allCitas">
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>

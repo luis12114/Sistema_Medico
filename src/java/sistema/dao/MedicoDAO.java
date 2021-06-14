@@ -155,8 +155,5 @@ public class MedicoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-    
-    
-    
+    }    
 }

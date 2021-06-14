@@ -94,105 +94,59 @@ public class AdminDAO {
     // Metodo para añadir usuarios
     public void addUser(User user) {
         try {
-            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO user (name,password,imagen_user,ID_Rol) VALUES (?,?,?,?);");
+            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO user (name,email,password,imagen_user,ID_Rol) VALUES (?,?,?,?,?);");
             preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setString(3, user.getPicture());
-            preparedStatement.setInt(4, user.getId_role());
+            preparedStatement.setString(2, user.getEmail());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setString(4, user.getPicture());
+            preparedStatement.setInt(5, user.getId_role());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
   /*-------------------------------TERMINA REGISTRO DE USURIOS --------------------------*/
+    
 
-    
-  /*-------------------------------INICIA ROLES---------------------------------------------*/
-    // Metodo para listar todos los roles
-    public List<Roles> getAllRoles() {
-        List<Roles> roles = new ArrayList<Roles>();
+  /*-------------------------------INICIA VALIDACIONES-----------------------------------*/
+  public boolean validarregistro(String Usuario) {
         try {
             PreparedStatement pstm = null;
             ResultSet rs = null;
-            String query = "SELECT *FROM roles";
+            String query = "SELECT id_user FROM user WHERE name=?";
             pstm = con.prepareStatement(query);
-            rs = pstm.executeQuery();
-            while (rs.next()) {
-                Roles role = new Roles();
-                role.setId_rol(rs.getInt("ID_Rol"));
-                role.setName_role(rs.getString("Name_Rol"));
-                role.setPermissions(rs.getString("Permissions"));
-                role.setUrl(rs.getString("url"));
-                role.setId_permisos(rs.getInt("ID_permisos"));
-                roles.add(role);
+            pstm.setString(1, Usuario);//convertir a String el parametro Usuario
+            rs = pstm.executeQuery();//ejecutar el query 
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return roles;
-    }
-    
-    // Metodo para obtener los datos de un rol
-    public Roles getRoles(int id) {
-        Roles r = new Roles();
-        try {
-            PreparedStatement pstm = null;
-            ResultSet rs = null;
-            String query = "SELECT *FROM roles WHERE ID_Rol= ?";
-            pstm = con.prepareStatement(query);
-            pstm.setInt(1, id);
-            rs = pstm.executeQuery();
-            while (rs.next()) {
-               r.setId_rol(rs.getInt("ID_Rol"));
-               r.setName_role(rs.getString("Name_Rol"));
-               r.setPermissions(rs.getNString("Permissions"));
-               r.setUrl(rs.getString("url"));
-               r.setId_permisos(rs.getInt("ID_permisos"));
-            }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
+            return false;
         }
-        return r;
-    }
-    
-    // Metodo para añadir usuarios
-    public void addRole(Roles role) {
+    }  
+  
+  public boolean validaemail(String Usuario) {
         try {
-            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO roles (Name_Rol,Permissions,url) VALUES (?,?,?);");
-            preparedStatement.setString(1,role.getName_role());
-            preparedStatement.setString(2,role.getPermissions());
-            preparedStatement.setString(3,role.getUrl());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            String query = "SELECT id_user FROM user WHERE email=?";
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, Usuario);//convertir a String el parametro Usuario
+            rs = pstm.executeQuery();//ejecutar el query 
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
         }
-    }
-    
-    // Metodo para actualizar roles
-    public void updateRoles(int id, Roles role) {
-        try {
-            PreparedStatement preparedStatement = con.prepareStatement("UPDATE roles SET ID_Rol=?,Name_Rol=?,Permissions=?,url=? WHERE ID_Rol=?;");
-            preparedStatement.setInt(1,role.getId_rol());
-            preparedStatement.setString(2,role.getName_role());
-            preparedStatement.setString(3,role.getPermissions());
-            preparedStatement.setString(4,role.getUrl());
-            preparedStatement.setInt(5, id);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    //Metodo para eliminar roles
-    public void deleteRoles(int id) {
-        try {
-            PreparedStatement preparedStatement = con.prepareStatement("DELETE FROM roles WHERE ID_Rol= ?;");
-            preparedStatement.setInt(1,id);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    
-   /*-------------------------------TERMINA ROLES---------------------------------------------*/
+    }  
+   /*-------------------------------TERMINA VALIDACIONES--------------------------------*/
+  
+  
 }
