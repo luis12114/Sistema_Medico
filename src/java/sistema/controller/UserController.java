@@ -102,7 +102,11 @@ public class UserController extends HttpServlet {
             try{
                 Part part = request.getPart("file");
                 String namefoto=extractFileName(part);
-                user.setPicture(namefoto);
+                if(namefoto.equals("")){
+                  user.setPicture("defaultProfile.jpg"); 
+                }else{
+                    user.setPicture(namefoto);
+                }
                 if (part == null){
                     out.print("no imagen");
                     return;
@@ -161,15 +165,36 @@ public class UserController extends HttpServlet {
         
       /*-----------------------INCIA ACTUALIZAR USUARIO------------------------------------*/
        else if (action.equalsIgnoreCase("updateUser")) {
-          String buscar = request.getParameter("loginUser");
-           
+           String buscar = request.getParameter("loginUser");
            String username1 = request.getParameter("usuario1");
+           String email2 = request.getParameter("emailLogin");
+           String imagen = request.getParameter("imagen");
+           
            String username = request.getParameter("usuario");
            String email = request.getParameter("email");
-           String email2 = request.getParameter("emailLogin");
            String passwd = request.getParameter("password");
 
            User user = new User();
+           
+           try{
+                Part part = request.getPart("file");
+                String namefoto=extractFileName(part);
+                if(namefoto.equals("")){
+                  user.setPicture(imagen); 
+                }else{
+                    user.setPicture(namefoto);
+                }
+                if (part == null){
+                    out.print("no imagen");
+                    return;
+                }
+                if(isExtension(part.getSubmittedFileName(),exents)){
+                    String foto= saveFile(part,uploads);
+                }
+            }catch(Exception e){
+               e.printStackTrace();
+            }
+           
            user.setName(username);
            user.setPassword(passwd);
            user.setEmail(email);
@@ -223,7 +248,26 @@ public class UserController extends HttpServlet {
         }
       /*-----------------------TERMINA ELIMINAR USUARIOS-----------------------------------*/
       
-      
+      /*-----------------------INCIA ELIMINAR USUARIOS--------------------------------------*/
+      else if (action.equalsIgnoreCase("delitUser")) {
+          String buscar = request.getParameter("usuario-login");
+          String username = request.getParameter("usuario");
+          String imagen = request.getParameter("img");
+         
+          admin.deleteUser(username);
+          admin.deleteItems(imagen);
+                  
+           User x = new User();
+           x = admin.getUser(buscar);
+           request.getSession().setAttribute("name", x.getName());
+           request.getSession().setAttribute("imagen",x.getPicture());
+           
+           request.setAttribute("users",admin.getAllUsers());
+           
+           
+           forward = "/administrador/users/index.jsp";
+        }
+      /*-----------------------TERMINA ELIMINAR USUARIOS-----------------------------------*/
      
       RequestDispatcher view = request.getRequestDispatcher(forward);
        view.forward(request, response);

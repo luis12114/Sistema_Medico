@@ -87,11 +87,12 @@ public class UserDAO {
     // Metodo para actualizar usuarios
     public void updateUser(String nombre, User user) {
         try {
-            PreparedStatement preparedStatement = con.prepareStatement("UPDATE user SET password=?,name=?,email=? WHERE name= ?;");
+            PreparedStatement preparedStatement = con.prepareStatement("UPDATE user SET password=?,name=?,email=?,imagen_user=? WHERE name= ?;");
             preparedStatement.setString(1, user.getPassword());
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setString(4, nombre);
+            preparedStatement.setString(4, user.getPicture());
+            preparedStatement.setString(5, nombre);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

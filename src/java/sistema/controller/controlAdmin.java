@@ -97,7 +97,11 @@ public class controlAdmin extends HttpServlet {
             try{
                 Part part = request.getPart("file");
                 String namefoto=extractFileName(part);
-                user.setPicture(namefoto);
+                if(namefoto.equals("")){
+                  user.setPicture("defaultProfile.jpg"); 
+                }else{
+                    user.setPicture(namefoto);
+                }
                 if (part == null){
                     out.print("no imagen");
                     return;

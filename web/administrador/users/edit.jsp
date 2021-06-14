@@ -156,9 +156,13 @@
                             <span>Password</span>
                         </div>
 
-                        <div class="inputBox w100">
+                        <div class="inputBox w50">
                             <input  <input type="email"  name="email" required value="<%out.println(email);%>">
                             <span>Email</span>
+                        </div>
+                            
+                        <div class="inputBox w50">
+                            <input type="file" name="file">
                         </div>
                             
                         <div class="inputBox w100">
@@ -201,6 +205,7 @@
                                 <input type="text" name="usuario1" value="<%out.println(nom);%>" style="display:none">
                                 <input type="text" name="loginUser" value="<%out.println(nom1);%>" style="display:none">
                                 <input type="text" name="emailLogin" value="<%out.println(email);%>" style="display:none">
+                                <input  <input type="text"  name="imagen" value="<%out.println(imagen);%>" style="display:none">
                                 <button type="submit" value="Send ">Guardar</button>
                             </div>
                         </div>
