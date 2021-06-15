@@ -43,6 +43,7 @@ public class CitaDAO {
             rs = pstm.executeQuery();
             while (rs.next()) {
                 u.setName(rs.getString("name"));
+                u.setEmail(rs.getString("email"));
                 u.setPicture(rs.getString("imagen_user"));
                 u.setPassword(rs.getString("password"));
             }
@@ -175,4 +176,26 @@ public class CitaDAO {
             e.printStackTrace();
         }
     }
+    
+    /*-------------------------------INICIA VALIDACIONES-----------------------------------*/
+   public boolean validarregistro(String buscar) {
+        try {
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            String query = "SELECT id_paciente FROM paciente WHERE hora=?";
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, buscar);//convertir a String el parametro Usuario
+            rs = pstm.executeQuery();//ejecutar el query 
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }  
+  
+  /*-------------------------------TERMINA VALIDACIONES--------------------------------*/ 
 }

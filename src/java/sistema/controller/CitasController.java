@@ -85,6 +85,7 @@ public class CitasController extends HttpServlet {
             z = admin.getUser(buscar);
             request.getSession().setAttribute("name", z.getName());
             request.getSession().setAttribute("imagen",z.getPicture());
+            request.getSession().setAttribute("email",z.getEmail());
             
             request.setAttribute("citas",admin.getAllCitas(buscar));
             forward = "/administrador/citas/create.jsp";
@@ -119,10 +120,16 @@ public class CitasController extends HttpServlet {
             citas.setMotivo(motivo);
             citas.setSintomas(sintomas);
             citas.setEstatus(estatus);
-            admin.addCitas(citas);
             
-            request.setAttribute("citas",admin.getAllCitas(buscar));
-            forward = "/administrador/citas/index.jsp";
+            if (admin.validarregistro(hora)) {
+               request.getSession().setAttribute("mensaje", "horario ocupado");
+               forward = "/administrador/citas/create.jsp";
+            }else{
+             admin.addCitas(citas);
+             request.setAttribute("citas",admin.getAllCitas(buscar));
+             forward = "/administrador/citas/index.jsp";   
+            }
+            
         }
       /*------------------------TERMINA ADD CITA----------------------------------------------*/
       
@@ -164,6 +171,7 @@ public class CitasController extends HttpServlet {
         
        else if (action.equalsIgnoreCase("updaCita")) {
            String buscar = request.getParameter("usuario1");
+           String hora1 = request.getParameter("hora1");
            
 
            String name = request.getParameter("name");
@@ -190,16 +198,35 @@ public class CitasController extends HttpServlet {
            citas.setGenero(genero);
            citas.setMotivo(motivo);
            citas.setSintomas(sintomas);
-
-           admin.updateCita(id_serach, citas);
            
-           User x = new User();
-           x = admin.getUser(buscar);
-           request.getSession().setAttribute("name", x.getName());
-           request.getSession().setAttribute("imagen",x.getPicture());
+           if(hora1 == null ? hora != null : hora1.equals(hora)){
+               if (admin.validarregistro(hora)) {
+                 request.getSession().setAttribute("mensaje", "horario ocupado");
+                 forward = "/administrador/citas/edit.jsp";
+               }
+               else{
+                  admin.updateCita(id_serach, citas);
+          
+                  User x = new User();
+                  x = admin.getUser(buscar);
+                  request.getSession().setAttribute("name", x.getName());
+                  request.getSession().setAttribute("imagen",x.getPicture());
            
-           request.setAttribute("citas",admin.getAllCitas(buscar));
-           forward = "/administrador/citas/index.jsp";
+                  request.setAttribute("citas",admin.getAllCitas(buscar));
+                  forward = "/administrador/citas/index.jsp";  
+                }
+            }
+           else if(hora1.equals(hora)){
+              admin.updateCita(id_serach, citas);
+          
+              User x = new User();
+              x = admin.getUser(buscar);
+              request.getSession().setAttribute("name", x.getName());
+              request.getSession().setAttribute("imagen",x.getPicture());
+           
+              request.setAttribute("citas",admin.getAllCitas(buscar));
+              forward = "/administrador/citas/index.jsp"; 
+           }
         } 
       /*-----------------------TERMINA ACTUALIZAR CITA-------------------------------------*/ 
       

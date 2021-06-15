@@ -9,6 +9,7 @@
 <%
     String nom = (String) session.getAttribute("name");
     String imagen = (String) session.getAttribute("imagen");
+    String email = (String) session.getAttribute("email");
 %>
 
 
@@ -157,8 +158,8 @@
                             
                             
                         <div class="inputBox w50 ">
-                            <input type="email" name="email" required>
-                            <span>Correo</span>
+                            <input type="email" name="email" value="<%out.println(email);%>" readonly required>
+                            <!--<span>Correo</span>-->
                         </div>
 
                         <div class="inputBox w50 ">
@@ -174,6 +175,19 @@
                         <div class="inputBox w100">
                             <input type="text" name="sintomas"required>
                             <span>Sintomas</span>
+                        </div>
+                            
+                        <div class="inputBox w100">
+                            <%
+                                String msg = (String) session.getAttribute("mensaje");
+                                if (!(msg == null)) {
+                            %>
+                            <p style="color:white; padding-top:5px; padding-bottom:5x;background-color: red; font-size:14px; margin-bottom:-20px; text-align: center;"><i class="las la-times" style="color:white;margin-right:3px; font-size:14px;"></i><%out.println(msg);%></p>
+                            <%
+
+                                   session.setAttribute("mensaje", null);
+                                }
+                            %>
                         </div>
                         
                        <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">    
