@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 
 <%
     String nom = (String) session.getAttribute("name");
@@ -137,8 +140,12 @@
                         </div>
 
                         <div class="inputBox w50 ">
-                            <input type="text" name="doctor"  required>
-                            <span>Doctor</span>
+                            <select name="doctor" required>
+                             <option value="" selected>Selecciona un medico</option>
+                             <c:forEach items="${medico}" var="med">
+                                  <option value="${med.nombre}">${med.nombre}</option>
+                             </c:forEach>
+                            </select>
                         </div>
 
                         <div class="inputBox w50 ">
@@ -147,8 +154,16 @@
                         </div>
 
                         <div class="inputBox w50 ">
-                            <input type="text" name="hora" required>
-                            <span>Hora</span>
+                            <select name="hora" required>
+                             <option value="" selected>Selecciona una hora</option>
+                             <option value="9:00">9:00</option>
+                             <option value="10:00">10:00</option>
+                             <option value="11:00">11:00</option>
+                             <option value="12:00">12:00</option>
+                             <option value="13:00">13:00</option>
+                             <option value="14:00">14:00</option>
+                             <option value="15:00">15:00</option>
+                            </select>
                         </div>
 
                         <div class="inputBox w50 ">

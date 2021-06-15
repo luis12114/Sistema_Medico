@@ -86,6 +86,35 @@ public class CitaDAO {
         return citas;
     }
     
+    //Metodo para listar todos los doctores
+    public List<Medico> getAllMedicos() {
+        List<Medico> medicos = new ArrayList<Medico>();
+        try {
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            String query = "SELECT *FROM medico";
+            pstm = con.prepareStatement(query);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Medico medico = new Medico();
+                medico.setId(rs.getInt("id_medico"));
+                medico.setArea(rs.getString("area"));
+                medico.setNombre(rs.getString("nombre"));
+                medico.setAp_pat(rs.getString("apell_pat"));
+                medico.setAp_mat(rs.getString("apell_mat"));
+                medico.setDireccion(rs.getString("direccion"));
+                medico.setEmail(rs.getString("email"));
+                medico.setTel(rs.getString("tel"));
+                medico.setHora_inc(rs.getString("hora_inic"));
+                medico.setHora_fin(rs.getString("hora_fin"));
+                medicos.add(medico);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return medicos;
+    }
     
     // Metodo para añadir citas
     public void addCitas(Citas cita) {

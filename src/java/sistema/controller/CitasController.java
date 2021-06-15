@@ -87,7 +87,9 @@ public class CitasController extends HttpServlet {
             request.getSession().setAttribute("imagen",z.getPicture());
             request.getSession().setAttribute("email",z.getEmail());
             
-            request.setAttribute("citas",admin.getAllCitas(buscar));
+
+            request.setAttribute("medico",admin.getAllMedicos());
+            
             forward = "/administrador/citas/create.jsp";
         }
       /*------------------------TERMINA CREAR CITAS--------------------------------------------*/ 
