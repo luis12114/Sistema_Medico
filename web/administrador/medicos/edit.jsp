@@ -9,22 +9,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%
-    /**Datos del usuario logeado**/
+    /**
+     * Datos del usuario logeado*
+     */
     String nom = (String) session.getAttribute("name");
     String imagen = (String) session.getAttribute("imagen");
-    
-    /**Datos del usuario que se desea editar**/
-    int id= (int) session.getAttribute("id");
-    String area= (String) session.getAttribute("area");
-    String nombre= (String) session.getAttribute("nombre");
-    String apell_p= (String) session.getAttribute("apell_p");
-    String apell_m= (String) session.getAttribute("apell_m");
-    String direccion= (String) session.getAttribute("direccion");
-    String email= (String) session.getAttribute("email");
-    String tel= (String) session.getAttribute("tel");
-    String hora_inic= (String) session.getAttribute("hora_inic");
-    String hora_fin= (String) session.getAttribute("hora_fin");
-    
+
+    /**
+     * Datos del usuario que se desea editar*
+     */
+    int id = (int) session.getAttribute("id");
+    String area = (String) session.getAttribute("area");
+    String nombre = (String) session.getAttribute("nombre");
+    String apell_p = (String) session.getAttribute("apell_p");
+    String apell_m = (String) session.getAttribute("apell_m");
+    String direccion = (String) session.getAttribute("direccion");
+    String email = (String) session.getAttribute("email");
+    String tel = (String) session.getAttribute("tel");
+    String hora_inic = (String) session.getAttribute("hora_inic");
+    String hora_fin = (String) session.getAttribute("hora_fin");
+
 %>
 
 <!DOCTYPE html>
@@ -61,12 +65,12 @@
                     </div>
                     <div class="user">
                         <small><%out.println(nom);%></small>
-                         <p>Panel Administrador</p>
+                        <p>Panel Administrador</p>
                     </div>
                 </div>
                 <ul>
-      
-                   <li>
+
+                    <li>
                         <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-home"></span> <samp class="text">Dashboard</samp>
@@ -85,7 +89,7 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                    
+
                     <li>
                         <form method="post" action="/SistemaMedico/RolesController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -95,7 +99,7 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                    
+
                     <li>
                         <form method="post" action="/SistemaMedico/MedicosController" class="opc-cont active">
                             <button type="submit" class="opc">
@@ -105,7 +109,7 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                    
+
                     <li>
                         <form method="post" action="/SistemaMedico/CitasController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -137,9 +141,9 @@
                 <div class="contactInfo ">
                     <div class="img">
                         <%if (imagen != null) {%>
-                          <img src="/SistemaMedico/images/<%=imagen%>" alt="">
+                        <img src="/SistemaMedico/images/<%=imagen%>" alt="">
                         <%} else {%>
-                         <img src="/SistemaMedico/images/defaultProfile.jpg" alt="">
+                        <img src="/SistemaMedico/images/defaultProfile.jpg" alt="">
                         <%}%>
                     </div>
                 </div>
@@ -190,10 +194,30 @@
                             <input type="text" name="direcc" required value="<%out.println(direccion);%>">
                             <span>Dirrección</span>
                         </div>
+                            
+                        <div class="inputBox w100">
+                            <%
+                                String msg = (String) session.getAttribute("mensaje");
+                                if (!(msg == null)) {
+                            %>
+                            <p style="color:white; padding-top:5px; padding-bottom:5x;background-color: red; font-size:14px; margin-bottom:-20px; text-align: center;"><i class="las la-times" style="color:white;margin-right:3px; font-size:14px;"></i><%out.println(msg);%></p>
+                            <%
+
+                                   session.setAttribute("mensaje", null);
+                                }
+                            %>
+                        </div>
 
                         <input type="hidden" name="action" value="updateMedico">
                         <input type="text" name="usuario1" value="<%out.println(nom);%>" style="display:none">
                         <input type="text" name="id_serch" value="<%out.println(id);%>" style="display:none">
+                        
+                        <input type="text" name="nombre1" required value="<%out.println(nombre);%>" style="display:none">
+                        <input type="text" name="apm1" required value="<%out.println(apell_m);%>" style="display:none">
+                        <input type="text" name="atp1" required value="<%out.println(apell_p);%>" style="display:none">
+                        <input type="email" name="email1" required value="<%out.println(email);%>" style="display:none">
+                        <input type="text" name="tel1" required value="<%out.println(tel);%>" style="display:none">
+                        
                         <div class="">
                             <div class="inputBox w100  buton">
                                 <button type="submit " value="Send ">Guardar</button>

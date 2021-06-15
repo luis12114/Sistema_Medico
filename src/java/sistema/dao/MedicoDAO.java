@@ -155,5 +155,103 @@ public class MedicoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }    
+    }
+
+   /*-------------------------------INICIA VALIDACIONES-----------------------------------*/
+    public boolean validar1(String buscar) {
+        try {
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            String query = "SELECT id_medico FROM medico WHERE nombre=?";
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, buscar);//convertir a String el parametro Usuario
+            rs = pstm.executeQuery();//ejecutar el query 
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean validar2(String buscar) {
+        try {
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            String query = "SELECT id_medico FROM medico WHERE apell_pat=?";
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, buscar);//convertir a String el parametro Usuario
+            rs = pstm.executeQuery();//ejecutar el query 
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    } 
+    
+    public boolean validar3(String buscar) {
+        try {
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            String query = "SELECT id_medico FROM medico WHERE 	apell_mat=?";
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, buscar);//convertir a String el parametro Usuario
+            rs = pstm.executeQuery();//ejecutar el query 
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    } 
+    
+    public boolean validar4(String buscar) {
+        try {
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            String query = "SELECT id_medico FROM medico WHERE 	email=?";
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, buscar);//convertir a String el parametro Usuario
+            rs = pstm.executeQuery();//ejecutar el query 
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    } 
+    
+    public boolean validar5(String buscar) {
+        try {
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            String query = "SELECT id_medico FROM medico WHERE tel=?";
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, buscar);//convertir a String el parametro Usuario
+            rs = pstm.executeQuery();//ejecutar el query 
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+  /*-------------------------------TERMINA VALIDACIONES---------------------------------*/
+    
 }

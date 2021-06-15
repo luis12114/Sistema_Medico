@@ -108,10 +108,32 @@ public class MedicosController extends HttpServlet {
            medico.setHora_fin(hrfin);
            medico.setDireccion(direcc);
            
-           admin.addMedico(medico);
-
-           request.setAttribute("medicos",admin.getAllMedicos());
-           forward = "/administrador/medicos/index.jsp";
+           if (admin.validar1(nombre)) {
+               request.getSession().setAttribute("mensaje", "El nombre ya existe");
+               forward = "/administrador/medicos/create.jsp";
+            }
+           else if (admin.validar2(atp)) {
+               request.getSession().setAttribute("mensaje", "El apellido ya existe");
+               forward = "/administrador/medicos/create.jsp";
+            }
+           else if (admin.validar3(apm)) {
+               request.getSession().setAttribute("mensaje", "El apellido ya existe");
+               forward = "/administrador/medicos/create.jsp";
+            }
+           else if (admin.validar4(email)) {
+               request.getSession().setAttribute("mensaje", "El correo ya existe");
+               forward = "/administrador/medicos/create.jsp";
+            }
+           else if (admin.validar5(tel)) {
+               request.getSession().setAttribute("mensaje", "El telefono ya existe");
+               forward = "/administrador/medicos/create.jsp";
+            }
+           else{
+             admin.addMedico(medico);
+             request.setAttribute("medicos",admin.getAllMedicos());
+             forward = "/administrador/medicos/index.jsp";
+           }
+           
         }
       /*------------------------TERMINA ADD MEDICO-----------------------------------------*/
       
@@ -155,6 +177,12 @@ public class MedicosController extends HttpServlet {
            String idSerch=request.getParameter("id_serch");
            int id_serach= Integer.parseInt(idSerch);
            
+           String nombre1 = request.getParameter("nombre1");
+           String apm1 = request.getParameter("apm1");
+           String atp1 = request.getParameter("atp1");
+           String email1 = request.getParameter("email1");
+           String tel1 = request.getParameter("tel1");
+           
            String area = request.getParameter("area");
            String nombre = request.getParameter("nombre");
            String apm = request.getParameter("apm");
@@ -176,15 +204,101 @@ public class MedicosController extends HttpServlet {
            medico.setHora_fin(hrfin);
            medico.setDireccion(direcc);
            
-           admin.updateMedico(id_serach,medico);
- 
-           User x = new User();
-           x = admin.getUser(buscar);
-           request.getSession().setAttribute("name", x.getName());
-           request.getSession().setAttribute("imagen",x.getPicture());
+           if(nombre1 == null ? nombre != null : !nombre1.equals(nombre)){
+               if (admin.validar1(nombre)) {
+                 request.getSession().setAttribute("mensaje", "El nombre ya existe");
+                 forward = "/administrador/medicos/edit.jsp";
+               }
+               else{
+                 admin.updateMedico(id_serach,medico);
+                 User x = new User();
+                 x = admin.getUser(buscar);
+                 request.getSession().setAttribute("name", x.getName());
+                 request.getSession().setAttribute("imagen",x.getPicture());
            
-           request.setAttribute("medicos",admin.getAllMedicos()); 
-           forward = "/administrador/medicos/index.jsp";
+                 request.setAttribute("medicos",admin.getAllMedicos()); 
+                 forward = "/administrador/medicos/index.jsp";
+               }
+            }
+           
+           else if(atp1 == null ? atp != null : !atp1.equals(atp)){
+               if (admin.validar2(atp)) {
+                 request.getSession().setAttribute("mensaje", "El apellido ya existe");
+                 forward = "/administrador/medicos/edit.jsp";
+               }
+               else{
+                 admin.updateMedico(id_serach,medico);
+                 User x = new User();
+                 x = admin.getUser(buscar);
+                 request.getSession().setAttribute("name", x.getName());
+                 request.getSession().setAttribute("imagen",x.getPicture());
+           
+                 request.setAttribute("medicos",admin.getAllMedicos()); 
+                 forward = "/administrador/medicos/index.jsp";
+               }
+            }
+           
+           else if(apm1 == null ? apm != null : !apm1.equals(apm)){
+               if (admin.validar3(apm)) {
+                 request.getSession().setAttribute("mensaje", "El apellido ya existe");
+                 forward = "/administrador/medicos/edit.jsp";
+               }
+               else{
+                 admin.updateMedico(id_serach,medico);
+                 User x = new User();
+                 x = admin.getUser(buscar);
+                 request.getSession().setAttribute("name", x.getName());
+                 request.getSession().setAttribute("imagen",x.getPicture());
+           
+                 request.setAttribute("medicos",admin.getAllMedicos()); 
+                 forward = "/administrador/medicos/index.jsp";
+               }
+            }
+           
+            else if(email1 == null ? email != null : !email1.equals(email)){
+               if (admin.validar4(apm)) {
+                 request.getSession().setAttribute("mensaje", "El email ya existe");
+                 forward = "/administrador/medicos/edit.jsp";
+               }
+               else{
+                 admin.updateMedico(id_serach,medico);
+                 User x = new User();
+                 x = admin.getUser(buscar);
+                 request.getSession().setAttribute("name", x.getName());
+                 request.getSession().setAttribute("imagen",x.getPicture());
+           
+                 request.setAttribute("medicos",admin.getAllMedicos()); 
+                 forward = "/administrador/medicos/index.jsp";
+               }
+            }
+           
+           else if(tel1== null ? tel != null : !tel1.equals(tel)){
+               if (admin.validar5(tel)) {
+                 request.getSession().setAttribute("mensaje", "El tel ya existe");
+                 forward = "/administrador/medicos/edit.jsp";
+               }
+               else{
+                 admin.updateMedico(id_serach,medico);
+                 User x = new User();
+                 x = admin.getUser(buscar);
+                 request.getSession().setAttribute("name", x.getName());
+                 request.getSession().setAttribute("imagen",x.getPicture());
+           
+                 request.setAttribute("medicos",admin.getAllMedicos()); 
+                 forward = "/administrador/medicos/index.jsp";
+               }
+            }
+            else if(nombre1.equals(nombre)||atp1.equals(atp)|| apm1.equals(apm)||email1.equals(email)||tel1.equals(tel) ){
+              admin.updateMedico(id_serach,medico);
+              User x = new User();
+              x = admin.getUser(buscar);
+              request.getSession().setAttribute("name", x.getName());
+              request.getSession().setAttribute("imagen",x.getPicture());
+           
+              request.setAttribute("medicos",admin.getAllMedicos()); 
+              forward = "/administrador/medicos/index.jsp";
+            }
+           
         } 
       /*-----------------------TERMINA ACTUALIZAR MEDICO-----------------------------------*/ 
       
