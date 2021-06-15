@@ -149,8 +149,8 @@
                         </div>
 
                         <div class="inputBox w50 ">
-                            <input type="text" name="doctor" value="<%out.println(doctor);%>" required>
-                            <span>Doctor</span>
+                            <input type="text" name="doctor" value="<%out.println(doctor);%>" required readonly>
+                            <!--<span>Doctor</span>-->
                         </div>
 
                         <div class="inputBox w50 ">
@@ -159,8 +159,16 @@
                         </div>
 
                         <div class="inputBox w50 ">
-                            <input type="text" name="hora" value="<%out.println(hora);%>" required>
-                            <span>Hora</span>
+                            <select name="hora" required>
+                             <option value="<%out.println(hora);%>" selected><%out.println(hora);%></option>
+                             <option value="9:00">9:00</option>
+                             <option value="10:00">10:00</option>
+                             <option value="11:00">11:00</option>
+                             <option value="12:00">12:00</option>
+                             <option value="13:00">13:00</option>
+                             <option value="14:00">14:00</option>
+                             <option value="15:00">15:00</option>
+                            </select>
                         </div>
 
                         <div class="inputBox w50 ">
