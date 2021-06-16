@@ -176,10 +176,10 @@
 
                         <div class="inputBox w50">
                             <select name="id_role" required>
-                                <c:forEach items="${rol}" var="rol">
-                                   
-                                    <option value="${rol.id_rol}">${rol.name_role}</option>
-                                </c:forEach>
+                                <option value="<%out.print(rolId);%>"><%out.print(rolName);%></option>
+                                <option value="1">Admin</option>
+                                <option value="2">Paciente</option>
+                                <option value="3">Doctor</option>
                             </select>
                         </div>
                             

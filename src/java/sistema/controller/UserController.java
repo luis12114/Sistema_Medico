@@ -143,7 +143,7 @@ public class UserController extends HttpServlet {
       
         
       /*-----------------------INCIA EDITAR USUARIO-----------------------------------------*/
-        else if (action.equalsIgnoreCase("datos")) {
+        else if (action.equalsIgnoreCase("editUser")) {
             /**Datos del usuario logeado**/
             String buscar1 = request.getParameter("usuario-login");
             User z= new User();
