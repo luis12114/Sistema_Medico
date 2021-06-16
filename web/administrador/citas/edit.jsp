@@ -75,6 +75,17 @@
                             <input type="text" name="nameUser" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
+                    
+                    <li>
+                        <form method="post" action="/SistemaMedico/DatosController" class="opc-cont">
+                            <button type="submit" class="opc">
+                                <span class="las la-users-cog"></span> <samp class="text">Mis Datos</samp>
+                            </button>
+                            <input type="hidden" name="action" value="datos">
+                            <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        </form>
+                    </li> 
 
                     <li>
                         <form method="post" action="/SistemaMedico/UserController" class="opc-cont">

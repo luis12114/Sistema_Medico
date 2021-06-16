@@ -22,10 +22,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-
 @MultipartConfig
-@WebServlet(name = "UserController", urlPatterns = {"/UserController"})
-public class UserController extends HttpServlet {
+@WebServlet(name = "DatosController", urlPatterns = {"/DatosController"})
+public class DatosController extends HttpServlet {
     
     // Variables locales
     private UserDAO admin;//Objeto de tipo Admin DAO
@@ -35,22 +34,22 @@ public class UserController extends HttpServlet {
     private File uploads = new File(pathFiles);
     private String[] exents ={".ico",".png",".jpg","jpeg"};
     
-    
-    public UserController() {
+    public DatosController(){
         super();
         admin = new UserDAO();
     }
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
+       
     }
 
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        
     }
 
     
@@ -60,90 +59,8 @@ public class UserController extends HttpServlet {
         String forward = "";
         String action = request.getParameter("action");
         
-      /*-----------------------INCIA VER TODOS LOS USURIOS----------------------------------*/   
-        if (action.equalsIgnoreCase("allUsers")) {
-            String buscar = request.getParameter("usuario");
-            User x = new User();
-            x = admin.getUser(buscar);
-            request.getSession().setAttribute("name", x.getName());
-            request.getSession().setAttribute("imagen",x.getPicture());
-            request.setAttribute("users",admin.getAllUsers()); 
-            forward = "/administrador/users/index.jsp";
-        } 
-      /*-----------------------TERMINA VER TODOS LOS USURIOS-------------------------------*/
-      
-        
-      /*-----------------------------INCIA CREAR USUARIOS----------------------------------*/
-        else if (action.equalsIgnoreCase("formAdd")) {
-            /**Datos del usuario logeado**/
-            String buscar = request.getParameter("usuario-login");
-            User z= new User();
-            z = admin.getUser(buscar);
-            request.getSession().setAttribute("name", z.getName());
-            request.getSession().setAttribute("imagen",z.getPicture());
-            request.setAttribute("rol",admin.getAllRoles());
-            forward = "/administrador/users/create.jsp";
-        }   
-     /*-----------------------------TERMINA CREAR USUARIOS--------------------------------*/
-     
-        
-     /*------------------------INICIA  ADD USUARIOS---------------------------------------*/ 
-        else if (action.equalsIgnoreCase("addUser")) {
-            /*Valores del formulario*/
-            String username = request.getParameter("User");
-            String email = request.getParameter("email");
-            String passwd = request.getParameter("pass");
-            String id_role = request.getParameter("id_role");
-            int role= Integer.parseInt(id_role);
-            
-            /*Envio a base de datos*/
-            
-            User user = new User();
-
-            try{
-                Part part = request.getPart("file");
-                String namefoto=extractFileName(part);
-                if(namefoto.equals("")){
-                  user.setPicture("defaultProfile.jpg"); 
-                }else{
-                    user.setPicture(namefoto);
-                }
-                if (part == null){
-                    out.print("no imagen");
-                    return;
-                }
-                if(isExtension(part.getSubmittedFileName(),exents)){
-                    String foto= saveFile(part,uploads);
-                }
-            }catch(Exception e){
-               e.printStackTrace();
-            }
-  
-            user.setName(username);
-            user.setPassword(passwd);
-            user.setEmail(email);
-            user.setId_role(role);
-            
-            
-            if (admin.validarregistro(username)) {
-               request.getSession().setAttribute("mensaje", "El usuario ya está en uso");
-               forward = "/administrador/users/create.jsp";
-            }
-            else if(admin.validaemail(email)){
-              request.getSession().setAttribute("mensaje", "El correo ya está en uso");
-              forward = "/administrador/users/create.jsp";
-            }
-            else{
-               admin.addUser(user);
-               request.setAttribute("users",admin.getAllUsers());
-               forward = "/administrador/users/index.jsp";
-            }   
-        }
-      /*------------------------TERMINA ADD USUARIOS----------------------------------------*/
-      
-        
-      /*-----------------------INCIA EDITAR USUARIO-----------------------------------------*/
-        else if (action.equalsIgnoreCase("datos")) {
+        /*-----------------------INCIA EDITAR USUARIO-----------------------------------------*/
+        if (action.equalsIgnoreCase("datos")) {
             /**Datos del usuario logeado**/
             String buscar1 = request.getParameter("usuario-login");
             User z= new User();
@@ -164,11 +81,10 @@ public class UserController extends HttpServlet {
             request.getSession().setAttribute("rolName",x.getName_rol());
             
             request.setAttribute("rol",admin.getAllRoles());
-            forward = "/administrador/users/edit.jsp";
+            forward = "/administrador/datos/index.jsp";
         }
       /*-----------------------TERMINA EDITAR USUARIO--------------------------------------*/
       
-        
       /*-----------------------INCIA ACTUALIZAR USUARIO------------------------------------*/
        else if (action.equalsIgnoreCase("updateUser")) {
            String buscar = request.getParameter("loginUser");
@@ -216,7 +132,7 @@ public class UserController extends HttpServlet {
            if(username1 == null ? username != null : !username1.equals(username)){
                if (admin.validarregistro(username)) {
                  request.getSession().setAttribute("mensaje", "El usuario ya está en uso");
-                 forward = "/administrador/users/edit.jsp";
+                 forward = "/administrador/datos/index.jsp";
                }
                else{
                   admin.updateUser(username1,user);
@@ -227,13 +143,13 @@ public class UserController extends HttpServlet {
            
                   request.setAttribute("users",admin.getAllUsers()); 
        
-                  forward = "/administrador/users/index.jsp";
+                  forward = "/administrador/index.jsp";
                }
             }
            else if(email2== null ? email!= null : !email2.equals(email)){
               if(admin.validaemail(email)){
                   request.getSession().setAttribute("mensaje", "El correo ya está en uso");
-                  forward = "/administrador/users/edit.jsp";
+                  forward = "/administrador/datos/index.jsp";
                 }
                 else{
                   admin.updateUser(username1,user);
@@ -244,7 +160,7 @@ public class UserController extends HttpServlet {
            
                   request.setAttribute("users",admin.getAllUsers()); 
        
-                  forward = "/administrador/users/index.jsp";
+                  forward = "/administrador/index.jsp";
                }
            }
            else if(username1.equals(username)||email2.equals(email)){
@@ -256,40 +172,16 @@ public class UserController extends HttpServlet {
            
                request.setAttribute("users",admin.getAllUsers()); 
        
-               forward = "/administrador/users/index.jsp";
+               forward = "/administrador/index.jsp";
            }
            
         }
       /*-----------------------TERMINA ELIMINAR USUARIOS-----------------------------------*/
-      
-      /*-----------------------INCIA ELIMINAR USUARIOS--------------------------------------*/
-      else if (action.equalsIgnoreCase("delitUser")) {
-          String buscar = request.getParameter("usuario-login");
-          String username = request.getParameter("usuario");
-          String imagen = request.getParameter("img");
-         
-          admin.deleteUser(username);
-          admin.deleteItems(imagen);
-                  
-           User x = new User();
-           x = admin.getUser(buscar);
-           request.getSession().setAttribute("name", x.getName());
-           request.getSession().setAttribute("imagen",x.getPicture());
-           
-           request.setAttribute("users",admin.getAllUsers());
-           
-           
-           forward = "/administrador/users/index.jsp";
-        }
-      /*-----------------------TERMINA ELIMINAR USUARIOS-----------------------------------*/
-     
       RequestDispatcher view = request.getRequestDispatcher(forward);
-       view.forward(request, response);
+      view.forward(request, response);  
     }
-  
-    
-    
-    
+
+   
     /*------------------------INICIA FUNCIONES PARA SUBIR IMAGENS---------------------------*/ 
      /*Funcion para guardar archivos*/
       private String saveFile(Part part, File pathUploads){
@@ -332,10 +224,10 @@ public class UserController extends HttpServlet {
     }
     /*------------------------TERMINA FUNCIONES PARA SUBIR IMAGENS---------------------------*/ 
      
-  
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
+    
+    
 }

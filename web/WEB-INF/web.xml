@@ -20,6 +20,10 @@
         <servlet-name>CitasController</servlet-name>
         <servlet-class>sistema.controller.CitasController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DatosController</servlet-name>
+        <servlet-class>sistema.controller.DatosController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>controlAdmin</servlet-name>
         <url-pattern>/controlAdmin</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>CitasController</servlet-name>
         <url-pattern>/CitasController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DatosController</servlet-name>
+        <url-pattern>/DatosController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

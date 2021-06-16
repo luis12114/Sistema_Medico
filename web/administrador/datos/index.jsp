@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Create
-    Created on : 11 may. 2021, 22:44:53
+    Document   : edit
+    Created on : 5 may. 2021, 20:18:52
     Author     : 52777
 --%>
 
@@ -8,13 +8,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-
 <%
-    String nom = (String) session.getAttribute("name");
-    String imagen = (String) session.getAttribute("imagen");
-    String email = (String) session.getAttribute("email");
-%>
+    /**
+     * Datos del usuario logeado*
+     */
+    String nom1 = (String) session.getAttribute("name1");
+    String imagen1 = (String) session.getAttribute("imagen1");
 
+    /**
+     * Datos del usuario que se desea editar*
+     */
+    String nom = (String)session.getAttribute("name");
+    String email = (String)session.getAttribute("email");
+    String password = (String)session.getAttribute("pass");
+    String imagen = (String)session.getAttribute("imagen");
+    int rolId = (int)session.getAttribute("rolId");
+    String rolName = (String) session.getAttribute("rolName");
+
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,9 +34,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Create</title>
+        <title>Mis datos</title>
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-        <link href="/SistemaMedico//css/dashboardStyle.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/SistemaMedico//css/dashboardStyle.css">
     </head>
 
     <body>
@@ -41,7 +52,7 @@
                     <div class="side-img"
                          style="
                          <%if (imagen != null) {%>
-                         background-image:url(/SistemaMedico/images/<%=imagen%>
+                         background-image:url(/SistemaMedico/images/<%=imagen1%>
                          <%} else {%>
                          background-image:url(/SistemaMedico/images/defaultProfile.jpg
                          <%}%>
@@ -49,7 +60,7 @@
                          >
                     </div>
                     <div class="user">
-                        <small><%out.println(nom);%></small>
+                        <small><%out.println(nom1);%></small>
                         <p>Panel Administrador</p>
                     </div>
                 </div>
@@ -61,12 +72,12 @@
                                 <span class="las la-home"></span> <samp class="text">Dashboard</samp>
                             </button>
                             <input type="hidden" name="action" value="dashboard">
-                            <input type="text" name="nameUser" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="nameUser" value="<%out.println(nom1);%>" style="display:none">
                         </form>
                     </li>
                     
                     <li>
-                        <form method="post" action="/SistemaMedico/DatosController" class="opc-cont">
+                        <form method="post" action="/SistemaMedico/DatosController" class="opc-cont active">
                             <button type="submit" class="opc">
                                 <span class="las la-users-cog"></span> <samp class="text">Mis Datos</samp>
                             </button>
@@ -81,14 +92,13 @@
                             <button type="submit" class="opc">
                                 <span class="las la-user"></span> <samp class="text">Users</samp>
                             </button>
-
                             <input type="hidden" name="action" value="allUsers">
-                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="usuario" value="<%out.println(nom1);%>" style="display:none">
                         </form>
                     </li>
 
                     <li>
-                        <form method="post" action="/SistemaMedico/RolesControlle" class="opc-cont">
+                        <form method="post" action="/SistemaMedico/RolesController" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-user-tag"></span> <samp class="text">Roles</samp>
                             </button>
@@ -114,11 +124,10 @@
                                 </samp>
                             </button>
                             <input type="hidden" name="action" value="allCitas">
-                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="usuario" value="<%out.println(email);%>" style="display:none">
                         </form>
                     </li>
                 </ul>
-
             </div>
         </div>
         <div class="main-content">
@@ -138,128 +147,110 @@
             <main class="container-edit ">
                 <div class="contactInfo ">
                     <div class="img">
-                        
+                        <%if (imagen != null) {%>
+                        <img src="/SistemaMedico/images/<%=imagen%>" alt="">
+                        <%} else {%>
+                        <img src="/SistemaMedico/images/defaultProfile.jpg" alt="">
+                        <%}%>
                     </div>
                 </div>
                 <div class="contactForm">
-                    <h2>Citas</h2>
+                    <h2>Informacion</h2>
 
-                    <form method="post" action="/SistemaMedico/CitasController" class="formBox">
-                        <div class="inputBox w50 ">
-                            <input type="text" name="name" value="<%out.println(nom);%>" readonly required>
-                            <!--<span>Nombre</span>-->
+                    <form action="" method="post" action="/SistemaMedico/DatosController" class="formBox" enctype="multipart/form-data">
+
+                        <div class="inputBox w50">
+                            <input type="text" name="usuario" required value="<%out.println(nom);%>">
+                            <span>User Name</span>
                         </div>
 
-                        <div class="inputBox w50 ">
-                            <select name="doctor" required>
-                             <option value="" selected>Selecciona un medico</option>
-                             <c:forEach items="${medico}" var="med">
-                                  <option value="${med.nombre}">${med.nombre}</option>
-                             </c:forEach>
+                        <div class="inputBox w50">
+                            <input type="password" name="password" required value="<%out.println(password);%>">
+                            <span>Password</span>
+                        </div>
+
+                        <div class="inputBox w50">
+                            <input  <input type="email"  name="email" required value="<%out.println(email);%>">
+                            <span>Email</span>
+                        </div>
+
+                        <div class="inputBox w50" style="display:none">
+                            <select name="id_role" required>
+                                <c:forEach items="${rol}" var="rol">
+                                   
+                                    <option value="${rol.id_rol}">${rol.name_role}</option>
+                                </c:forEach>
                             </select>
                         </div>
-
-                        <div class="inputBox w50 ">
-                            <input type="date" name="fecha" id="fecha" required>
-                            <span>Fecha</span>
-                        </div>
-
-                        <div class="inputBox w50 ">
-                            <select name="hora" required>
-                             <option value="" selected>Selecciona una hora</option>
-                             <option value="9:00">9:00</option>
-                             <option value="10:00">10:00</option>
-                             <option value="11:00">11:00</option>
-                             <option value="12:00">12:00</option>
-                             <option value="13:00">13:00</option>
-                             <option value="14:00">14:00</option>
-                             <option value="15:00">15:00</option>
-                            </select>
-                        </div>
-
-                        <div class="inputBox w50 ">
-                            <input type="text" name="tel" required>
-                            <span>Tel</span>
-                        </div>
                             
-                            
-                        <div class="inputBox w50 ">
-                            <input type="email" name="email" value="<%out.println(email);%>" readonly required>
-                            <!--<span>Correo</span>-->
+                        <div class="inputBox w50">
+                            <input type="file" name="file">
                         </div>
 
-                        <div class="inputBox w50 ">
-                            <input type="text" name="genero" required>
-                            <span>Genero</span>
-                        </div>
-
-                        <div class="inputBox w50 ">
-                            <input type="text" name="motivo" required>
-                            <span>Motivo</span>
-                        </div>
-
-                        <div class="inputBox w100">
-                            <input type="text" name="sintomas"required>
-                            <span>Sintomas</span>
-                        </div>
-                            
                         <div class="inputBox w100">
                             <%
                                 String msg = (String) session.getAttribute("mensaje");
                                 if (!(msg == null)) {
                             %>
-                            <p style="color:white; padding-top:5px; padding-bottom:5x;background-color: red; font-size:14px; margin-bottom:-20px; text-align: center;"><i class="las la-times" style="color:white;margin-right:3px; font-size:14px;"></i><%out.println(msg);%></p>
-                            <%
+                            <p style="color:white; padding-top:10px; padding-bottom: 10px;background-color: red; font-size:14px; margin-bottom:0px; text-align: center;"><i class="las la-times" style="color:white;margin-right:3px; font-size:14px;"></i><%out.println(msg);%></p>
+                                <%
 
-                                   session.setAttribute("mensaje", null);
-                                }
-                            %>
+                                        session.setAttribute("mensaje", null);
+                                    }
+                                %>
+                        </div>
+
+                        <!--<div class="inputBox w50">
+                            <input type="file" name="file">
                         </div>
                         
-                       <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">    
-                        <input type="hidden" name="action" value="addCita">
-                      
-                        <div class="">
-                            <div class="inputBox w100  buton">
-                                <button type="submit " value="Send ">Guardar</button>
-                            </div
+                       
+                        <div class="inputBox w100">
+                            <input type="file" name="file">
+                            <span>Cambiar foto</span>
                         </div>
+
+                        <div class="inputBox w50">
+                            <input type="text" required>
+                            <span>Mobil Number</span>
+                        </div>
+
+                        <div class="inputBox w100">
+                            <textarea required></textarea>
+                            <span>Write you message here...</span>
+                        </div>-->
+
+
+                        <div class="botones">
+                            <div class="inputBox w100  buton">
+                                <input type="hidden" name="action" value="updateUser">
+                                <input type="text" name="usuario1" value="<%out.println(nom);%>" style="display:none">
+                                <input type="text" name="loginUser" value="<%out.println(nom1);%>" style="display:none">
+                                
+                                <input type="text" name="emailLogin" value="<%out.println(email);%>" style="display:none">
+                                <input  <input type="text"  name="imagen" value="<%out.println(imagen);%>" style="display:none">
+                                
+                                <input  <input type="text"  name="idRol" required value="<%out.println(rolId);%>"style="display:none">
+                                <button type="submit" value="Send ">Guardar</button>
+                            </div>
+                        </div>
+
                     </form>
                     <div class="botom">
-                        <form method="post" action="/SistemaMedico/CitasController" class="formBox">
-                            <input type="hidden" name="action" value="allCitas">
-                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
-                            <div class="inputBox w100  buton">
-                                <button type="submit" class="top">Regresar</button>
-                            </div> 
+                        <form method="post" action="/SistemaMedico/controlAdmin" class="formBox">
+                            <input type="hidden" name="action" value="dashboard">
+                            <input type="text" name="nameUser" value="<%out.println(nom1);%>" style="display:none">
+                            <div class="botones">
+                                <div class="inputBox w100  buton">
+                                    <button type="submit" class="top">Regresar</button>
+                                </div> 
+                            </div>
                         </form>
                     </div>
                 </div>
             </main>
         </div>
-        <label class="close-mobile-menu " for="menu-toggle "></label>
-        <script>
-            window.addEventListener('load', function () {
-
-                document.getElementById('fecha').type = 'text';
-
-                document.getElementById('fecha').addEventListener('blur', function () {
-
-                    document.getElementById('fecha').type = 'text';
-
-                });
-
-                document.getElementById('fecha').addEventListener('focus', function () {
-
-                    document.getElementById('fecha').type = 'date';
-
-                });
-
-            });
-
-        </script>
+        <label class="close-mobile-menu" for="menu-toggle"></label>
     </body>
 
 </html>
-
-
