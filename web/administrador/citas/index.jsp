@@ -11,6 +11,7 @@
 <%
     String nom = (String) session.getAttribute("name");
     String imagen = (String) session.getAttribute("imagen");
+    int rol = (int) session.getAttribute("rol");
 %>
 
 <!DOCTYPE html>
@@ -52,7 +53,6 @@
                 </div>
                 <ul>
 
-
                     <li>
                         <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
                             <button type="submit" class="opc">
@@ -62,7 +62,7 @@
                             <input type="text" name="nameUser" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                    
+
                     <li>
                         <form method="post" action="/SistemaMedico/DatosController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -73,18 +73,20 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li> 
-
+                    <%if (rol == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/UserController" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-user"></span> <samp class="text">Users</samp>
                             </button>
-                            
+
                             <input type="hidden" name="action" value="allUsers">
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                    
+                    <%}%>
+
+                    <%if (rol == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/RolesController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -94,7 +96,9 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                    
+                    <%}%>
+
+                    <%if (rol == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/MedicosController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -104,7 +108,9 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                    
+                    <%}%>
+
+                    <%if (rol == 1 || rol == 2 || rol == 3) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/CitasController" class="opc-cont active">
                             <button type="submit" class="opc">
@@ -115,6 +121,7 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
+                    <%}%>
                 </ul>
 
             </div>
@@ -134,6 +141,7 @@
                 </div>
             </header>
             <main class="card__container ">
+                <%if (rol == 1 || rol == 2) {%>
                 <div class="card__glass">
                     <form method="post" action="/SistemaMedico/CitasController" class="add">
                         <button class="btn-add"><span class="las la-plus-circle"></span></button>
@@ -141,10 +149,12 @@
                         <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
                     </form>
                 </div>
-               
+                <%}%>
+
+
                 <c:forEach items="${citas}" var="citas">
                     <div class="card__glass">
-                        
+
                         <div class="card__data">
                             <h3 class="card__title"> ${citas.id}. ${citas.name} </h3>
                             <span class="card__profession">Doctor:${citas.doctor}</span><br>
@@ -159,26 +169,53 @@
                             <span class="card__profession">Web Developer</span>-->
                         </div>
 
+
+                        <%if (rol == 1) {%>
                         <form method="post" action="/SistemaMedico/CitasController" class="card__button">
                             <span class="las la-edit"></span><input type="submit" value="Edit" class="opc">
                             <input type="hidden" name="action" value="editCita">
                             <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
                             <input type="text" name="cita" value="${citas.id}" style="display:none">
                         </form>
-                        
+
                         <form method="post" action="/SistemaMedico/CitasController" class="card__button formulario">
                             <span class="las la-trash"></span><input type="submit"  value="Delit" class="opc">
                             <input type="hidden" name="action" value="delitCita">
                             <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
                             <input type="text" name="cita" value="${citas.id}" style="display:none">
                         </form>
-                        
+
                         <form method="post" action="/SistemaMedico/CitasController" class="card__button formulario">
                             <span class="las la-ban" > </span><input type="submit"  value="Cancelar" class="opc" style="margin-left:1px;">
                             <input type="hidden" name="action" value="cancelarCita">
                             <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
                             <input type="text" name="cita" value="${citas.id}" style="display:none">
                         </form>
+                        <%}%>
+
+                        <%if (rol == 2) {%>
+                        <form method="post" action="/SistemaMedico/CitasController" class="card__button">
+                            <span class="las la-edit"></span><input type="submit" value="Edit" class="opc">
+                            <input type="hidden" name="action" value="editCita">
+                            <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="cita" value="${citas.id}" style="display:none">
+                        </form>
+                        <form method="post" action="/SistemaMedico/CitasController" class="card__button formulario">
+                            <span class="las la-ban" > </span><input type="submit"  value="Cancelar" class="opc" style="margin-left:1px;">
+                            <input type="hidden" name="action" value="cancelarCita">
+                            <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="cita" value="${citas.id}" style="display:none">
+                        </form>
+                        <%}%>
+                        <%if (rol == 3) {%>
+                        <form method="post" action="/SistemaMedico/CitasController" class="card__button formulario">
+                            <span class="las la-check-circle" > </span><input type="submit"  value="Realizada" class="opc" style="margin-left:1px;">
+                            <input type="hidden" name="action" value="cancelarCita">
+                            <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="cita" value="${citas.id}" style="display:none">
+                        </form>
+                        <%}%>
+
                     </div>
                 </c:forEach>
             </main>

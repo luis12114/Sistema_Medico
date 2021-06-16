@@ -9,6 +9,7 @@
 <%
     String nom = (String) session.getAttribute("name");
     String imagen = (String) session.getAttribute("imagen");
+    int rol = (int) session.getAttribute("rol");
 %>
 
 
@@ -60,7 +61,7 @@
                             <input type="text" name="nameUser" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                    
+
                     <li>
                         <form method="post" action="/SistemaMedico/DatosController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -71,7 +72,7 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li> 
-
+                    <%if (rol == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/UserController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -82,7 +83,9 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
+                    <%}%>
 
+                    <%if (rol == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/RolesControlle" class="opc-cont">
                             <button type="submit" class="opc">
@@ -92,9 +95,11 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
+                    <%}%>
 
+                    <%if (rol == 1) {%>
                     <li>
-                        <form method="post" action="/SistemaMedico/MedicosController" class="opc-cont active">
+                        <form method="post" action="/SistemaMedico/MedicosController" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-stethoscope"></span> <samp class="text">Medicos</samp>
                             </button>
@@ -102,7 +107,9 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                    
+                    <%}%>
+
+                    <%if (rol == 1 || rol == 2 || rol == 3) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/CitasController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -113,6 +120,8 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
+                    <%}%>
+
                 </ul>
 
             </div>
@@ -185,22 +194,22 @@
                             <input type="text" name="direcc" required>
                             <span>Dirrección</span>
                         </div>
-                        
+
                         <div class="inputBox w100">
                             <%
                                 String msg = (String) session.getAttribute("mensaje");
                                 if (!(msg == null)) {
                             %>
                             <p style="color:white; padding-top:5px; padding-bottom:5x;background-color: red; font-size:14px; margin-bottom:-20px; text-align: center;"><i class="las la-times" style="color:white;margin-right:3px; font-size:14px;"></i><%out.println(msg);%></p>
-                            <%
+                                <%
 
-                                   session.setAttribute("mensaje", null);
-                                }
-                            %>
+                                        session.setAttribute("mensaje", null);
+                                    }
+                                %>
                         </div>
 
                         <input type="hidden" name="action" value="addMedico">
-
+                        <input type="text" name="usuario-login"" value="<%out.println(nom);%>" style="display:none">
                         <div class="">
                             <div class="inputBox w100  buton">
                                 <button type="submit " value="Send ">Guardar</button>

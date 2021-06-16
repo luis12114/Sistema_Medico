@@ -18,11 +18,11 @@
     /**
      * Datos del usuario que se desea editar*
      */
-    String nom = (String)session.getAttribute("name");
-    String email = (String)session.getAttribute("email");
-    String password = (String)session.getAttribute("pass");
-    String imagen = (String)session.getAttribute("imagen");
-    int rolId = (int)session.getAttribute("rolId");
+    String nom = (String) session.getAttribute("name");
+    String email = (String) session.getAttribute("email");
+    String password = (String) session.getAttribute("pass");
+    String imagen = (String) session.getAttribute("imagen");
+    int rolId = (int) session.getAttribute("rolId");
     String rolName = (String) session.getAttribute("rolName");
 
 %>
@@ -75,7 +75,7 @@
                             <input type="text" name="nameUser" value="<%out.println(nom1);%>" style="display:none">
                         </form>
                     </li>
-                    
+
                     <li>
                         <form method="post" action="/SistemaMedico/DatosController" class="opc-cont active">
                             <button type="submit" class="opc">
@@ -83,10 +83,11 @@
                             </button>
                             <input type="hidden" name="action" value="datos">
                             <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
-                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="usuario" value="<%out.println(nom1);%>" style="display:none">
                         </form>
                     </li> 
 
+                    <%if (rolId == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/UserController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -96,27 +97,33 @@
                             <input type="text" name="usuario" value="<%out.println(nom1);%>" style="display:none">
                         </form>
                     </li>
+                    <%}%>
 
+                    <%if (rolId == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/RolesController" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-user-tag"></span> <samp class="text">Roles</samp>
                             </button>
                             <input type="hidden" name="action" value="allRoles">
-                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="usuario" value="<%out.println(nom1);%>" style="display:none">
                         </form>
                     </li>
+                    <%}%>
 
+                    <%if (rolId == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/MedicosController" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-stethoscope"></span> <samp class="text">Medicos</samp>
                             </button>
                             <input type="hidden" name="action" value="allMedicos">
-                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                            <input type="text" name="usuario" value="<%out.println(nom1);%>" style="display:none">
                         </form>
                     </li>
+                    <%}%>
 
+                    <%if (rolId==1||rolId==2||rolId==3) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/CitasController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -124,9 +131,10 @@
                                 </samp>
                             </button>
                             <input type="hidden" name="action" value="allCitas">
-                            <input type="text" name="usuario" value="<%out.println(email);%>" style="display:none">
+                            <input type="text" name="usuario" value="<%out.println(nom1);%>" style="display:none">
                         </form>
                     </li>
+                    <%}%>
                 </ul>
             </div>
         </div>
@@ -182,7 +190,7 @@
                                 <option value="3">Doctor</option>
                             </select>
                         </div>
-                            
+
                         <div class="inputBox w50">
                             <input type="file" name="file">
                         </div>
@@ -226,10 +234,10 @@
                                 <input type="hidden" name="action" value="updateUser">
                                 <input type="text" name="usuario1" value="<%out.println(nom);%>" style="display:none">
                                 <input type="text" name="loginUser" value="<%out.println(nom1);%>" style="display:none">
-                                
+
                                 <input type="text" name="emailLogin" value="<%out.println(email);%>" style="display:none">
                                 <input  <input type="text"  name="imagen" value="<%out.println(imagen);%>" style="display:none">
-                                
+
                                 <input  <input type="text"  name="idRol" required value="<%out.println(rolId);%>"style="display:none">
                                 <button type="submit" value="Send ">Guardar</button>
                             </div>

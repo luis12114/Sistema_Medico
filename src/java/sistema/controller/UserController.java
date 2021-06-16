@@ -67,6 +67,7 @@ public class UserController extends HttpServlet {
             x = admin.getUser(buscar);
             request.getSession().setAttribute("name", x.getName());
             request.getSession().setAttribute("imagen",x.getPicture());
+            request.getSession().setAttribute("rol",x.getId_role());
             request.setAttribute("users",admin.getAllUsers()); 
             forward = "/administrador/users/index.jsp";
         } 
@@ -81,6 +82,8 @@ public class UserController extends HttpServlet {
             z = admin.getUser(buscar);
             request.getSession().setAttribute("name", z.getName());
             request.getSession().setAttribute("imagen",z.getPicture());
+            request.getSession().setAttribute("rol",z.getId_role());
+            
             request.setAttribute("rol",admin.getAllRoles());
             forward = "/administrador/users/create.jsp";
         }   
@@ -127,10 +130,12 @@ public class UserController extends HttpServlet {
             
             if (admin.validarregistro(username)) {
                request.getSession().setAttribute("mensaje", "El usuario ya está en uso");
+               request.setAttribute("rol",admin.getAllRoles());
                forward = "/administrador/users/create.jsp";
             }
             else if(admin.validaemail(email)){
               request.getSession().setAttribute("mensaje", "El correo ya está en uso");
+              request.setAttribute("rol",admin.getAllRoles());
               forward = "/administrador/users/create.jsp";
             }
             else{
@@ -224,7 +229,7 @@ public class UserController extends HttpServlet {
                   x = admin.getUser(buscar);
                   request.getSession().setAttribute("name", x.getName());
                   request.getSession().setAttribute("imagen",x.getPicture());
-           
+                  request.getSession().setAttribute("rol",x.getId_role());
                   request.setAttribute("users",admin.getAllUsers()); 
        
                   forward = "/administrador/users/index.jsp";
@@ -241,7 +246,7 @@ public class UserController extends HttpServlet {
                   x = admin.getUser(buscar);
                   request.getSession().setAttribute("name", x.getName());
                   request.getSession().setAttribute("imagen",x.getPicture());
-           
+                  request.getSession().setAttribute("rol",x.getId_role());
                   request.setAttribute("users",admin.getAllUsers()); 
        
                   forward = "/administrador/users/index.jsp";
@@ -253,7 +258,7 @@ public class UserController extends HttpServlet {
                x = admin.getUser(buscar);
                request.getSession().setAttribute("name", x.getName());
                request.getSession().setAttribute("imagen",x.getPicture());
-           
+               request.getSession().setAttribute("rol",x.getId_role());
                request.setAttribute("users",admin.getAllUsers()); 
        
                forward = "/administrador/users/index.jsp";
@@ -275,7 +280,7 @@ public class UserController extends HttpServlet {
            x = admin.getUser(buscar);
            request.getSession().setAttribute("name", x.getName());
            request.getSession().setAttribute("imagen",x.getPicture());
-           
+           request.getSession().setAttribute("rol",x.getId_role());
            request.setAttribute("users",admin.getAllUsers());
            
            

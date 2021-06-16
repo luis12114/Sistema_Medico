@@ -70,7 +70,7 @@ public class CitasController extends HttpServlet {
             x = admin.getUser(buscar);
             request.getSession().setAttribute("name", x.getName());
             request.getSession().setAttribute("imagen",x.getPicture());
-            
+            request.getSession().setAttribute("rol",x.getId_role());
             request.setAttribute("citas",admin.getAllCitas(buscar));
             forward = "/administrador/citas/index.jsp";
         }
@@ -86,7 +86,7 @@ public class CitasController extends HttpServlet {
             request.getSession().setAttribute("name", z.getName());
             request.getSession().setAttribute("imagen",z.getPicture());
             request.getSession().setAttribute("email",z.getEmail());
-            
+            request.getSession().setAttribute("rol",z.getId_role());
 
             request.setAttribute("medico",admin.getAllMedicos());
             
@@ -109,7 +109,7 @@ public class CitasController extends HttpServlet {
             String sintomas= request.getParameter("sintomas");
             String estatus="activo";
             
-            String buscar = request.getParameter("usuario");
+            String buscar = request.getParameter("usuario1");
             
             Citas citas = new Citas();
             citas.setName(name);
@@ -128,6 +128,14 @@ public class CitasController extends HttpServlet {
                forward = "/administrador/citas/create.jsp";
             }else{
              admin.addCitas(citas);
+
+             User z= new User();
+              z = admin.getUser(buscar);
+             request.getSession().setAttribute("name", z.getName());
+             request.getSession().setAttribute("imagen",z.getPicture());
+             request.getSession().setAttribute("email",z.getEmail());
+             request.getSession().setAttribute("rol",z.getId_role());
+             
              request.setAttribute("citas",admin.getAllCitas(buscar));
              forward = "/administrador/citas/index.jsp";   
             }
@@ -144,7 +152,7 @@ public class CitasController extends HttpServlet {
             z = admin.getUser(buscar1);
             request.getSession().setAttribute("name", z.getName());
             request.getSession().setAttribute("imagen",z.getPicture());
-            
+            request.getSession().setAttribute("rol",z.getId_role());
             /**Datos del usuario que se desea editar**/
             String id_buscar = request.getParameter("cita");
             int id= Integer.parseInt(id_buscar);
@@ -213,7 +221,7 @@ public class CitasController extends HttpServlet {
                   x = admin.getUser(buscar);
                   request.getSession().setAttribute("name", x.getName());
                   request.getSession().setAttribute("imagen",x.getPicture());
-           
+                  request.getSession().setAttribute("rol",x.getId_role());
                   request.setAttribute("citas",admin.getAllCitas(buscar));
                   forward = "/administrador/citas/index.jsp";  
                 }
@@ -225,7 +233,7 @@ public class CitasController extends HttpServlet {
               x = admin.getUser(buscar);
               request.getSession().setAttribute("name", x.getName());
               request.getSession().setAttribute("imagen",x.getPicture());
-           
+              request.getSession().setAttribute("rol",x.getId_role());
               request.setAttribute("citas",admin.getAllCitas(buscar));
               forward = "/administrador/citas/index.jsp"; 
            }
@@ -248,7 +256,7 @@ public class CitasController extends HttpServlet {
             z = admin.getUser(buscar);
             request.getSession().setAttribute("name", z.getName());
             request.getSession().setAttribute("imagen",z.getPicture());
-            
+            request.getSession().setAttribute("rol",z.getId_role());
             request.setAttribute("citas",admin.getAllCitas(buscar));
             forward = "/administrador/citas/index.jsp";  
        }
@@ -271,7 +279,7 @@ public class CitasController extends HttpServlet {
             z = admin.getUser(buscar);
             request.getSession().setAttribute("name", z.getName());
             request.getSession().setAttribute("imagen",z.getPicture());
-            
+            request.getSession().setAttribute("rol",z.getId_role());
             request.setAttribute("citas",admin.getAllCitas(buscar));
             forward = "/administrador/citas/index.jsp";  
        }

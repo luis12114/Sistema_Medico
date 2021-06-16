@@ -64,6 +64,7 @@ public class RolesController extends HttpServlet {
             x = admin.getUser(buscar);
             request.getSession().setAttribute("name", x.getName());
             request.getSession().setAttribute("imagen",x.getPicture());
+            request.getSession().setAttribute("rol",x.getId_role());
             
             request.setAttribute("roles",admin.getAllRoles()); 
             forward = "/administrador/roles/index.jsp";
@@ -79,6 +80,7 @@ public class RolesController extends HttpServlet {
             z = admin.getUser(buscar);
             request.getSession().setAttribute("name", z.getName());
             request.getSession().setAttribute("imagen",z.getPicture());
+            request.getSession().setAttribute("rol",z.getId_role());
             forward = "/administrador/roles/create.jsp";
         }   
       /*-----------------------------TERMINA CREAR ROLE------------------------------------*/
@@ -103,6 +105,12 @@ public class RolesController extends HttpServlet {
                forward = "/administrador/roles/create.jsp";
             }
            else{
+               String buscar = request.getParameter("usuario-login");
+               User z= new User();
+               z = admin.getUser(buscar);
+               request.getSession().setAttribute("name", z.getName());
+               request.getSession().setAttribute("imagen",z.getPicture());
+               request.getSession().setAttribute("rol",z.getId_role());
                admin.addRole(role);
                request.setAttribute("roles",admin.getAllRoles());
                forward = "/administrador/roles/index.jsp";
@@ -122,6 +130,7 @@ public class RolesController extends HttpServlet {
             z = admin.getUser(buscar1);
             request.getSession().setAttribute("name", z.getName());
             request.getSession().setAttribute("imagen",z.getPicture());
+            request.getSession().setAttribute("rol1",z.getId_role());
             
             /**Datos del usuario que se desea editar**/
             String id_buscar = request.getParameter("id");
@@ -173,7 +182,7 @@ public class RolesController extends HttpServlet {
                   x = admin.getUser(buscar);
                   request.getSession().setAttribute("name", x.getName());
                   request.getSession().setAttribute("imagen",x.getPicture());
-           
+                  request.getSession().setAttribute("rol",x.getId_role());
                   request.setAttribute("roles",admin.getAllRoles()); 
                   forward = "/administrador/roles/index.jsp";
                }
@@ -184,7 +193,7 @@ public class RolesController extends HttpServlet {
               x = admin.getUser(buscar);
               request.getSession().setAttribute("name", x.getName());
               request.getSession().setAttribute("imagen",x.getPicture());
-           
+              request.getSession().setAttribute("rol",x.getId_role());
               request.setAttribute("roles",admin.getAllRoles()); 
               forward = "/administrador/roles/index.jsp";
            }
@@ -207,7 +216,7 @@ public class RolesController extends HttpServlet {
            x = admin.getUser(buscar);
            request.getSession().setAttribute("name", x.getName());
            request.getSession().setAttribute("imagen",x.getPicture());
-           
+           request.getSession().setAttribute("rol",x.getId_role());
            request.setAttribute("roles",admin.getAllRoles()); 
            
            

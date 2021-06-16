@@ -11,6 +11,7 @@
 <%
     String nom = (String) session.getAttribute("name");
     String imagen = (String) session.getAttribute("imagen");
+    int rol = (int) session.getAttribute("rol");
 %>
 
 <!DOCTYPE html>
@@ -62,7 +63,7 @@
                             <input type="text" name="nameUser" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                    
+                    <%if (rol == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/DatosController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -74,17 +75,22 @@
                         </form>
                     </li> 
 
+                    <%}%>
+
+                    <%if (rol == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/UserController" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-user"></span> <samp class="text">Users</samp>
                             </button>
-                            
+
                             <input type="hidden" name="action" value="allUsers">
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                    
+                    <%}%>
+
+                    <%if (rol == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/RolesController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -94,7 +100,9 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                    
+                    <%}%>
+
+                    <%if (rol == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/MedicosController" class="opc-cont active">
                             <button type="submit" class="opc">
@@ -104,7 +112,9 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                    
+                    <%}%>
+
+                    <%if (rol == 1 || rol == 2 || rol == 3) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/CitasController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -115,6 +125,8 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
+                    <%}%>
+
                 </ul>
 
             </div>
@@ -141,10 +153,10 @@
                         <input type="text" name="usuario-login" value="<%out.println(nom);%>" style="display:none">
                     </form>
                 </div>
-               
+
                 <c:forEach items="${medicos}" var="medico">
                     <div class="card__glass">
-                        
+
                         <div class="card__data">
                             <h3 class="card__title"> ${medico.id}. ${medico.nombre} </h3>
                             <span class="card__profession">Apellidos: ${medico.ap_pat} ${medico.ap_mat}</span><br>

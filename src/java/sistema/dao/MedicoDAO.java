@@ -38,6 +38,7 @@ public class MedicoDAO {
                 u.setName(rs.getString("name"));
                 u.setPicture(rs.getString("imagen_user"));
                 u.setPassword(rs.getString("password"));
+                u.setId_role(rs.getInt("ID_Rol"));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

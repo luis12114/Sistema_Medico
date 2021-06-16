@@ -76,6 +76,7 @@ public class controlAdmin extends HttpServlet {
             u= admin.getUser(user);
             request.getSession().setAttribute("name", u.getName());
             request.getSession().setAttribute("imagen", u.getPicture());
+            request.getSession().setAttribute("rol", u.getId_role());
         } 
       /*--------------------------------TERMINA LOGIN---------------------------------------*/ 
         

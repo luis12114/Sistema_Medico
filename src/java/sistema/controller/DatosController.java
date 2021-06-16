@@ -140,9 +140,8 @@ public class DatosController extends HttpServlet {
                   x = admin.getUser(buscar);
                   request.getSession().setAttribute("name", x.getName());
                   request.getSession().setAttribute("imagen",x.getPicture());
-           
-                  request.setAttribute("users",admin.getAllUsers()); 
-       
+                  request.getSession().setAttribute("rol",x.getId_role());
+                  
                   forward = "/administrador/index.jsp";
                }
             }
@@ -157,9 +156,8 @@ public class DatosController extends HttpServlet {
                   x = admin.getUser(buscar);
                   request.getSession().setAttribute("name", x.getName());
                   request.getSession().setAttribute("imagen",x.getPicture());
-           
-                  request.setAttribute("users",admin.getAllUsers()); 
-       
+                  request.getSession().setAttribute("rol",x.getId_role());
+                  
                   forward = "/administrador/index.jsp";
                }
            }
@@ -169,8 +167,7 @@ public class DatosController extends HttpServlet {
                x = admin.getUser(buscar);
                request.getSession().setAttribute("name", x.getName());
                request.getSession().setAttribute("imagen",x.getPicture());
-           
-               request.setAttribute("users",admin.getAllUsers()); 
+               request.getSession().setAttribute("rol",x.getId_role());
        
                forward = "/administrador/index.jsp";
            }

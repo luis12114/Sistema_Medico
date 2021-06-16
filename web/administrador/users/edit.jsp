@@ -75,7 +75,7 @@
                             <input type="text" name="nameUser" value="<%out.println(nom1);%>" style="display:none">
                         </form>
                     </li>
-                    
+
                     <li>
                         <form method="post" action="/SistemaMedico/DatosController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -87,6 +87,7 @@
                         </form>
                     </li> 
 
+                    <%if (rolId == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/UserController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -96,7 +97,9 @@
                             <input type="text" name="usuario" value="<%out.println(nom1);%>" style="display:none">
                         </form>
                     </li>
+                    <%}%>
 
+                    <%if (rolId == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/RolesController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -106,7 +109,9 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
+                    <%}%>
 
+                    <%if (rolId == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/MedicosController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -116,7 +121,9 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
+                    <%}%>
 
+                    <%if (rolId==1||rolId==2||rolId==3) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/CitasController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -127,6 +134,7 @@
                             <input type="text" name="usuario" value="<%out.println(email);%>" style="display:none">
                         </form>
                     </li>
+                    <%}%>
                 </ul>
             </div>
         </div>

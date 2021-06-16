@@ -14,6 +14,7 @@
      */
     String nom = (String) session.getAttribute("name");
     String imagen = (String) session.getAttribute("imagen");
+    int rolId = (int) session.getAttribute("rol1");
 
     /**
      * Datos del usuario que se desea editar*
@@ -63,7 +64,6 @@
                     </div>
                 </div>
                 <ul>
-
                     <li>
                         <form method="post" action="/SistemaMedico/controlAdmin" class="opc-cont">
                             <button type="submit" class="opc">
@@ -73,7 +73,7 @@
                             <input type="text" name="nameUser" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                    
+
                     <li>
                         <form method="post" action="/SistemaMedico/DatosController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -84,18 +84,20 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li> 
-
+                    <%if (rolId == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/UserController" class="opc-cont">
                             <button type="submit" class="opc">
                                 <span class="las la-user"></span> <samp class="text">Users</samp>
                             </button>
-                            
+
                             <input type="hidden" name="action" value="allUsers">
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
+                    <%}%>
 
+                    <%if (rolId == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/RolesController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -105,7 +107,9 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
+                    <%}%>
 
+                    <%if (rolId == 1) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/MedicosController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -115,7 +119,9 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
-                   
+                    <%}%>
+
+                    <%if (rolId == 1 || rolId == 2 || rolId == 3) {%>
                     <li>
                         <form method="post" action="/SistemaMedico/CitasController" class="opc-cont">
                             <button type="submit" class="opc">
@@ -126,6 +132,8 @@
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
                         </form>
                     </li>
+                    <%}%>
+
                 </ul>
             </div>
         </div>
@@ -173,7 +181,7 @@
                             <input type="text" name="url" required value="<%out.println(url);%>">
                             <span>Url</span>
                         </div>
-                            
+
                         <div class="inputBox w100">
                             <%
                                 String msg = (String) session.getAttribute("mensaje");
@@ -213,7 +221,7 @@
                             </div>
                         </div>  
                     </form>
-                                
+
                     <div class="botom">
                         <form method="post" action="/SistemaMedico/RolesController" class="formBox">
                             <input type="hidden" name="action" value="allRoles">
