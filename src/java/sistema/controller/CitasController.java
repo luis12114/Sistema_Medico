@@ -71,6 +71,12 @@ public class CitasController extends HttpServlet {
             request.getSession().setAttribute("name", x.getName());
             request.getSession().setAttribute("imagen",x.getPicture());
             request.getSession().setAttribute("rol",x.getId_role());
+            
+            if(admin.validar(buscar)){
+                request.setAttribute("citas",admin.getAllCitas2());
+                forward = "/administrador/citas/index.jsp";
+            }
+            else
             request.setAttribute("citas",admin.getAllCitas(buscar));
             forward = "/administrador/citas/index.jsp";
         }
@@ -135,7 +141,10 @@ public class CitasController extends HttpServlet {
              request.getSession().setAttribute("imagen",z.getPicture());
              request.getSession().setAttribute("email",z.getEmail());
              request.getSession().setAttribute("rol",z.getId_role());
-             
+             if(admin.validar(buscar)){
+                 request.setAttribute("citas",admin.getAllCitas2());
+                 forward = "/administrador/citas/index.jsp";
+                }
              request.setAttribute("citas",admin.getAllCitas(buscar));
              forward = "/administrador/citas/index.jsp";   
             }
@@ -222,6 +231,11 @@ public class CitasController extends HttpServlet {
                   request.getSession().setAttribute("name", x.getName());
                   request.getSession().setAttribute("imagen",x.getPicture());
                   request.getSession().setAttribute("rol",x.getId_role());
+                  
+                  if(admin.validar(buscar)){
+                     request.setAttribute("citas",admin.getAllCitas2());
+                     forward = "/administrador/citas/index.jsp";
+                   }
                   request.setAttribute("citas",admin.getAllCitas(buscar));
                   forward = "/administrador/citas/index.jsp";  
                 }
@@ -234,6 +248,11 @@ public class CitasController extends HttpServlet {
               request.getSession().setAttribute("name", x.getName());
               request.getSession().setAttribute("imagen",x.getPicture());
               request.getSession().setAttribute("rol",x.getId_role());
+              
+              if(admin.validar(buscar)){
+                  request.setAttribute("citas",admin.getAllCitas2());
+                  forward = "/administrador/citas/index.jsp";
+                }
               request.setAttribute("citas",admin.getAllCitas(buscar));
               forward = "/administrador/citas/index.jsp"; 
            }
@@ -257,6 +276,11 @@ public class CitasController extends HttpServlet {
             request.getSession().setAttribute("name", z.getName());
             request.getSession().setAttribute("imagen",z.getPicture());
             request.getSession().setAttribute("rol",z.getId_role());
+            
+            if(admin.validar(buscar)){
+               request.setAttribute("citas",admin.getAllCitas2());
+               forward = "/administrador/citas/index.jsp";
+            }
             request.setAttribute("citas",admin.getAllCitas(buscar));
             forward = "/administrador/citas/index.jsp";  
        }
@@ -280,6 +304,10 @@ public class CitasController extends HttpServlet {
             request.getSession().setAttribute("name", z.getName());
             request.getSession().setAttribute("imagen",z.getPicture());
             request.getSession().setAttribute("rol",z.getId_role());
+            if(admin.validar(buscar)){
+              request.setAttribute("citas",admin.getAllCitas2());
+              forward = "/administrador/citas/index.jsp";
+            }
             request.setAttribute("citas",admin.getAllCitas(buscar));
             forward = "/administrador/citas/index.jsp";  
        }

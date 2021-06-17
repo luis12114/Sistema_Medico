@@ -87,6 +87,37 @@ public class CitaDAO {
         return citas;
     }
     
+    //Metodo para listar todas las citas 2
+    public List<Citas> getAllCitas2() {
+        List<Citas> citas= new ArrayList<Citas>();
+        try {
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            String query = "SELECT *FROM paciente WHERE estatus='activo'";
+            pstm = con.prepareStatement(query);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+               Citas cita = new Citas();
+               cita.setId(rs.getInt("id_paciente"));
+               cita.setName(rs.getString("name"));
+               cita.setDoctor(rs.getString("doctor"));
+               cita.setFecha(rs.getString("fecha"));
+               cita.setHora(rs.getString("hora"));
+               cita.setTel(rs.getString("tel"));
+               cita.setCorreo(rs.getString("correo"));
+               cita.setGenero(rs.getString("genero"));
+               cita.setMotivo(rs.getString("motivo"));
+               cita.setSintomas(rs.getString("sintomas"));
+               cita.setEstatus(rs.getString("estatus"));
+               citas.add(cita);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return citas;
+    }
+    
     //Metodo para listar todos los doctores
     public List<Medico> getAllMedicos() {
         List<Medico> medicos = new ArrayList<Medico>();
@@ -116,6 +147,8 @@ public class CitaDAO {
         }
         return medicos;
     }
+    
+    
     
     // Metodo para añadir citas
     public void addCitas(Citas cita) {
@@ -226,6 +259,25 @@ public class CitaDAO {
             return false;
         }
     }  
+   
+    public boolean validar(String buscar) {
+        try {
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            String query = "SELECT id_user FROM user WHERE name=? AND(ID_Rol=1 OR ID_Rol=3)";
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, buscar);//convertir a String el parametro Usuario
+            rs = pstm.executeQuery();//ejecutar el query 
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    } 
   
   /*-------------------------------TERMINA VALIDACIONES--------------------------------*/ 
 }
