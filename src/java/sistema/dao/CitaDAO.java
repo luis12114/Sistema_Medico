@@ -240,7 +240,7 @@ public class CitaDAO {
         }
     }
     
-    /*-------------------------------INICIA VALIDACIONES-----------------------------------*/
+   /*-------------------------------INICIA VALIDACIONES-----------------------------------*/
    public boolean validarregistro(String buscar) {
         try {
             PreparedStatement pstm = null;
@@ -260,7 +260,26 @@ public class CitaDAO {
         }
     }  
    
-    public boolean validar(String buscar) {
+   public boolean validarregistro2(String buscar) {
+        try {
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            String query = "SELECT id_paciente FROM paciente WHERE  fecha=?";
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, buscar);//convertir a String el parametro Usuario
+            rs = pstm.executeQuery();//ejecutar el query 
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    } 
+   
+   public boolean validar(String buscar) {
         try {
             PreparedStatement pstm = null;
             ResultSet rs = null;

@@ -12,7 +12,7 @@
     /**
      * Datos del usuario logeado*
      */
-    String nom = (String) session.getAttribute("name");
+    String nom = (String) session.getAttribute("name1");
     String imagen = (String) session.getAttribute("imagen");
     int rol = (int) session.getAttribute("rol");
 
@@ -173,6 +173,7 @@
                             <input type="text" name="name" value="<%out.println(name);%>" readonly required>
                             <!--<span>Nombre</span>-->
                         </div>
+                            
 
                         <div class="inputBox w50 ">
                             <input type="text" name="doctor" value="<%out.println(doctor);%>" required readonly>
@@ -183,25 +184,18 @@
                             <input type="text" name="fecha" id="fecha" value="<%out.println(fecha);%>" required>
                             <span>Fecha</span>
                         </div>
-
+                        
+                        <input type="text" name="fecha1" value="<%out.println(fecha);%>" style="display:none">
+                        
                         <div class="inputBox w50 ">
-                            <select name="hora" required>
-                                <option value="<%out.println(hora);%>" selected><%out.println(hora);%></option>
-                                <option value="9:00">9:00</option>
-                                <option value="10:00">10:00</option>
-                                <option value="11:00">11:00</option>
-                                <option value="12:00">12:00</option>
-                                <option value="13:00">13:00</option>
-                                <option value="14:00">14:00</option>
-                                <option value="15:00">15:00</option>
-                            </select>
+                            <input type="text" name="hora" value="<%out.println(hora);%>" required readonly>
+                            <!--<span>hora</span>-->
                         </div>
-
+                        
                         <div class="inputBox w50 ">
                             <input type="text" name="tel" value="<%out.println(tel);%>" required>
                             <span>Tel</span>
                         </div>
-
 
                         <div class="inputBox w50 ">
                             <input type="email" name="email" value="<%out.println(correo);%>" required>
@@ -250,7 +244,7 @@
                         <form method="post" action="/SistemaMedico/CitasController" class="formBox">
                             <input type="hidden" name="action" value="allCitas">
                             <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
-                            <input type="text" name="hora1" value="<%out.println(hora);%>" style="display:none">
+                            
                             <div class="inputBox w100  buton">
                                 <button type="submit" class="top">Regresar</button>
                             </div> 
