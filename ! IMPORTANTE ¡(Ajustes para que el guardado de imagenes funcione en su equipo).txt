@@ -1,0 +1,18 @@
+Cambiar la esta linea por una ruta absoluta de su equipo para el guardado de imagenes en los siguientes servlet:
+
+1.- DatosController:
+//Variable de subida de acrhivos
+private String pathFiles="C:\\Users\\52777\\Documents\\NetBeansProjects\\SistemaMedico\\web\\images";
+(cambie esa ruta por una ruta de su equipo)
+
+
+2.- UserController:
+//Variable de subida de acrhivos
+private String pathFiles="C:\\Users\\52777\\Documents\\NetBeansProjects\\SistemaMedico\\web\\images";
+(cambie esa ruta por una ruta de su equipo)
+
+
+3.- controlAdmin:
+//Variable de subida de acrhivos
+private String pathFiles="C:\\Users\\52777\\Documents\\NetBeansProjects\\SistemaMedico\\web\\images";
+(cambie esa ruta por una ruta de su equipo)
