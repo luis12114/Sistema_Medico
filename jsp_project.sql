@@ -1,4 +1,6 @@
-CREATE DATABASE jsp_project;
+medicoCREATE DATABASE jsp_project;
+
+use jsp_project;
 
 CREATE TABLE medico (
   id_medico int(11) NOT NULL AUTO_INCREMENT,

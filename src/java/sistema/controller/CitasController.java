@@ -223,12 +223,15 @@ public class CitasController extends HttpServlet {
            citas.setGenero(genero);
            citas.setMotivo(motivo);
            citas.setSintomas(sintomas);
+           
            User z= new User();
            z = admin.getUser(buscar);
            request.getSession().setAttribute("name", z.getName());
            request.getSession().setAttribute("imagen",z.getPicture());
            request.getSession().setAttribute("email",z.getEmail());
            request.getSession().setAttribute("rol",z.getId_role());
+           
+           
            if(fecha1.equals(fecha)){
               admin.updateCita(id_serach, citas);
               if(admin.validar(buscar)){ 

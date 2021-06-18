@@ -122,6 +122,30 @@
                         </form>
                     </li>
                     <%}%>
+                    
+                    <%if (rol == 1 || rol == 3) {%>
+                    <li>
+                        <form method="get" action="/SistemaMedico/ListServlet" class="opc-cont">
+                            <button type="submit" class="opc">
+                                <span class="las la-file-medical-alt"></span> <samp class="text">Receta
+                                </samp>
+                            </button>
+                            <input type="hidden" name="action" value="listarCategorias">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        </form>
+                    </li>
+                    <%}%>
+                    
+                    <li>
+                        <form method="post" action="/SistemaMedico/" class="opc-cont">
+                            <button type="submit" class="opc">
+                                <span class="las la-door-open"></span> <samp class="text">Salir
+                                </samp>
+                            </button>
+                            <input type="hidden" name="action" value="allCitas">
+                            <input type="text" name="usuario" value="<%out.println(nom);%>" style="display:none">
+                        </form>
+                    </li>
                 </ul>
 
             </div>

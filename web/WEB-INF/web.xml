@@ -48,6 +48,10 @@
         <servlet-name>DatosController</servlet-name>
         <url-pattern>/DatosController</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListServlet</servlet-name>
+        <url-pattern>/ListServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
